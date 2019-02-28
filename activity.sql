@@ -187,6 +187,27 @@ INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `fi
 (12,	59,	2,	2,	'อาจารย์ ดร.',	'พุทธิพร',	'ธนธรรมเมธี',	NULL,	'0800000000',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-02-05 15:27:41',	0),
 (13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	'เยาวเรศ',	'ศิริสถิตย์กุล',	NULL,	'',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-02-05 12:45:12',	0);
 
+DROP TABLE IF EXISTS `terms`;
+CREATE TABLE `terms` (
+  `year` int(4) NOT NULL,
+  `sector` int(1) NOT NULL,
+  PRIMARY KEY (`year`,`sector`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `terms` (`year`, `sector`) VALUES
+(2558,	1),
+(2558,	2),
+(2558,	3),
+(2559,	1),
+(2559,	2),
+(2559,	3),
+(2560,	1),
+(2560,	2),
+(2560,	3),
+(2561,	1),
+(2561,	2),
+(2561,	3);
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -207,7 +228,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (24,	'58140500',	'$2y$10$U9Qn.66XD4i2Q8bxejBrce/sCl2wvt3pSpLW5eUvwlpdl90M9Fdqa',	NULL,	'2019-01-27 22:26:46',	'',	'2019-01-27 22:26:46',	NULL),
 (25,	'58141623',	'$2y$10$hc2GQPUXjYR8E6eqzHbN6O7QEOoSizFtA2d8iEuzK7NhYYB.iZ8oi',	NULL,	'2019-01-27 22:27:08',	'',	'2019-01-27 22:27:08',	NULL),
 (27,	'58120379',	'$2y$10$7hCHW00i.fghuhEuHOz39efvHSKQWEIn3TBrZvyjDRU75dsjwvqXO',	NULL,	'2019-01-27 22:26:33',	'',	'2019-01-27 22:26:33',	NULL),
-(31,	'58145236',	'$2y$10$XoIwwT0UnvxWA5ssUf283eSgxWYz3VSMNBLZFwd9poaJZ5O.vg7Iy',	'tI6prZZ8PVywAktWQn2HcCvDderRXyw5xo7SWyJLjF3AwyrC6qdecU0pIqE9',	'2019-02-05 23:24:15',	'',	'2019-02-05 23:24:15',	NULL),
+(31,	'58145236',	'$2y$10$XoIwwT0UnvxWA5ssUf283eSgxWYz3VSMNBLZFwd9poaJZ5O.vg7Iy',	'2bnfdDADgNt4ImwqPPiurpTqOrSngqQOVGeZAfXCxP4PoDkGg2ClVZkTRZAo',	'2019-02-13 20:21:37',	'',	'2019-02-13 20:21:37',	NULL),
 (32,	'58143033',	'$2y$10$bAUoKVrgiN2nIr/6FZINOub7zFin7j1qWeXgFn7II0hA0RM1oyoWa',	NULL,	'2019-01-27 22:27:01',	'',	'2019-01-27 22:27:01',	NULL),
 (33,	'58148602',	'$2y$10$aMjdrrG5.P.SDwnXLyBAT.TRTnexVrIxyL3MJ8t1py1jwJj7Ixbji',	'wcyQtO3KTqX6mzVoM9pdkIfFmvaAYQ4JMRrgwBM4eQMjHeZ96AhYQBheGxNe',	'2019-01-27 22:27:42',	'',	'2019-01-27 22:27:42',	NULL),
 (34,	'58112418',	'$2y$10$ZczyhQGcf4tEeObppttkKO9FwnifNshwE0u1FFJvEltO33EpBqRyK',	NULL,	'2019-01-27 22:26:13',	'',	'2019-01-27 22:26:13',	NULL),
@@ -222,33 +243,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (63,	'11123456',	'$2y$10$iOjKXeywg3J/EvQvOqqtTeIZ5sYWRubDoP7IV9iVdfkVtTNY71mMC',	NULL,	'2019-02-05 15:24:27',	'',	'2019-02-05 15:24:27',	NULL),
 (64,	'58123472',	'$2y$10$XLAt9Uwuy1SMv2eW8HeNz.MkExPT0VSH3Pz..gnLcOWhB4c8iL4/6',	NULL,	'2019-02-06 16:03:04',	'',	'2019-02-06 16:03:04',	NULL);
 
-DROP TABLE IF EXISTS `users_bkkkkk`;
-CREATE TABLE `users_bkkkkk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `firstname` varchar(150) DEFAULT NULL,
-  `lastname` varchar(150) DEFAULT NULL,
-  `tel` varchar(20) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `type` varchar(150) DEFAULT NULL,
-  `remember_token` varchar(150) DEFAULT NULL,
-  `code` varchar(150) DEFAULT NULL,
-  `room_num` varchar(150) DEFAULT NULL,
-  `roleID` int(11) DEFAULT NULL,
-  `positionID` int(11) DEFAULT NULL,
-  `year` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname`, `tel`, `email`, `image`, `created_at`, `updated_at`, `type`, `remember_token`, `code`, `room_num`, `roleID`, `positionID`, `year`) VALUES
-(1,	'root',	'$2y$10$rYf5dHuXTtLpdTlKfkEOJOVqPTF4h1PlzWvYeo3BDmkKnBU/ZwjRO',	'Saharat ',	'Rakdam',	'0635404688',	'mail@mail.com',	'avatar/1/2019011310543019.PNG',	'2018-12-25 15:48:00',	'2019-01-13 13:32:58',	'student',	'0V132ZbyMKCHEMnf2Fd75kXZo3kTtOUFGbeqv5IZhaqSqSdKpyvsWHFjMua5',	'541102109102',	NULL,	NULL,	NULL,	'2561'),
-(3,	'teach1',	'$2y$10$3vw4Hz5byW26Fsu99abhx.1WWl/7/bnx7e89Zaa81DTT4I3OjVqDe',	'teach1123',	'teach1',	'0888888881',	'nukdev021@gmail.com',	'avatar/3/2019011310512020.PNG',	'2019-01-10 21:45:56',	'2019-01-13 15:26:39',	'teach',	'4uo3rFwQGlVs1rAENIx2YmCgDOWkHhbjNB2nSlv2xHpSb1blBWClPh0msW1A',	NULL,	'202',	1,	1,	NULL),
-(4,	'test1',	'$2y$10$/Zds5L0AqbgI3eghm81y6OdJNB190ITTV9.p1czurfqfSU0XtP.Qq',	'sadas',	'dsad',	'088888888',	'dasdasd@dasdas.com',	'avatar/4/2019011310421110.PNG',	'2019-01-13 10:42:11',	'2019-01-13 12:33:57',	'teach',	'mbtdzWfJ7qZ9Qf3rbrXhWDBA73e7JTsFNxfxMku17tMFAVBSJpqwNCywVJkk',	NULL,	'asdas',	2,	2,	NULL),
-(5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
-(6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
-
--- 2019-02-08 10:48:50
+-- 2019-02-28 16:44:43

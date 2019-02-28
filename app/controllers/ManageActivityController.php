@@ -36,6 +36,11 @@ class ManageActivityController extends BaseController {
 		$isPastDayEnd = false;
 
 		$teachers = Teacher::whereNotAdmin()->get();
+		$students = Student::get();
+		$nowYear = Term::getLastYear();
+
+		$q = "";
+		$year = "";
 
 		$data = [
 			'text_activityname'=>$text_activityname,
@@ -53,6 +58,10 @@ class ManageActivityController extends BaseController {
 			'isPastDayStart'=>$isPastDayStart,
 			'isPastDayEnd'=>$isPastDayEnd,
 			'teachers'=>$teachers,
+			'students'=>$students,
+			'q'=>$q,
+			'year'=>$year
+			
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -107,6 +116,7 @@ class ManageActivityController extends BaseController {
 	}
 	public function actionActivityAdd($id = null)
 	{
+		dd(Input::get("paticipations"));
 		$rules = array(
 			'activityname' => 'required',
 			'timestart' => 'required|date_format:H:m',

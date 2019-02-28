@@ -142,8 +142,8 @@
                @foreach($teachers as $teacher)
                   <div class="col-6">
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox"  name="teacher[]" id="teacher1" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teacher))?'checked':''}}>
-                        <label class="form-check-label" for="teacher1">                                                                            
+                        <input class="form-check-input" type="checkbox"  name="teacher[]" id="teacher-{{$teacher->id}}" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teacher))?'checked':''}}>
+                        <label class="form-check-label" for="teacher-{{$teacher->id}}">                                                                            
                            {{$teacher->getFullName()}}
                         </label>
                      </div>
@@ -200,18 +200,52 @@
                   </div>
                </div>
                <div class="col-2">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"  name="years[]" id="year5" value="5" {{(in_array("5",$check_years))?'checked':''}}>
-                     <label class="form-check-label" for="year5">
-                        ชั้นปีอื่นๆ
-                     </label>
-                  </div>
-               </div>
+                  <button type="button" id="showStudentSelector" class="btn btn-sm btn-secondary">เพิ่มเติม</button>
+               </div> 
             </div>
-
             <small class="form-text text-danger">{{$errors->first('years')}}</small>
 
             <br>
+            <div id="studentSelector" style="display: none;">
+               <div class="input-group">
+                  <input type="text" id="search-student" class="form-control" placeholder="ค้นหาจาก รหัสนักศึกษา ชื่อ นามสกุล">
+                  <div class="input-group-append">
+                     <select class="custom-select" id="year">
+                        <option value="0">ทั้งหมด</option>
+                        <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
+                        <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
+                        <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>
+                        <option value="4" <?=($year == '4')?'selected':''?>>ชั้นปีที่ 4</option>
+                        <option value="5" <?=($year == '5')?'selected':''?>>ชั้นปีที่อื่นๆ</option>
+                     </select>
+                  </div>
+               </div>
+               <table class="table student-list">
+                  <thead>
+                     <tr>
+                        <th scope="col" width="20%">รหัสนักศึกษา</th>
+                        <th scope="col">ชื่อ</th>
+                        <th scope="col">นามสกุล</th>
+                        <th scope="col">เลือก</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     @foreach($students as $student)
+                     <tr class="row-year-{{($student->getNowYear()<=4)?$student->getNowYear():'other'}}" data-year="{{($student->getNowYear()<=4)?$student->getNowYear():'other'}}" style="display: none;">
+                        <td>{{$student->id}}</td>
+                        <td>{{$student->firstname}}</td>
+                        <td>{{$student->lastname}}</td>
+                        <td>
+                           <div class="form-check">
+                              <input class="form-check-input checkbox-year-{{$student->getNowYear()}}" type="checkbox"  name="paticipations[]" id="student-checkbox-{{$student->lastname}}" value="{{$student->id}}">
+                           </div>
+                        </td>
+                     </tr>
+                     @endforeach
+                  </tbody>
+               </table>
+            </div>
+            
 
             <div class="form-group">
                <label for="exampleFormControlFile1">รูปภาพกิจกรรม</label>
@@ -228,6 +262,35 @@
 </form>
 <script type="text/javascript">
    $(function () {
+      var isStudentSelector = false
+
+      function searchStudent() {
+         var search = $("#search-student").val();
+         var searchYear = $("#year").val()
+
+         $(".student-list tr").each(function(index) {
+            if (index != 0) {
+               $row = $(this);
+               var id = $row.find("td:nth-child(1)").text()
+               var firstname = $row.find("td:nth-child(2)").text()
+               var lastname = $row.find("td:nth-child(3)").text()
+               var isMatch = id.indexOf(search) === 0 || firstname.indexOf(search) === 0 || lastname.indexOf(search) === 0 
+               var isYear = $row.data('year') == searchYear
+               if(searchYear == '0')
+                  isYear = true
+               
+               if (isYear && isMatch) {
+                  $(this).show();
+               }
+               else {
+                  $(this).hide();
+               }
+            }
+         })
+      }
+
+
+
       $('#timestart').datetimepicker({
          defaultDate: "{{Tool::nowForDatepicker()}} <?=($text_timestart != '')?$text_timestart:'00:00'?>",
          format: 'HH:mm'
@@ -254,6 +317,58 @@
          ,disable: true
          @endif
       });
+
+      $("#showStudentSelector").click( () => {
+         isStudentSelector = !isStudentSelector
+         if(isStudentSelector){
+            $("#studentSelector").show();
+         }else{
+            $("#studentSelector").hide();
+         }
+      })
+
+      $("#year1").change(function() {
+         if(this.checked) {
+            console.log("checked")
+            $('.checkbox-year-1').prop('checked', true);
+         }else{
+            $('.checkbox-year-1').prop('checked', false);
+         }
+      });
+      $("#year2").change(function() {
+         if(this.checked) {
+            console.log("checked")
+            $('.checkbox-year-2').prop('checked', true);
+         }else{
+            $('.checkbox-year-2').prop('checked', false);
+         }
+      });
+      $("#year3").change(function() {
+         if(this.checked) {
+            console.log("checked")
+            $('.checkbox-year-3').prop('checked', true);
+         }else{
+            $('.checkbox-year-3').prop('checked', false);
+         }
+      });
+      $("#year4").change(function() {
+         if(this.checked) {
+            console.log("checked")
+            $('.checkbox-year-4').prop('checked', true);
+         }else{
+            $('.checkbox-year-4').prop('checked', false);
+         }
+      });
+
+      $("#year").on('change', function() {
+         searchStudent()
+      });
+   
+      $("#search-student").on("keyup", () => {
+         searchStudent()
+      })
+
+
    });
 </script>
 

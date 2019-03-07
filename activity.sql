@@ -416,8 +416,5 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (65,	'58122526',	'$2y$10$OR3IPEfCe3x9vxmWD401KOfLRASzgF59X8e43txzGC6Bd0zZuPuqq',	NULL,	'2019-03-03 04:31:01',	'',	'2019-03-03 04:31:01',	NULL),
 (66,	'61122516',	'$2y$10$qiPifv6D/9pgAAKN.v17UOs5MeH1nVh5DoJdft/l.6BNiv.GqDwJK',	NULL,	'2019-03-07 12:13:28',	'',	'2019-03-07 12:13:28',	NULL);
 
-<<<<<<< HEAD
 -- 2019-03-07 10:41:35
-=======
 -- 2019-03-04 09:10:11
->>>>>>> 0df7ae23a4bc6842049d6d12c02f8e293d52a735

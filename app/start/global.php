@@ -98,3 +98,12 @@ Validator::extend('exist_bettewn_in_db', function($attribute, $value, $parameter
 		$db = $db->where('id', '!=', $parameters[3]);
 	return $db->count() < 1;
 });
+Validator::extend('exist_term_and_sector_in_db', function($attribute, $value, $parameters)
+{
+  $activityDetail = ActivityDetail::where('activity_id',$parameters[0])
+                    ->where('term_year',Input::get($parameters[1]))
+                    ->where('term_sector',$value);
+  if(isset($parameters[2]))
+    $activityDetail = $activityDetail->where('id','!=',$parameters[2]);
+  return $activityDetail->count() < 1;
+});

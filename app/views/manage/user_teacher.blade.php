@@ -1,67 +1,96 @@
 @extends('manage.layout')
 @section('title')
+  @if(isset($onlyTrashed))
+    อาจารย์ <small class="text-danger">(ลาออก)</small>
+  @else
     อาจารย์
+  @endif
 @stop
 
-   @section('content')
-   @include('error')
+@section('subtitle')
+จัดการผู้ใช้งาน
+@stop
 
-   <h2>
-      อาจารย์
-      <div class="float-right">
-         <a href="{{url('/manage/user/teacher/add')}}" class="btn btn-outline-success btn-success" >เพิ่มอาจารย์</a>
-         <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-info btn-info">  
+@section('content')
+
+
+<div class="row">
+  <div class="col">
+    <div class="card card-small mb-4">
+      <div class="card-header border-bottom">
+
+        @if(!isset($onlyTrashed))
+          <a class="btn btn-success btn-lg" href="{{url('/manage/user/teacher/add')}}">
+            <i class="fa fa-plus"></i> เพิ่มอาจารย์
+          </a>
+          <a class="btn btn-outline-success btn-lg" href="{{url('/manage/user/teacher/add')}}">
+            <i class="fa fa-plus"></i> เพิ่มไฟล์
+          </a>
+          <a class="btn btn-outline-primary btn-lg" href="{{url('/manage/user/teacher-suspended')}}">
+            ลาออก
+          </a>
+        @else
+          <a class="btn btn-outline-primary btn-lg" href="{{url('/manage/user/teacher')}}">
+          อาจารย์
+          </a>
+        @endif
+
+        <form class="input-group input-group-lg col-md-5 float-right">
+            <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อหรือนามสกุล" name="q">
+            <span class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">
+                  <i class="fa fa-search"></i>
+              </button>
+            </span>
+        </form>
       </div>
-   </h2>
-   <hr>
-
-
-   <form>
-      <div class="input-group">
-         <input type="text" id="q" name="q" class="form-control" placeholder="ค้นหาด้วย ชื่อ นามสกุล" value="{{$q}}">  
-         <div class="input-group-append">
-            <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
-         </div>
-      </div>
-   </form>
-      
-   <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
-            <th class="text-center table-tr-max-260">ชื่อ-สกุล</th>
-            <th class="text-center">อีเมล</th>
-            <th class="text-center">เบอร์โทรศัพท์</th>
-            <th class="text-center">ห้องทำงาน</th>
-            <th class="text-center">จัดการ</th>
-         </tr>
-      </thead>
-      <tbody>
-         @foreach ($teachers as $teacher)
+      <div class="card-body p-0 text-center">
+        <table class="table mb-0 ">
+          <thead class="bg-light">
             <tr>
-               <td class="text-left table-tr-max-260">{{ $teacher->getFullName() }}</td>
-               <td class="text-left">{{ $teacher->email }}</td>
-               <td class="text-center">{{ $teacher->tel }}</td>
-               <td class="text-center">{{ $teacher->room }}</td>
-               <td class="text-center">  
-                  <a href="{{url('/manage/user/teacher/edit/'.$teacher->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
-                  <a href="{{url('/manage/user/teacher/delete/'.$teacher->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
-               </td>
+              <th class="text-center table-tr-max-260">ชื่อ-สกุล</th>
+              <th class="text-center">อีเมล</th>
+              <th class="text-center">เบอร์โทรศัพท์</th>
+              <th class="text-center">ห้องทำงาน</th>
+              <th class="text-center">จัดการ</th>
             </tr>
-         @endforeach
-      </tbody>
-   </table>
-   <?php echo $teachers->links('partials.pagination'); ?>
-   <script type="text/javascript">
-      $(function () {
-         $('[data-toggle="tooltip"]').tooltip()
-      });
-   </script>
-    <style>
-      .table-tr-max-40{
-         max-width:40px
-      }
-      .table-tr-max-260{
-         max-width:260px
-      }
-   </style>
+          </thead>
+          <tbody>
+            @foreach ($teachers as $teacher)
+              <tr>
+                <td class="text-left table-tr-max-260">{{ $teacher->getFullName() }}</td>
+                <td class="text-left">{{ $teacher->email }}</td>
+                <td class="text-center">{{ $teacher->tel }}</td>
+                <td class="text-center">{{ $teacher->room }}</td>
+                <td class="text-center">  
+                  @if(isset($onlyTrashed))
+                    <a href="{{url('/manage/user/teacher-unsuspended/'.$teacher->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนอาจารย์"><i class="fas fa-trash-restore-alt"></i></a>                      
+                  @else
+                    <a href="{{url('/manage/user/teacher/edit/'.$teacher->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
+                    <a href="{{url('/manage/user/teacher/delete/'.$teacher->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
+                  @endif
+
+                </td>
+              </tr>
+          @endforeach
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-light border-top text-muted">
+        <?php echo $teachers->links('partials.pagination'); ?>
+      </div>
+
+      <style>
+        .table-tr-max-40{
+          max-width:40px
+        }
+        .table-tr-max-260{
+          max-width:260px
+        }
+      </style>
+    </div>
+  </div>
+</div>
+
+
 @stop

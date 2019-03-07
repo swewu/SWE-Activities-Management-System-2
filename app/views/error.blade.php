@@ -1,10 +1,12 @@
 @if(Session::has('message'))
-<div class="alert alert-success text-center" role="alert">
-    {{Session::get('message')}}
+<div role="alert" aria-live="polite" aria-atomic="true" class="alert-royal-blue alert alert-success">
+  <i class="fa fa-info mx-2"></i>
+  {{Session::get('message')}}
 </div>
 @endif
 @if(Session::has('error'))
-<div class="alert alert-danger text-center" role="alert">
-    {{Session::get('error')}}
+<div role="alert" aria-live="polite" aria-atomic="true" class="alert-royal-blue alert alert-danger">
+  <i class="fa fa-info mx-2"></i>
+  {{Session::get('error')}}
 </div>
 @endif

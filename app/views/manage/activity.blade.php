@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-กิจกรรม
+เพิ่มกิจกรรม
 @stop
 @section('subtitle')
 จัดการกิจรรม

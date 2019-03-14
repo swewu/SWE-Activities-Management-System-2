@@ -1,47 +1,40 @@
 @extends('manage.layout')
 @section('title')
-    test
+กิจกรรมทั้งหมด
 @stop
-
+@section('subtitle')
+จัดการกิจรรม
+@stop
 @section('content')
-<div class="container">
-  <div class="page-header" style="margin-top:40px">
-    <h2 class="mb-4 mr-sm-4 mb-sm-0">ประวัติกิจกรรมทั้งหมด</h2>
-  </div>
-  <br>
-  <form>
-    <div class="input-group">  
-      <input type="text" id="s" name="s" class="form-control" placeholder="ค้นหาจากชื่อกิจกรรม">  
-        <span class="input-group-btn">      
-            <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
-        </span> 
-    </div>
-  </form>
-  <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
-            <th class="text-center">ชื่อกิจกรรม</th>
-            <th class="text-center">วันที่จัดกิจกรรม</th>
-            <th class="text-center">ผู้ร่วมโครงการ</th>
-            <th class="text-center">นักศึกษาที่เข้าร่วม</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr>
-            <td class="text-center">ค่ายScrum</td>
-            <td class="text-center">12/12/2561</td>
-            <td class="text-center">ผู้ช่วยศาสตราจารย์ ฐิมาพร เพชรแก้ว </td>
-            <td class="text-center">ชั้นปีที่ 4</td>
-         </tr>
-         <tr>
-            <td class="text-center">รับน้องทะเล</td>
-            <td class="text-center">19/12/2561</td>
-            <td class="text-center">อาจารย์ ดร. พุทธิพร ธนธรรมเมธี </td>
-            <td class="text-center">ชั้นปีที่ 2</td>
-         </tr>
-         <tr>     
-      </tbody>
-   </table>
-</div>
+<div class="row">
+  <div class="col">
+    <div class="card card-small mb-4">
+      <div class="card-header border-bottom">
+
+        <a class="btn btn-success btn-lg" href="{{url('manage/activity/add')}}">
+          <i class="fa fa-plus"></i> เพิ่มกิจกรรม
+        </a>
+
+        <form class="input-group input-group-lg col-md-5 float-right">
+            <input class="form-control py-2" type="search" value="" placeholder="ค้นหาจากชื่อกิจกรรม" name="">
+            <span class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">
+                  <i class="fa fa-search"></i>
+              </button>
+            </span>
+        </form>
+      </div>
+      <div class="card-body p-0 text-center">
+            <table class="table mb-0 ">
+               <thead class="bg-light">
+                  <tr>
+                  <th scope="col" class="border-0">ชื่อกิจกรรม</th>
+                  <th scope="col" class="border-0">ปี ภาคการศึกษา</th>
+                  <th scope="col" class="border-0">อาจารย์ผู้รับผิดชอบ</th>
+                  <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
+                  </tr>
+               </thead>
+               </div>
+      </div>
 
 @stop

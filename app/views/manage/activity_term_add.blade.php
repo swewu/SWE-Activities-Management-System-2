@@ -253,7 +253,7 @@
         <label for="name">อาจารย์ที่รับผิดชอบ</label>
           <div class="row">
             @foreach($teachers as $teacher)
-              <div class="col-6">
+              <div class="col-7">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox"  name="teachers[]" id="teacher-{{$teacher->id}}" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teachers))?'checked':''}}>
                   <label class="form-check-label" for="teacher-{{$teacher->id}}">                                                                            
@@ -283,7 +283,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox"  name="years[]" id="year1" value="1" >
                 <label class="form-check-label" for="year1">
-                  ชั้นปีที่ 1
+                  ปี 1
                 </label>
               </div>
             </div>
@@ -291,7 +291,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox"  name="years[]" id="year2" value="2">
                 <label class="form-check-label" for="year2">
-                  ชั้นปีที่ 2
+                  ปี 2
                 </label>
               </div>
             </div>
@@ -299,7 +299,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox"  name="years[]" id="year3" value="3">
                 <label class="form-check-label" for="year3">
-                  ชั้นปีที่ 3
+                  ปี 3
                 </label>
               </div>
             </div>
@@ -307,7 +307,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox"  name="years[]" id="year4" value="4">
                 <label class="form-check-label" for="year4">
-                  ชั้นปีที่ 4
+                  ปี 4
                 </label>
               </div>
             </div>
@@ -315,7 +315,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox"  name="years[]" id="yearOther" value="other">
                 <label class="form-check-label" for="yearOther">
-                  ชั้นปีอื่น ๆ
+                  ปีอื่นๆ
                 </label>
               </div>
             </div>

@@ -20,13 +20,13 @@
       <div class="card-header border-bottom">
 
         @if(!isset($onlyTrashed))
-          <a class="btn btn-success btn-lg" href="{{url('/manage/user/teacher/add')}}">
+          <a class="btn btn-success btn-sg" href="{{url('/manage/user/teacher/add')}}">
             <i class="fa fa-plus"></i> เพิ่มอาจารย์
           </a>
-          <a class="btn btn-outline-success btn-lg" href="{{url('/manage/user/teacher/add')}}">
+          <a class="btn btn-outline-success btn-sg" href="{{url('/manage/user/teacher/add')}}">
             <i class="fa fa-plus"></i> เพิ่มไฟล์
           </a>
-          <a class="btn btn-outline-primary btn-lg" href="{{url('/manage/user/teacher-suspended')}}">
+          <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/teacher-suspended')}}">
             ลาออก
           </a>
         @else

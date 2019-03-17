@@ -2,8 +2,9 @@
 @section('title')
 สรุปการเข้าร่วมกิจกรรม
 @stop
-
-
+@section('subtitle')
+จัดการกิจรรม
+@stop
 @section('content')
 
 <div class="row">

@@ -3,7 +3,7 @@
 @if(isset($activity))
    แก้ไขข้อมูลกิจกรรม
 @else
-   สร้างข้อมูลกิจกรรม
+   เพิ่มข้อมูลกิจกรรม
 @endif
 @stop
 @section('subtitle')

@@ -12,9 +12,9 @@
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
 
-        <!-- <a class="btn btn-success btn-sg" href="{{url('manage/activity/add')}}">
+        <a class="btn btn-success btn-sg" href="{{url('manage/activity/add')}}">
           <i class="fa fa-plus"></i> เพิ่มกิจกรรม
-        </a> -->
+        </a>
 
         <form class="input-group input-group-lg col-md-5 float-right">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">

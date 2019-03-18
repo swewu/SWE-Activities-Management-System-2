@@ -13,7 +13,7 @@ xxxxxx กิจกรรม {{$activity->name}}
       <div class="card-header border-bottom">
 
         <a class="btn btn-success btn-lg" href="{{url('manage/activity/'.$activity->id.'/term/add')}}">
-          <i class="fa fa-plus"></i> เพิ่มปีการศึกษา และ เทอม
+          <i class="fa fa-plus"></i> เพิ่มรายละเอียดกิจกรรม
         </a>
 
         <form class="input-group input-group-lg col-md-5 float-right">

@@ -2,7 +2,9 @@
 @section('title')
 กิจกรรมทั้งหมด
 @stop
-
+@section('subtitle')
+จัดการกิจรรม
+@stop
 @section('content')
 <div class="row">
   <div class="col">

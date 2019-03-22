@@ -60,6 +60,8 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
 	Route::get('/manage/activity/detail', 'ManageActivityController@showActivityDetail');
 
 	Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
+
+	Route::get('/manage/activity/decription', 'ManageActivityController@showActivityDecription');
 });
 
 //headteacher

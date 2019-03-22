@@ -427,6 +427,11 @@ class ManageActivityController extends BaseController {
 		$activity = Activity::find($id);
 		$register = \DB::table('checking')->where('activityID', $id)->get();
 		return View::make('manage.activity_check_status', ['activity' => $activity, 'register'=>$register]);
-	}
+  }
+  
+  public function showActivityDecription()
+  {
+    return View::make('manage.activity_decription');
+  }
 
 }

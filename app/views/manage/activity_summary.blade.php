@@ -25,7 +25,7 @@
           <thead class="bg-light">
             <tr>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
-              <th scope="col" class="border-0">ภาคการศึกษา/ปี</th>
+              <th scope="col" class="border-0">ภาค/ปีการศึกษา</th>
               <th scope="col" class="border-0">อาจารย์ผู้รับผิดชอบ</th>
               <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
             </tr>

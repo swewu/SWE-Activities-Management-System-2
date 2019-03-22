@@ -37,7 +37,7 @@
             หมดสภาพนักศึกษา
           </a>
         @else
-        <a class="btn btn-outline-primary btn-lg" href="{{url('/manage/user/student')}}">
+        <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/student')}}">
           นักศึกษา
           </a>
         @endif

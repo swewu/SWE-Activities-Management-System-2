@@ -1,5 +1,5 @@
 <?php
-
+set_time_limit(0);
 class ManageActivityController extends BaseController {
 
 	public function validData($input=null, $activity=null, $default='')

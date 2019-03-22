@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-xxxxxx กิจกรรม {{$activity->name}}
+รายละเอียดกิจกรรม {{$activity->name}}
 @stop
 @section('subtitle')
 จัดการกิจรรม

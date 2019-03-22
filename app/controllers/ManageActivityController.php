@@ -350,7 +350,15 @@ class ManageActivityController extends BaseController {
 
 	public function showActivitySummary()
 	{
-		return View::make('manage.activity_summary');
+    $q = '';
+    $activities = Activity::orderBy('id','DESC');
+    if(Input::get('q') != NULL && Input::get('q') != ""){
+			$q = Input::get('q');
+			$activities = $activities->Where('name','like','%'.$q.'%');
+		}
+		$activities = $activities->paginate(10);
+		$activities->appends(['q'=>$q]);
+		return View::make('manage.activity_summary',['activities' => $activities,'q'=>$q]);
   }
   
 	public function showActivitySummaryUseradd()
@@ -364,7 +372,15 @@ class ManageActivityController extends BaseController {
   
 	public function showActivityConclude()
 	{
-		return View::make('manage.activity_conclude');
+    $q = '';
+    $activities = Activity::orderBy('id','DESC');
+    if(Input::get('q') != NULL && Input::get('q') != ""){
+			$q = Input::get('q');
+			$activities = $activities->Where('name','like','%'.$q.'%');
+		}
+		$activities = $activities->paginate(10);
+		$activities->appends(['q'=>$q]);
+		return View::make('manage.activity_conclude',['activities' => $activities,'q'=>$q]);
   }
   
 	public function showActivityDetail()

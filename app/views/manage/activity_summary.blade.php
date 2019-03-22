@@ -26,23 +26,34 @@
             <tr>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาค/ปีการศึกษา</th>
-              <th scope="col" class="border-0">อาจารย์ผู้รับผิดชอบ</th>
               <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
+              <th scope="col" class="border-0">รายละเอียดกิจกรรม</th>
             </tr>
           </thead>
           <tbody>
-              <tr>
-                <td class="text-center" style="vertical-align : middle;">SWE</td>
-                <td>
-                <div><h6 class="mb-0">1/2560</h6></div>
-                </td>
-                <td>อาจารย์พุทธิพร ธนธรรมเมธี</td>
-                <td>18</td>
-              </tr>
+              @foreach($activities as $activity)
+                @foreach($activity->details as $detail)
+                  <tr>
+                    <td class="text-left">{{$activity->name}}</td>
+                    <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
+                    <td>{{$detail->studentAllJoinCount()}}</td>
+                    <td>
+                      <a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="กิจกรรม">
+                        <i class="fas fa-link"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @endforeach
+              @endforeach
           </tbody>
-         </table>
+        </table>
+      </div>
+
+      <div class="card-footer bg-light border-top text-muted">
+        <?php echo $activities->links('partials.pagination'); ?>
       </div>
     </div>
   </div>
+</div>
 
 @stop

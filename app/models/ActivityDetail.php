@@ -26,7 +26,7 @@ class ActivityDetail extends Eloquent {
   {
     return $this->hasManyThrough('RankCheck', 'Participation');
   }
-  public function responsibilityByUserIDAndSearch($teacherId,$q)
+  public function responsibilityByUserIDAndSearch($teacherId, $q)
   {
     $activities = new Activity;
     if($q != NULL && $q != ""){
@@ -54,6 +54,87 @@ class ActivityDetail extends Eloquent {
   public function isPassDayStart()
   {
     return strtotime($this->day_start) >= strtotime('now');
+  }
+  public function studentAllJoinCount()
+  {
+    return $this->participations()->count();
+  }
+  public function studentAllJoin()
+  {
+    $students = [];
+    foreach($this->participations as $participation){
+      $students[] = [
+        "id" => $participation->student->id,
+        "fullName" => $participation->student->getFullName()
+      ];
+    }
+    
+    $students_json = json_encode($students);
+    return $students_json;
+  }
+  public function studentJoinCount()
+  {
+    $count = 0 ;
+    foreach($this->participations as $participation){
+      $join = true;
+      foreach($participation->rankChecks as $rankCheck){
+        $join = $join && $rankCheck->status;
+      }
+      if($join){
+        $count++;
+      }
+    }
+    return $count;
+  }
+  public function studentJoin()
+  {
+    $students = [];
+    foreach($this->participations as $participation){
+      $join = true;
+      foreach($participation->rankChecks as $rankCheck){
+        $join = $join && $rankCheck->status;
+      }
+      if($join){
+        $students[] = [
+          "id" => $participation->student->id,
+          "fullName" => $participation->student->getFullName()
+        ];
+      }
+    }
+    $students_json = json_encode($students);
+    return $students_json;
+  }
+  public function studentNotJoinCount()
+  {
+    $count = 0 ;
+    foreach($this->participations as $participation){
+      $join = true;
+      foreach($participation->rankChecks as $rankCheck){
+        $join = $join && $rankCheck->status;
+      }
+      if(!$join){
+        $count++;
+      }
+    }
+    return $count;
+  }
+  public function studentNotJoin()
+  {
+    $students = [];
+    foreach($this->participations as $participation){
+      $join = true;
+      foreach($participation->rankChecks as $rankCheck){
+        $join = $join && $rankCheck->status;
+      }
+      if(!$join){
+        $students[] = [
+          "id" => $participation->student->id,
+          "fullName" => $participation->student->getFullName()
+        ];
+      }
+    }
+    $students_json = json_encode($students);
+    return $students_json;
   }
   
 }

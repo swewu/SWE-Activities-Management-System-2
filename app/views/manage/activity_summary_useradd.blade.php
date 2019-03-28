@@ -29,7 +29,7 @@
           <thead class="bg-light">
             <tr>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
-              <th scope="col" class="border-0">ปี ภาคการศึกษา</th>
+              <th scope="col" class="border-0">ภาคการศึกษา/ปี</th>
               <th scope="col" class="border-0">วันและเวลาที่จัด</th>
               <th scope="col" class="border-0">จำนวนนักศึกษา</th>
               <th scope="col" class="border-0">จัดการ</th>

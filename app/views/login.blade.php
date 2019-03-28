@@ -23,7 +23,7 @@
         background: #fdfdfd none repeat scroll 0 0;
         border-radius: 2px;
         margin: 70px auto 90px;
-        max-width: 30%;
+        max-width: 35%;
         padding: 100px 70px 70px 71px;
     }
 

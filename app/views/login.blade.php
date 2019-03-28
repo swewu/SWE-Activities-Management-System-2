@@ -11,19 +11,38 @@
 <!------ Include the above in your HEAD tag ---------->
 <style>
     body{
-        background-color: #ffffff;
+        background-color: #ebebeb;
     }
     h2 {
         text-align: center;
         text-transform: uppercase;
-        margin:30px;
+        margin:30px;  
+    }
+
+    .main-div {
+        background: #fdfdfd none repeat scroll 0 0;
+        border-radius: 2px;
+        margin: 70px auto 90px;
+        max-width: 30%;
+        padding: 100px 70px 70px 71px;
+    }
+
+    .login-form  .btn.btn-primary {
+        background: #0d529c none repeat scroll 0 0;
+        border-color: #0d529c;
+        color: #ffffff;
+        font-size: 16px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
     }
 
 </style>
   </head>
 
     <body id="LoginForm">
-        <h2>ระบบจัดการกิจกรรมหลักสูตรวิศวกรรมซอฟต์แวร์</h2>
+        <!-- <h2>ระบบจัดการกิจกรรมหลักสูตรวิศวกรรมซอฟต์แวร์</h2> -->
         <div class="container"></div>
             <div class="login-form">
              <div class="main-div">

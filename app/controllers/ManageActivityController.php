@@ -17,7 +17,7 @@ class ManageActivityController extends BaseController {
   public function showActivity()
 	{
     $q = '';
-    $activities = Activity::where('created_by',Auth::user()->id)->orderBy('id','DESC');
+    $activities = Activity::orderBy('id','DESC');
     if(Input::get('q') != NULL && Input::get('q') != ""){
 			$q = Input::get('q');
 			$activities = $activities->Where('name','like','%'.$q.'%');

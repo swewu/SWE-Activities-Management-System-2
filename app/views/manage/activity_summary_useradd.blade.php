@@ -39,12 +39,7 @@
             @foreach($activityDetails as $activityDetail)
               <tr>
                 <td class="text-left" style="vertical-align : middle;">{{$activityDetail->activity->name}}</td>
-                <td>
-                  <div>
-                    <h6 class="mb-0">ปีการศึกษา {{$activityDetail->term_year}}</h6>
-                    <span>ภาคการศึกษา {{$activityDetail->term_sector}}</span>
-                  </div>
-                </td>
+                <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
                 <td>
                   <div>
                     <h6 class="mb-0">{{$activityDetail->dayStartDayEnd()}}</h6>

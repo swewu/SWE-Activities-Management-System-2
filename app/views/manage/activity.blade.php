@@ -40,7 +40,7 @@
                 <td class="text-left">{{$activity->name}}</td>
                 <td>{{$activity->details->count()}}</td>
                 <td>
-                  <a href="{{url('/manage/activity/'.$activity->id.'/term')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="รายกิจกรรม"><i class="far fa-calendar-alt"></i></a>  
+                  <a href="{{url('/manage/activity/'.$activity->id.'/term')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="รายการกิจกรรม"><i class="far fa-calendar-alt"></i></a>  
                   <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"> <i class="far fa-edit"></i></a>  
                   <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a> 
                 </td>

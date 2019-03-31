@@ -29,7 +29,7 @@
   <div class="col">
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
-        <form class="input-group input-group-lg col-md-5 float-right">
+        <form class="input-group input-group-sg col-md-5 float-right">
           <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
           <span class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">
@@ -46,8 +46,8 @@
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาคการศึกษา/ปี</th>
               <th scope="col" class="border-0">นักศึกษาที่ต้องเข้าร่วมกิจกรรม</th>
-              <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
-              <th scope="col" class="border-0">นักศึกษาที่ไม่เข้าร่วม</th>
+              <th scope="col" class="border-0">นักศึกษาเข้าร่วม</th>
+              <th scope="col" class="border-0">นักศึกษาไม่เข้าร่วม</th>
             </tr>
           </thead>
           <tbody>
@@ -58,17 +58,17 @@
                   <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
                   <td> 
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentAllJoin()}}'>
-                      {{$detail->studentAllJoinCount()}}
+                      {{$detail->studentAllJoinCount()}} คน
                     </button>
                   </td>
                   <td>
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentJoin()}}'>
-                      {{$detail->studentJoinCount()}}
+                      {{$detail->studentJoinCount()}} คน
                     </button>
                   </td>
                   <td>
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentNotJoin()}}'>
-                      {{$detail->studentNotJoinCount()}}
+                      {{$detail->studentNotJoinCount()}} คน
                     </button>
                   </td>
                 </tr>

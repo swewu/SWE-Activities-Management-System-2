@@ -15,7 +15,7 @@
           <i class="fa fa-plus"></i> เพิ่มกิจกรรม
         </a> -->
 
-        <form class="input-group input-group-lg col-md-5 float-right">
+        <form class="input-group input-group-sg col-md-5 float-right">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
             <span class="input-group-append">
               <button class="btn btn-outline-secondary" type="submit">

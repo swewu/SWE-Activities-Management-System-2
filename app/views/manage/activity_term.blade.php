@@ -30,7 +30,7 @@
           <thead class="bg-light">
             <tr>
               <th scope="col" class="border-0">ปีการศึกษา</th>
-              <th scope="col" class="border-0">เทอม</th>
+              <th scope="col" class="border-0">ภาคการศึกษา</th>
               <th scope="col" class="border-0">วันที่จัด</th>
               <th scope="col" class="border-0">เวลา</th>
               <th scope="col" class="border-0">จัดการ</th>

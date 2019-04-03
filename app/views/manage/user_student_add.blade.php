@@ -12,6 +12,22 @@
 จัดการข้อมูลนักศึกษา
 @stop
 
+@section('js')
+<script>
+  $(document).ready(function () {
+    $('#firstname').on("keydown", onPressOnlyThaiAndEng);
+    $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#id').on("keydown", onPressOnlyNumber);
+    $('#id').on("keydown", (e)=>{
+      onPressLimit(e,$('#id').val().length,8)
+    });
+    $('#password').on("keydown", (e)=>{
+      onPressLimit(e,$('#password').val().length,16)
+    });
+  })
+</script>
+@stop
+
 @section('content')
 <form class="add-new-post" method="post" autocomplete="off" enctype="multipart/form-data" >
   <div class="row">

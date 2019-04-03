@@ -1,12 +1,24 @@
 @if(Session::has('message'))
-<div role="alert" aria-live="polite" aria-atomic="true" class="alert-royal-blue alert alert-success">
-  <i class="fa fa-info mx-2"></i>
-  {{Session::get('message')}}
-</div>
+<script type="text/javascript">
+$(function(){
+  Swal.fire({
+    title: 'สำเร็จ!',
+    text: '{{Session::get('message')}}',
+    type: 'success',
+    confirmButtonText: 'ตกลง'
+  })
+})
+</script>
 @endif
 @if(Session::has('error'))
-<div role="alert" aria-live="polite" aria-atomic="true" class="alert-royal-blue alert alert-danger">
-  <i class="fa fa-info mx-2"></i>
-  {{Session::get('error')}}
-</div>
+<script type="text/javascript">
+$(function(){
+  Swal.fire({
+    title: 'พบข้อผิดพลาด!',
+    text: '{{Session::get('error')}}',
+    type: 'error',
+    confirmButtonText: 'ตกลง'
+  })
+})
+</script>
 @endif

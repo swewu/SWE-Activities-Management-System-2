@@ -56,6 +56,7 @@
                 </a>
               </li>
 
+              @if(Auth::user()->isTeacher())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">local_activity</i>
@@ -66,10 +67,14 @@
                   <!-- <a class="dropdown-item {{ Request::is('manage/activity/add') ? 'active' : '' }}" href="{{url('manage/activity/add')}}">สร้างกิจกรรม</a> -->
                   <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">กิจกรรมที่รับผิดชอบ</a>
                   <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">กิจกรรมทั้งหมด</a>
+                  @if(Auth::user()->isHeadTeacher())
                   <a class="dropdown-item {{ Request::is('manage/activity/conclude') ? 'active' : '' }}" href="{{url('manage/activity/conclude')}}">สรุปการเข้าร่วมกิจกรรม</a>
+                  @endif
                 </div>
               </li>
-              
+              @endif
+
+              @if(Auth::user()->isAdmin())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">people</i>
@@ -80,48 +85,7 @@
                   <a class="dropdown-item " href="{{url('manage/user/teacher')}}">อาจารย์</a>
                 </div>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link " href="index.html">
-                  <i class="material-icons">edit</i>
-                  <span>Blog Dashboard</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="components-blog-posts.html">
-                  <i class="material-icons">vertical_split</i>
-                  <span>Blog Posts</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="add-new-post.html">
-                  <i class="material-icons">note_add</i>
-                  <span>Add New Post</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="form-components.html">
-                  <i class="material-icons">view_module</i>
-                  <span>Forms &amp; Components</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="tables.html">
-                  <i class="material-icons">table_chart</i>
-                  <span>Tables</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="user-profile-lite.html">
-                  <i class="material-icons">person</i>
-                  <span>User Profile</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="errors.html">
-                  <i class="material-icons">error</i>
-                  <span>Errors</span>
-                </a>
-              </li> -->
+              @endif
             </ul>
           </div>
         </aside>
@@ -159,14 +123,13 @@
               </nav>
             </nav>
           </div>
-          @include('error')
           <!-- / .main-navbar -->
           <div class="main-content-container container-fluid px-4">
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
-              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">@yield('subtitle')</span>
-                <h2>@yield('title')</h2>
+                <h3>@yield('title')</h3>
               </div>
             </div>
             @yield('content')
@@ -177,19 +140,83 @@
         </main>
       </div>
     </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary confirm">confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{asset('assets/shards-dashboard/scripts/extras.1.1.0.min.js')}}"></script>
     <script src="{{asset('assets/shards-dashboard/scripts/shards-dashboards.1.1.0.min.js')}}"></script>
     <script type="text/javascript">
-      $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip()
-      });
+      const onPressOnlyThaiAndEng = (event) => {
+        var eventCode = event.which;
+		    if((eventCode >= 37 && eventCode <= 40) ||  eventCode == 8 || eventCode == 9 || eventCode == 46) { // Left  / Right Arrow, Backspace, Delete keys
+		        return;
+		    }
+        let isThaiEng = /^[a-zก-๛]+$/ig.test(event.key)
+        if(isThaiEng === false){
+          event.preventDefault()
+          return false;
+        }
+      }
+      const onPressOnlyNumber = (event) => {
+        var eventCode = event.which;
+		    if((eventCode >= 37 && eventCode <= 40) ||  eventCode == 8 || eventCode == 9 || eventCode == 46) { // Left  / Right Arrow, Backspace, Delete keys
+		        return;
+		    }
+        let isNumber = /^[0-9]+$/ig.test(event.key)
+        if(isNumber === false){
+          event.preventDefault()
+          return false;
+        }
+      }
+      const onPressLimit = (event,length,limit) => {
+        var eventCode = event.which;
+		    if((eventCode >= 37 && eventCode <= 40) ||  eventCode == 8 || eventCode == 9 || eventCode == 46) { // Left  / Right Arrow, Backspace, Delete keys
+		        return;
+		    }
+        if(length >= limit){
+          event.preventDefault()
+          return false;
+        }
+      }
+      $(function(){
+        var delete_href = null
+        $('.delete-confirm').click((e)=>{
+          event.preventDefault()
+          delete_href = e.target.href
+          $('#deleteModal').modal('show')
+          console.log(delete_href)
+        })
+        $('#deleteModal .confirm').click((e)=>{
+          event.preventDefault()
+          window.location = delete_href
+        })
+        $('[data-toggle="tooltip"]').tooltip()
+      })
     </script>
+    @include('error')
     @yield('js')
   </body>
 </html>

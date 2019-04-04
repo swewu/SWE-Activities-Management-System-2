@@ -42,8 +42,8 @@
                   จัดการผู้ใช้งาน
                   </a>
                   <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="{{url('/manage/user/student')}}">นักศึกษา</a>
-                      <a class="dropdown-item" href="{{url('/manage/user/teacher')}}">อาจารย์</a>
+                      <a class="dropdown-item" href="{{url('/manage/user/student')}}">ข้อมูลนักศึกษา</a>
+                      <a class="dropdown-item" href="{{url('/manage/user/teacher')}}">ข้อมูลอาจารย์</a>
                   </div>
                 </li>
               </ul>

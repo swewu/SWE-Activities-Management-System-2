@@ -30,7 +30,7 @@
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="{{url('manage')}}" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="{{asset('assets/shards-dashboard/images/shards-dashboards-logo.svg')}}" alt="Shards Dashboard">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="{{asset('assets/image/logo-swe.png')}}" alt="Shards Dashboard">
                   <span class="d-none d-md-inline ml-1">Software Engineering</span>
                 </div>
               </a>
@@ -144,17 +144,15 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">ต้องการจะลบข้อมูลใช่หรือไม่?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            ...
-          </div>
+         
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary confirm">confirm</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-primary confirm">ลบ</button>
           </div>
         </div>
       </div>

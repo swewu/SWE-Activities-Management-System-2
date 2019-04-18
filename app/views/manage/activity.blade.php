@@ -3,7 +3,7 @@
 เพิ่มกิจกรรม
 @stop
 @section('subtitle')
-จัดการกิจรรม
+จัดการกิจกรรม
 @stop
 @section('content')
 

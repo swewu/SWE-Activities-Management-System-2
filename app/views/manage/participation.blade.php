@@ -16,7 +16,7 @@
   $(document).ready(function(){
     $(".check-status").on('change', function() {
       console.log($(this).data('id'),$(this).data('time'),this.checked);
-      $.post( "{{url('/manage/activity/detail/'.$activity_detail_id.'/participation')}}/"+$(this).data('id'), {time: $(this).data('time'), status: this.checked} , (data)=>{
+      $.post( "{{url('/manage/activity/detail/'.$activity_detail_id.'/participation/id')}}/"+$(this).data('id'), {time: $(this).data('time'), status: this.checked} , (data)=>{
         console.log( "Data Loaded: " + data );
         if(data !== 'true'){
           this.checked = !this.checked
@@ -24,6 +24,12 @@
       }).fail(() => {
         this.checked = !this.checked
       })
+    })
+    $("#checkAll").click(()=>{
+      $.post( "{{url('/manage/activity/detail/'.$activity_detail_id.'/participation/all')}}", {date: '{{$nowDay}}'} , (data)=>{
+        $('.check-status').prop('checked', true);
+      })
+      
     })
   })
   </script>
@@ -36,20 +42,32 @@
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
         @foreach($dayList as $day)
-          <?php $day = Tool::formatDateForsave($day)?>
-          <a class="btn btn-outline-secondary {{($nowDay==$day)?'disabled':''}}" href="?day={{$day}}">
+          <?php $day = Tool::formatDateForsave($day);?>
+          <?php 
+            $link = "?day=".urlencode($day);
+            if(isset($q))
+              $link .= "&q=".urlencode($q)
+          ?>
+          <a class="btn btn-outline-secondary {{($nowDay==$day)?'disabled':''}}" href="{{$link}}">
             {{$day}}
           </a>
         @endforeach
-
-        <form class="input-group input-group-lg col-md-5 float-right">
+        <div class="col-md-5 float-right">
+          <form class="input-group input-group-lg">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อหรือนามสกุลนักศึกษา" name="q">
             <span class="input-group-append">
               <button class="btn btn-outline-secondary" type="submit">
                   <i class="fa fa-search"></i>
               </button>
             </span>
-        </form>
+          </form>
+          <div class="text-right" style=" margin-top: 8px; ">
+            <a class="btn btn-outline-success" id="checkAll">
+              เช็คหมดเลยยยย
+            </a>
+          </div>
+        </div>
+        
       </div>
       <div class="card-body p-0 text-center">
         <table class="table mb-0 ">

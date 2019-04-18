@@ -17,9 +17,22 @@
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 @stop
+@section('js')
+<script>
+  $(document).ready(function () {
+    $('#firstname').on("keydown", onPressOnlyThaiAndEng);
+    $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#tel').on("keydown", onPressOnlyNumber);
+    $('#tel').on("keydown", (e)=>{
+      onPressLimit(e,$('#tel').val().length,10)
+    });
+    $('#password').on("keydown", (e)=>{
+      onPressLimit(e,$('#password').val().length,16)
+    });
+  })
+</script>
+@stop
 @section('content')
-
-
 <form class="add-new-post" method="post" autocomplete="off" enctype="multipart/form-data" >
   <div class="row">
     <div class="col-lg-6 col-md-12">

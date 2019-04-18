@@ -206,12 +206,14 @@ class ManageActivityController extends BaseController {
       foreach ($participations as $participation) {
         foreach ($listOfDate as $day) {
           $rankCheck = new RankCheck;
+          $rankCheck->activity_details_id = $activityDetail->id;
           $rankCheck->participation_id = $participation->id;
           $rankCheck->date_check = $day;
           $rankCheck->time ='เช้า';
           $rankCheck->save();
 
           $rankCheck = new RankCheck;
+          $rankCheck->activity_details_id = $activityDetail->id;
           $rankCheck->participation_id = $participation->id;
           $rankCheck->date_check = $day;
           $rankCheck->time ='บ่าย';
@@ -392,20 +394,24 @@ class ManageActivityController extends BaseController {
   {
 
     $q = '';
-    $participations = Participation::where('activity_detail_id',$activity_detail_id);
+    $participations = Participation::where('activity_detail_id',$activity_detail_id)->orderBy('student_id','DESC');
     if(Input::get('q') != NULL && Input::get('q') != ""){
       $q = Input::get('q');
       $student_list = Student::withTrashed()->where('firstname','like','%'.$q.'%')->orWhere('lastname','like','%'.$q.'%')->lists('id');
 			$participations = $participations->whereIn('student_id',$student_list);
 		}
 		$participations = $participations->paginate(20);
-    $participations->appends(['q'=>$q]);
+    $participations->appends(['q'=>$q,'day'=>Input::get('day')]);
     
-    $daylist = $participations[0]->dateList();
-    $nowDay = Tool::formatDateForsave($daylist[0]);
-    if(Input::get('day') != NULL && Input::get('day') != ""){
-      $nowDay = Input::get('day');
-      $participations->appends(['day'=>Input::get('day')]);
+    $daylist = [];
+    $nowDay = null;
+    if($participations->count() > 0){
+      $daylist = $participations[0]->dateList();
+      $nowDay = Tool::formatDateForsave($daylist[0]);
+      if(Input::get('day') != NULL && Input::get('day') != ""){
+        $nowDay = Input::get('day');
+        $participations->appends(['day'=>Input::get('day')]);
+      }
     }
     
 		return View::make(
@@ -437,6 +443,29 @@ class ManageActivityController extends BaseController {
     }
     
   }
+  public function actionParticipationAll($activity_detail_id)
+  {
+    try {
+      $date_check = Tool::formatDateToDatepicker(Input::get('date'));
+    //   $activityDetail = ActivityDetail::find($activity_detail_id);
+    //   foreach($activityDetail->participations as $p){
+    //     $p->with(["rankChecks" => function($q) use($date_check) {
+    //       $q->where('date_check', '=',$date_check );
+    //     }])->get();
+    //     foreach($p->rankChecks as $c){
+    //       $c->status = 1;
+    //       $c->save();
+    //     }
+    //   }
+        $rankCheck = RankCheck::where('date_check',$date_check)
+                                ->where('activity_details_id',$activity_detail_id)
+                                ->update(array('status' => 1));
+      return 'true';
+    } catch (\Throwable $th) {
+      return 'false';
+    }
+    
+  }
 
 	public function showActivityStatus($id)
 	{
@@ -445,9 +474,10 @@ class ManageActivityController extends BaseController {
 		return View::make('manage.activity_check_status', ['activity' => $activity, 'register'=>$register]);
   }
   
-  public function showActivityDecription()
+  public function showActivityDecription($activity_detail_id)
   {
-    return View::make('manage.activity_decription');
+    $activityDetail = ActivityDetail::find($activity_detail_id);
+    return View::make('manage.activity_decription',['activityDetail' => $activityDetail]);
   }
 
 }

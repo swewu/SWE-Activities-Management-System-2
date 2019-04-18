@@ -206,8 +206,10 @@
         $('.delete-confirm').click((e)=>{
           event.preventDefault()
           delete_href = e.target.href
-          $('#deleteModal').modal('show')
-          console.log(delete_href)
+          if(delete_href){
+            $('#deleteModal').modal('show')
+            console.log('delete_href',delete_href)
+          }
         })
         $('#deleteModal .confirm').click((e)=>{
           event.preventDefault()

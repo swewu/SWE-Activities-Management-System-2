@@ -38,7 +38,7 @@
                     <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
                     <td>{{$detail->studentAllJoinCount()}}</td>
                     <td>
-                      <a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดเพิ่มเติม">
+                      <a href="{{url('/manage/activity/detail/'.$detail->id.'/decription')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดเพิ่มเติม">
                         <i class="fas fa-link"></i>
                       </a>
                     </td>

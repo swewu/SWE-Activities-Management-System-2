@@ -30,9 +30,13 @@
     $("form").on("submit", function (e) {
       $("#hiddenArea").text($('.ql-editor').html());
     });
+    $('#name').on("keydown", (e)=>{
+      onPressLimit(e,$('#name').val().length,100)
+    });
   });
   </script>
 @stop
+
 @section('content')
 <form class="add-new-post" method="post" autocomplete="off" enctype="multipart/form-data" >
   <div class="row">
@@ -42,7 +46,7 @@
         <div class="card-body">
           
             <div class="form-group">
-              <input class="form-control form-control-lg mb-3 {{$errors->has('name') ? 'is-invalid' : ''}}" type="text" name="name" value="{{$text_name}}" placeholder="ชื่อกิจกรรม" >
+              <input class="form-control form-control-lg mb-3 {{$errors->has('name') ? 'is-invalid' : ''}}" type="text" id="name" name="name" value="{{$text_name}}" placeholder="ชื่อกิจกรรม" >
               <div class="invalid-feedback">{{$errors->first('name')}}</div>
             </div>
             <textarea name="detail" style="display:none" id="hiddenArea"></textarea>

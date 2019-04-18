@@ -50,7 +50,9 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
   Route::get('/manage/activity/{activity_id}/term/{id}/delete', 'ManageActivityController@actionActivityTermDelete');
   
   Route::get('/manage/activity/detail/{activity_detail_id}/participation', 'ManageActivityController@showParticipation');
-  Route::post('/manage/activity/detail/{activity_detail_id}/participation/{id}', 'ManageActivityController@actionParticipation');
+  Route::post('/manage/activity/detail/{activity_detail_id}/participation/all', 'ManageActivityController@actionParticipationAll');
+  Route::post('/manage/activity/detail/{activity_detail_id}/participation/id/{id}', 'ManageActivityController@actionParticipation');
+
 
 
 	Route::get('/manage/activity/summary', 'ManageActivityController@showActivitySummary');
@@ -61,7 +63,7 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
 
 	Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
 
-	Route::get('/manage/activity/decription', 'ManageActivityController@showActivityDecription');
+	Route::get('/manage/activity/detail/{activity_detail_id}/decription', 'ManageActivityController@showActivityDecription');
 });
 
 //headteacher
@@ -76,20 +78,20 @@ Route::group(array('before' => array('auth', 'admin')) , function () {
 	Route::post('/manage/user/student/add', 'ManageUserController@actionUserStudentAdd');
 	Route::get('/manage/user/student/edit/{id}', 'ManageUserController@showUserStudentEdit');
 	Route::post('/manage/user/student/edit/{id}', 'ManageUserController@actionUserStudentAdd');
-  Route::get('/manage/user/student/delete/{id}', 'ManageUserController@actionUserStudentDelete');
+  	Route::get('/manage/user/student/delete/{id}', 'ManageUserController@actionUserStudentDelete');
   
-  Route::get('/manage/user/student-suspended', 'ManageUserController@showStudentSuspended');
-  Route::get('/manage/user/student-unsuspended/{id}', 'ManageUserController@actionStudentUnsuspended');
+  	Route::get('/manage/user/student-suspended', 'ManageUserController@showStudentSuspended');
+  	Route::get('/manage/user/student-unsuspended/{id}', 'ManageUserController@actionStudentUnsuspended');
 
 	Route::get('/manage/user/teacher', 'ManageUserController@showUserTeacher');
 	Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacherAdd');
 	Route::post('/manage/user/teacher/add', 'ManageUserController@actionUserTeacherAdd');
 	Route::get('/manage/user/teacher/edit/{id}', 'ManageUserController@showUserTeacherEdit');
 	Route::post('/manage/user/teacher/edit/{id}', 'ManageUserController@actionUserTeacherAdd');
-  Route::get('/manage/user/teacher/delete/{id}', 'ManageUserController@actionUserTeacherDelete');
+  	Route::get('/manage/user/teacher/delete/{id}', 'ManageUserController@actionUserTeacherDelete');
     
-  Route::get('/manage/user/teacher-suspended', 'ManageUserController@showTeacherSuspended');
-  Route::get('/manage/user/teacher-unsuspended/{id}', 'ManageUserController@actionTeacherUnsuspended');
+	Route::get('/manage/user/teacher-suspended', 'ManageUserController@showTeacherSuspended');
+	Route::get('/manage/user/teacher-unsuspended/{id}', 'ManageUserController@actionTeacherUnsuspended');
 });
 
 

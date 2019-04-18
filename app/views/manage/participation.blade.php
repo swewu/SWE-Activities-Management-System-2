@@ -63,7 +63,7 @@
           </form>
           <div class="text-right" style=" margin-top: 8px; ">
             <a class="btn btn-outline-success" id="checkAll">
-              เช็คหมดเลยยยย
+              เช็คทั้งหมด
             </a>
           </div>
         </div>

@@ -33,7 +33,8 @@ INSERT INTO `activity` (`id`, `name`, `description`, `image`, `created_at`, `cre
 (65,	'เทส กิจกรรม',	'<p><br></p>',	NULL,	'2019-03-31 17:24:39',	148,	'2019-03-31 17:24:39',	148),
 (69,	'a',	'<p>a</p>',	NULL,	'2019-04-03 21:54:24',	56,	'2019-04-03 21:54:24',	56),
 (70,	'test123',	'<p><br></p>',	NULL,	'2019-04-04 10:40:12',	56,	'2019-04-04 10:40:12',	56),
-(71,	' อบรม123',	'<p>asdasd</p><ol><li>asd</li><li>asda</li><li>asd</li></ol><p><strong>zxczxcasdasd</strong></p>',	NULL,	'2019-04-04 10:48:57',	56,	'2019-04-19 01:31:27',	57);
+(71,	' อบรม123',	'<p>asdasd</p><ol><li>asd</li><li>asda</li><li>asd</li></ol><p><strong>zxczxcasdasd</strong></p>',	NULL,	'2019-04-04 10:48:57',	56,	'2019-04-19 01:31:27',	57),
+(74,	'เทสเทสเทสเทส',	'<p><br></p>',	NULL,	'2019-04-19 02:16:36',	56,	'2019-04-19 02:16:36',	56);
 
 DROP TABLE IF EXISTS `activity_details`;
 CREATE TABLE `activity_details` (
@@ -62,7 +63,7 @@ CREATE TABLE `activity_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `activity_details` (`id`, `activity_id`, `day_start`, `day_end`, `time_start`, `time_end`, `term_year`, `term_sector`, `location`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(11,	71,	'2019-04-18',	'2019-04-27',	'08:00:00',	'16:00:00',	2561,	1,	'a',	'2019-04-18 23:58:43',	56,	'2019-04-18 23:58:43',	56);
+(11,	71,	'2019-04-18',	'2019-04-20',	'08:00:00',	'16:00:00',	2561,	1,	'a',	'2019-04-19 02:19:54',	56,	'2019-04-19 02:19:54',	56);
 
 DROP TABLE IF EXISTS `albumactivity`;
 CREATE TABLE `albumactivity` (
@@ -2000,7 +2001,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
 (55,	'pthimapo2@wu.ac.th',	'$2y$10$LSA1n/xcA4JVRfAuwv9aa.mOtXzTY.rLH9tdqpMSSGXBEe61K6QcS',	NULL,	'2019-03-07 15:49:05',	'',	'2019-03-07 15:49:05',	NULL),
 (56,	'kanchan.th@wu.ac.th',	'$2y$10$hcmyFbQ0MOqD9/37bpSREOAYNeWmttQsF770Qp633Z86T6d5WpDWK',	'Lj1SyEaXbN47lTihFtcw3PYpnfT5aHyZJCdXRm7Fg8q4oks1efdv4GZ6Yfb2',	'2019-04-19 02:00:55',	'',	'2019-04-19 02:00:55',	NULL),
-(57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'1ktNBqpUdPiozb2khOIXIv0H4Fv8voxCItVWysqWxhsu5n5nf4sGJ5UPUo0v',	'2019-04-19 01:59:52',	'',	'2019-04-19 01:59:52',	NULL),
+(57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'ewyXV4Me6FU9zwryGNR2wxckP2Ty4w9DZmsxqssA1N3Oqle7zpJeqr0ZH4oT',	'2019-04-19 02:14:00',	'',	'2019-04-19 02:14:00',	NULL),
 (58,	'muhamard@wu.ac.th',	'$2y$10$cjlExpqXoFsdtfqfO8oRxOzGAvxW6VBRhDf1haWT0JvW3i1qH8K0.',	NULL,	'2019-02-05 12:46:46',	'',	'2019-02-05 12:46:46',	NULL),
 (59,	'putthiporn.th@wu.ac.th',	'$2y$10$4iixfs8x4vmUj22ktXQMLe22s59bFZZSycs2EJc7XT0m9JXYu51a.',	NULL,	'2019-02-05 12:43:17',	'',	'2019-02-05 12:43:17',	NULL),
 (60,	'syaowara@wu.ac.th',	'$2y$10$EE5FpFUInqFHI4JbMxffi.ciyNbmFOifx8G/uwfl7ia9TpvCv3lU2',	NULL,	'2019-02-05 12:45:12',	'',	'2019-02-05 12:45:12',	NULL),
@@ -2087,4 +2088,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (147,	'12345678',	'$2y$10$SQxmhTbnq2XNeUuaWlhHSOtj6s1BKDR1Hiv9Zv.QyI0.rjAr/cwZq',	NULL,	'2019-03-22 09:37:55',	'',	'2019-03-22 09:37:55',	NULL),
 (148,	'sudarat@gmail.com',	'$2y$10$wPcnfqLfGUVLDjteuZZe4.i1kpMS7gjhjhO99wtv7Fa.LbTs574Nu',	'MklQHYxP0pXuBfKWW77vEt7E1dhSnBGWhj2nUXBaLuMKYC48HxFf3eJgvPGh',	'2019-03-31 17:27:00',	'',	'2019-03-31 17:27:00',	NULL);
 
--- 2019-04-18 19:10:05
+-- 2019-04-18 19:20:04

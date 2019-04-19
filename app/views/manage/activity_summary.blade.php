@@ -27,7 +27,7 @@
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาค/ปีการศึกษา</th>
               <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
-              <th scope="col" class="border-0">รายละเอียดกิจกรรม</th>
+              <th scope="col" class="border-0">รายละเอียดกิจกรรมเพิ่มเติม</th>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +38,7 @@
                     <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
                     <td>{{$detail->studentAllJoinCount()}}</td>
                     <td>
-                      <a href="{{url('/manage/activity/detail/'.$detail->id.'/decription')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดเพิ่มเติม">
+                      <a href="{{url('/manage/activity/detail/'.$detail->id.'/decription')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดกิจกรรมเพิ่มเติม">
                         <i class="fas fa-link"></i>
                       </a>
                     </td>

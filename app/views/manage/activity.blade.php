@@ -12,7 +12,7 @@
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
 
-        <a class="btn btn-success btn-sg" href="{{url('manage/activity/add')}}">
+        <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/add')}}">
           <i class="fa fa-plus"></i> เพิ่มกิจกรรม
         </a>
 

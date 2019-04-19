@@ -41,17 +41,25 @@
   <div class="col">
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
-        @foreach($dayList as $day)
-          <?php $day = Tool::formatDateForsave($day);?>
-          <?php 
-            $link = "?day=".urlencode($day);
-            if(isset($q))
-              $link .= "&q=".urlencode($q)
-          ?>
-          <a class="btn btn-outline-secondary {{($nowDay==$day)?'disabled':''}}" href="{{$link}}">
-            {{$day}}
-          </a>
-        @endforeach
+        <div class="dropdown float-left">
+          <button class="btn btn-outline-muted dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{$nowDay}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach($dayList as $day)
+              <?php $day = Tool::formatDateForsave($day);?>
+              <?php 
+                $link = "?day=".urlencode($day);
+                if(isset($q))
+                  $link .= "&q=".urlencode($q)
+              ?>
+              <a class="dropdown-item {{($nowDay==$day)?'disabled':''}}" href="{{$link}}">
+                {{$day}}
+              </a>
+            @endforeach
+          </div>
+        </div>
+        
         <div class="col-md-5 float-right">
           <form class="input-group input-group-lg">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อหรือนามสกุลนักศึกษา" name="q">

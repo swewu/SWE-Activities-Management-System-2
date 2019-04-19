@@ -370,7 +370,7 @@
           <small class="form-text text-danger">{{$errors->first('students')}}</small>
         </div>
         <div class="card-footer bg-light border-top p-3 text-muted">
-          <button class="btn btn-outline-accent ml-auto float-right">
+          <button class="btn btn-outline-success ml-auto float-right">
             <i class="material-icons">save</i> บันทึก
           </button>
         </div>

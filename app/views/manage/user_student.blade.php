@@ -1,9 +1,9 @@
 @extends('manage.layout')
 @section('title')
   @if(isset($onlyTrashed))
-    นักศึกษา <small class="text-danger">(หมดสภาพนักศึกษา)</small>
+    ข้อมูลนักศึกษา <small class="text-danger">(นักศึกษาที่พ้นสภาพ)</small>
   @else
-    นักศึกษา
+    ข้อมูลนักศึกษา
   @endif
 @stop
 @section('subtitle')
@@ -27,18 +27,18 @@
       <div class="card-header border-bottom">
 
         @if(!isset($onlyTrashed))
-          <a class="btn btn-success btn-sg" href="{{url('/manage/user/student/add')}}">
-            <i class="fa fa-plus"></i> เพิ่มนักศึกษา
-          </a>
           <a class="btn btn-outline-success btn-sg" href="{{url('/manage/user/student/add')}}">
+            <i class="fa fa-plus"></i> เพิ่มข้อมูลนักศึกษา
+          </a>
+          <a class="btn btn-outline-success btn-sg" href="{{url('manage')}}">
             <i class="fa fa-plus"></i> เพิ่มไฟล์
           </a>
-          <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/student-suspended')}}">
+          <a class="btn btn-outline-danger btn-sg" href="{{url('/manage/user/student-suspended')}}">
             นักศึกษาที่พ้นสภาพ
           </a>
         @else
         <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/student')}}">
-          นักศึกษา
+          ข้อมูลนักศึกษา
           </a>
         @endif
 

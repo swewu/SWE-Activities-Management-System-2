@@ -71,7 +71,7 @@
           <input type="file" class="form-control-file" name="photo">
         </div>
         <div class="card-footer bg-light border-top p-3 text-muted">
-          <button class="btn btn-outline-accent ml-auto">
+          <button class="btn btn-outline-success ml-auto">
             <i class="material-icons">save</i> บันทึก
           </button>
         </div>

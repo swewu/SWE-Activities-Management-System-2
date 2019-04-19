@@ -43,14 +43,14 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('manage') ? 'active' : '' }}" href="{{url('manage')}}">
+                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage')}}">
                   <i class="material-icons">home</i>
                   <span>หน้าหลัก</span>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('profile')}}">
+                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage')}}">
                   <i class="material-icons">person</i>
                   <span>ข้อมูลนักศึกษา</span>
                 </a>
@@ -81,8 +81,8 @@
                   <span>จัดการผู้ใช้งาน</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small" x-placement="bottom-start" style="display: none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-5px, 50px, 0px);">
-                  <a class="dropdown-item " href="{{url('manage/user/student')}}">นักศึกษา</a>
-                  <a class="dropdown-item " href="{{url('manage/user/teacher')}}">อาจารย์</a>
+                  <a class="dropdown-item " href="{{url('manage/user/student')}}">ข้อมูลนักศึกษา</a>
+                  <a class="dropdown-item " href="{{url('manage/user/teacher')}}">ข้อมูลอาจารย์</a>
                 </div>
               </li>
               @endif

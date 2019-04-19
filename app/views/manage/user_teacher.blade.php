@@ -3,7 +3,7 @@
   @if(isset($onlyTrashed))
     อาจารย์ <small class="text-danger">(ลาออก)</small>
   @else
-    อาจารย์
+    ข้อมูลอาจารย์
   @endif
 @stop
 
@@ -20,13 +20,13 @@
       <div class="card-header border-bottom">
 
         @if(!isset($onlyTrashed))
-          <a class="btn btn-success btn-sg" href="{{url('/manage/user/teacher/add')}}">
-            <i class="fa fa-plus"></i> เพิ่มอาจารย์
-          </a>
           <a class="btn btn-outline-success btn-sg" href="{{url('/manage/user/teacher/add')}}">
+            <i class="fa fa-plus"></i> เพิ่มข้อมูลอาจารย์
+          </a>
+          <a class="btn btn-outline-success btn-sg" href="{{url('manage')}}">
             <i class="fa fa-plus"></i> เพิ่มไฟล์
           </a>
-          <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/teacher-suspended')}}">
+          <a class="btn btn-outline-danger btn-sg" href="{{url('/manage/user/teacher-suspended')}}">
             ลาออก
           </a>
         @else

@@ -32,7 +32,7 @@
               <th scope="col" class="border-0">ภาคการศึกษา/ปี</th>
               <th scope="col" class="border-0">วันและเวลาที่จัด</th>
               <th scope="col" class="border-0">จำนวนนักศึกษา</th>
-              <th scope="col" class="border-0">จัดการ</th>
+              <th scope="col" class="border-0">บันทึกการเข้าร่วม</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +49,7 @@
                 <td>{{$activityDetail->participations()->count()}}</td>
                 <td>
                   @if(!$activityDetail->isPassDayStart())
-                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="เช็คชื่อ"><i class="far fa-calendar-check"></i></a>  
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
                   @else
                     <small class="text-danger">
                       ยังไม่ถึงเวลาในการจัดกิจกรรม

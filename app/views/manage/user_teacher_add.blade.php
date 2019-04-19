@@ -129,7 +129,11 @@
                <small class="form-text text-danger">{{$errors->first('password')}}</small>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">บันทึก</button>
+             
+          <button class="btn btn-outline-success ml-auto float-right">
+            <i class="material-icons">save</i> บันทึก
+          </button>
+      
           </form>
         </div>
       </div>

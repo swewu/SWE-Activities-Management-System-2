@@ -65,7 +65,6 @@
               <tr>
                 <th class="text-center">รหัสนักศึกษา</th>
                 <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
-                <th class="text-center">ปีการศึกษาที่เข้าศึกษา</th>
                 <th class="text-center">จัดการ</th>
             </tr>
           </thead>
@@ -74,10 +73,9 @@
               <tr>
                 <td class="text-center">{{ $student->id }}</td>
                 <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
-                <td class="text-center">{{ $student->year }}</td>
                 <td class="text-center">  
                   @if(isset($onlyTrashed))
-                    <a href="{{url('/manage/user/student-unsuspended/'.$student->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนนักศึกษา"><i class="fas fa-trash-restore-alt"></i></a>                      
+                    <a href="{{url('/manage/user/student-unsuspended/'.$student->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนสภาพนักศึกษา"><i class="fas fa-trash-restore-alt"></i></a>                      
                   @else
                     <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
                     <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>

@@ -27,7 +27,7 @@
             <i class="fa fa-plus"></i> เพิ่มไฟล์
           </a>
           <a class="btn btn-outline-danger btn-sg" href="{{url('/manage/user/teacher-suspended')}}">
-            ลาออก
+            อาจารย์ที่ลาออก
           </a>
         @else
           <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/teacher')}}">
@@ -64,7 +64,7 @@
                 <td class="text-center">{{ $teacher->room }}</td>
                 <td class="text-center">  
                   @if(isset($onlyTrashed))
-                    <a href="{{url('/manage/user/teacher-unsuspended/'.$teacher->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนอาจารย์"><i class="fas fa-trash-restore-alt"></i></a>                      
+                    <a href="{{url('/manage/user/teacher-unsuspended/'.$teacher->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนอาจารย์ที่ลาออก"><i class="fas fa-trash-restore-alt"></i></a>                      
                   @else
                     <a href="{{url('/manage/user/teacher/edit/'.$teacher->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
                     <a href="{{url('/manage/user/teacher/delete/'.$teacher->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>

@@ -46,7 +46,7 @@
                 <td>{{$activityDetail->timeStartTimeEnd()}}</td>
                 <td>
                   @if($activityDetail->isPassDayStart())
-                    <a href="" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดกิจกรรมเพิ่มเติม"><i class="fas fa-link"></i></a>
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/decription')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดกิจกรรมเพิ่มเติม"><i class="fas fa-link"></i></a>
                     <a href="{{url('/manage/activity/'.$activity->id.'/term/'.$activityDetail->id.'/edit'.'')}}" class="btn btn-info btn-sm " data-toggle="tooltip" title="แก้ไข"> <i class="far fa-edit"></i></a>  
                     <a href="{{url('/manage/activity/'.$activity->id.'/term/'.$activityDetail->id.'/delete')}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
                   @else

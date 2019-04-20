@@ -52,7 +52,7 @@ class ManageUserController extends BaseController {
 			return Redirect::back()->with('error', $e->getMessage());
 		}
 
-		return Redirect::back()->with('message','กู้คืนนักศึกษาสำเร็จ');
+		return Redirect::back()->with('message','กู้คืนสำเร็จ');
 
   }
   
@@ -85,7 +85,7 @@ class ManageUserController extends BaseController {
 			return Redirect::back()->with('error', $e->getMessage());
 		}
 
-		return Redirect::back()->with('message','กู้คืนอาจารย์สำเร็จ');
+		return Redirect::back()->with('message','กู้คืนสำเร็จ');
 
 	}
 

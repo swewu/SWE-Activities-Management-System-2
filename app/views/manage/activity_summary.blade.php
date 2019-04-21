@@ -36,9 +36,9 @@
                   <tr>
                     <td class="text-left">{{$activity->name}}</td>
                     <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
-                    <td>{{$detail->studentAllJoinCount()}}</td>
+                    <td>{{$detail->studentAllJoinCount()}} คน </td>
                     <td>
-                      <a href="{{url('/manage/activity/detail/'.$detail->id.'/decription')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดกิจกรรมเพิ่มเติม">
+                      <a href="{{url('/manage/activity/detail/'.$detail->id.'/decription')}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดกิจกรรมเพิ่มเติม">
                         <i class="fas fa-link"></i>
                       </a>
                     </td>

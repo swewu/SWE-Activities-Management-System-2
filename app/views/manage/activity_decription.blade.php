@@ -3,7 +3,7 @@
 รายละเอียดกิจกรรม
 @stop
 @section('subtitle')
-จัดการกิจรรม
+จัดการกิจกรรม
 @stop
 @section('content')
 <div class="row">

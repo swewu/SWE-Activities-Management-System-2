@@ -7,7 +7,7 @@
 @endif
 @stop
 @section('subtitle')
-จัดการกิจรรม
+จัดการกิจกรรม
 @stop
 @section('cdn')
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>

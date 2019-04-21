@@ -9,7 +9,7 @@
 @stop
 
 @section('subtitle')
-จัดการกิจรรม
+จัดการกิจกรรม
 @stop
 
 @section('cdn')

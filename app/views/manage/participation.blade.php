@@ -3,7 +3,7 @@
 เช็คการเข้าร่วมกิจกรรม
 @stop
 @section('subtitle')
-จัดการกิจรรม
+จัดการกิจกรรม
 @stop
 
 @section('cdn')

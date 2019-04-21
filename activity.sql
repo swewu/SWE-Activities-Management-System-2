@@ -3027,8 +3027,8 @@ INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `fi
 (11,	58,	2,	2,	'ผู้ช่วยศาสตราจารย์',	'อุหมาด',	'หมัดอาด้ำ',	NULL,	'0899909099',	'muhamard@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:41:14',	0,	'2019-03-07 15:08:19',	0,	NULL),
 (12,	59,	2,	2,	'อาจารย์ ดร.',	'พุทธิพร',	'ธนธรรมเมธี',	NULL,	'0800000000',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-03-07 15:08:20',	0,	NULL),
 (13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	'เยาวเรศ',	'ศิริสถิตย์กุล',	NULL,	'',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-03-07 15:08:21',	0,	NULL),
-(14,	146,	1,	1,	'นาย',	'test',	'test',	NULL,	'0908243820',	'so@hotmail.com',	'c',	'2019-03-22 09:37:06',	0,	'2019-04-19 17:33:02',	0,	NULL),
-(15,	148,	3,	3,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ประธาน',	'หลักสูตร',	NULL,	'0908243820',	'sudarat@gmail.com',	'c3',	'2019-03-28 15:54:41',	0,	'2019-03-28 15:54:41',	0,	NULL),
+(14,	146,	1,	1,	'นาย',	'test',	'test',	NULL,	'0908243820',	'so@hotmail.com',	'c',	'2019-03-22 09:37:06',	0,	'2019-04-21 20:59:03',	0,	'2019-04-21 20:59:03'),
+(15,	148,	3,	3,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ประธาน',	'หลักสูตร',	NULL,	'0908243820',	'sudarat@gmail.com',	'c3',	'2019-03-28 15:54:41',	0,	'2019-04-21 20:58:36',	0,	'2019-04-21 20:58:36'),
 (16,	151,	3,	3,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ชิดชนก',	'ผิวอ่อน',	NULL,	'',	'a@hotmail.com',	'อาคารวิชาการ3',	'2019-04-19 10:37:46',	0,	'2019-04-19 17:33:26',	0,	'2019-04-19 17:33:26');
 
 DROP TABLE IF EXISTS `terms`;
@@ -3066,7 +3066,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
 (55,	'pthimapo2@wu.ac.th',	'$2y$10$LSA1n/xcA4JVRfAuwv9aa.mOtXzTY.rLH9tdqpMSSGXBEe61K6QcS',	NULL,	'2019-03-07 15:49:05',	'',	'2019-03-07 15:49:05',	NULL),
-(56,	'kanchan.th@wu.ac.th',	'$2y$10$hcmyFbQ0MOqD9/37bpSREOAYNeWmttQsF770Qp633Z86T6d5WpDWK',	'OJTMyri2nnf9OtWm1IJoJmA4u6wcNUkUWdrC1vKT9qeq1oHbEJX4lCDOVUvd',	'2019-04-20 20:40:11',	'',	'2019-04-20 20:40:11',	NULL),
+(56,	'kanchan.th@wu.ac.th',	'$2y$10$hcmyFbQ0MOqD9/37bpSREOAYNeWmttQsF770Qp633Z86T6d5WpDWK',	'qnEEbzq3Vw0E9pWA3mEzfsVZsOmNuOVOrYmLR7rny6GUpwvm4YGU9MEVZWwR',	'2019-04-21 20:57:53',	'',	'2019-04-21 20:57:53',	NULL),
 (57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'L6wB7P7JPW7NfhGLzQUz0M3IqyaGXJh5bXxt7wAgXGFfqYYdCpN6e0hhb3Cc',	'2019-04-20 19:32:27',	'',	'2019-04-20 19:32:27',	NULL),
 (58,	'muhamard@wu.ac.th',	'$2y$10$cjlExpqXoFsdtfqfO8oRxOzGAvxW6VBRhDf1haWT0JvW3i1qH8K0.',	NULL,	'2019-02-05 12:46:46',	'',	'2019-02-05 12:46:46',	NULL),
 (59,	'putthiporn.th@wu.ac.th',	'$2y$10$4iixfs8x4vmUj22ktXQMLe22s59bFZZSycs2EJc7XT0m9JXYu51a.',	NULL,	'2019-02-05 12:43:17',	'',	'2019-02-05 12:43:17',	NULL),
@@ -3157,4 +3157,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (150,	'58888888',	'$2y$10$5zogpecaUCujbLRA/SqLjeYyus.OMZY/hT0j6K2njYNJgUlnR9aE2',	NULL,	'2019-04-19 10:33:57',	'',	'2019-04-19 10:33:57',	NULL),
 (151,	'a@hotmail.com',	'$2y$10$L3Qjr7JxNBUkgQaVEa1G9uqZfUwOIjd57gK6SFrpG5ex8OXH5mPxi',	NULL,	'2019-04-19 10:37:46',	'',	'2019-04-19 10:37:46',	NULL);
 
--- 2019-04-21 13:50:44
+-- 2019-04-21 13:59:53

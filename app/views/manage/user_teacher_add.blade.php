@@ -104,7 +104,7 @@
             <div class="row">
                <div class="col">
                   <div class="form-group">
-                     <label for="name">เบอร์โทรศัพท์</label>
+                     <label for="name">เบอร์โทรศัพท์ (ระบุหรือไม่ระบุก็ได้)</label>
                      <input type="tel" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder="0899999999" >
                      <small class="form-text text-danger">{{$errors->first('tel')}}</small>
                   </div>

@@ -29,6 +29,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th scope="col" class="border-0">ลำดับที่</th>
               <th scope="col" class="border-0">ปีการศึกษา</th>
               <th scope="col" class="border-0">ภาคการศึกษา</th>
               <th scope="col" class="border-0">วันที่จัด</th>
@@ -39,7 +40,7 @@
           <tbody>
             @foreach($activityDetails as $activityDetail)
               <tr>
-                
+                <td></td>
                 <td>{{$activityDetail->term_year}}</td>
                 <td>{{$activityDetail->term_sector}}</td>
                 <td>{{$activityDetail->dayStartDayEnd()}}</td>

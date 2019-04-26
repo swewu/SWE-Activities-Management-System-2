@@ -29,6 +29,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th scope="col" class="border-0">ลำดับที่</th>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">จำนวนครั้งที่จัด</th>
               <th scope="col" class="border-0">จัดการ</th>
@@ -37,6 +38,7 @@
           <tbody>
             @foreach($activities as $activity)
               <tr>
+                <td></td>
                 <td class="text-left">{{$activity->name}}</td>
                 <td>{{$activity->details->count()}}</td>
                 <td>

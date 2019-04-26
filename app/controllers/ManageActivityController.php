@@ -63,6 +63,9 @@ class ManageActivityController extends BaseController {
     $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
+    $nowTeachers = Auth::user()->teacher->id;
+
+
     $term_years = Term::groupBy('year')->orderBy('year','desc')->limit(1)->lists('year');
     $term_sectors = Term::where('year',$term_years[0])->lists('sector');
 
@@ -81,6 +84,7 @@ class ManageActivityController extends BaseController {
 			'isPastDayEnd'=>$isPastDayEnd,
       'teachers'=>$teachers,
       'students'=>$students,
+      'nowTeachers'=>$nowTeachers
       
 		];
 		return View::make('manage.activity_term_add',$data);
@@ -113,6 +117,8 @@ class ManageActivityController extends BaseController {
     $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
+    $nowTeachers = Auth::user()->teacher->id;
+
     $term_years = [$activityDetail->term_year];
     $term_sectors = Term::where('year',$term_years[0])->lists('sector');
 
@@ -131,6 +137,7 @@ class ManageActivityController extends BaseController {
 			'isPastDayEnd'=>$isPastDayEnd,
       'teachers'=>$teachers,
       'students'=>$students,
+      'nowTeachers'=>$nowTeachers
       
 		];
 		return View::make('manage.activity_term_add',$data);

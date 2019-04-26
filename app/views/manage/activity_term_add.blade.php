@@ -255,7 +255,7 @@
             @foreach($teachers as $teacher)
               <div class="col-7">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox"  name="teachers[]" id="teacher-{{$teacher->id}}" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teachers))?'checked':''}}>
+                  <input class="form-check-input" type="checkbox"  name="teachers[]" id="teacher-{{$teacher->id}}" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teachers) || $nowTeachers === $teacher->id )?'checked':''}} {{($nowTeachers === $teacher->id)? 'onclick="return false;"':''}}>
                   <label class="form-check-label" for="teacher-{{$teacher->id}}">                                                                            
                     {{$teacher->getFullName()}}
                   </label>

@@ -24,7 +24,7 @@
             <i class="fa fa-plus"></i> เพิ่มข้อมูลอาจารย์
           </a>
           <a class="btn btn-outline-success btn-sg" href="{{url('manage')}}">
-            <i class="fa fa-plus"></i> เพิ่มไฟล์
+            <i class="fa fa-plus"></i> นำเข้าไฟล์
           </a>
           <a class="btn btn-outline-danger btn-sg" href="{{url('/manage/user/teacher-suspended')}}">
             อาจารย์ที่ลาออก
@@ -48,6 +48,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th class="text-center">ลำดับที่</th>
               <th class="text-center table-tr-max-260">ชื่อ-สกุล</th>
               <th class="text-center">อีเมล</th>
               <th class="text-center">เบอร์โทรศัพท์</th>
@@ -58,6 +59,7 @@
           <tbody>
             @foreach ($teachers as $teacher)
               <tr>
+                <td class="text-center"></td>
                 <td class="text-left table-tr-max-260">{{ $teacher->getFullName() }}</td>
                 <td class="text-left">{{ $teacher->email }}</td>
                 <td class="text-center">{{ $teacher->tel }}</td>

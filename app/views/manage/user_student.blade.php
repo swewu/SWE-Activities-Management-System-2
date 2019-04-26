@@ -31,10 +31,10 @@
             <i class="fa fa-plus"></i> เพิ่มข้อมูลนักศึกษา
           </a>
           <a class="btn btn-outline-success btn-sg" href="{{url('manage')}}">
-            <i class="fa fa-plus"></i> เพิ่มไฟล์
+            <i class="fa fa-plus"></i> นำเข้าไฟล์
           </a>
           <a class="btn btn-outline-danger btn-sg" href="{{url('/manage/user/student-suspended')}}">
-            นักศึกษาที่พ้นสภาพ
+            นักศึกษาที่จบ/พ้นสภาพ
           </a>
         @else
         <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/student')}}">
@@ -63,16 +63,20 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
               <tr>
+                <th class="text-center">ลำดับที่</th>
                 <th class="text-center">รหัสนักศึกษา</th>
                 <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
+                <th class="text-center">ชั้นปี</th>
                 <th class="text-center">จัดการ</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($students as $student)
               <tr>
+                <td class="text-center"></td>
                 <td class="text-center">{{ $student->id }}</td>
                 <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
+                <td class="text-center"></td>
                 <td class="text-center">  
                   @if(isset($onlyTrashed))
                     <a href="{{url('/manage/user/student-unsuspended/'.$student->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนสภาพนักศึกษา"><i class="fas fa-trash-restore-alt"></i></a>                      

@@ -76,7 +76,7 @@
                 <td class="text-center">{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td class="text-center">{{ $student->id }}</td>
                 <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
-                <td class="text-center"></td>
+                <td class="text-center">{{ $student->getNowYear() }}</td>
                 <td class="text-center">  
                   @if(isset($onlyTrashed))
                     <a href="{{url('/manage/user/student-unsuspended/'.$student->id)}}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="กู้คืนสภาพนักศึกษา"><i class="fas fa-trash-restore-alt"></i></a>                      

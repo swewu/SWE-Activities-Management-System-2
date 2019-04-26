@@ -1,7 +1,10 @@
 <?php
 set_time_limit(0);
 class ManageActivityController extends BaseController {
-
+  public function __construct()
+	{
+		$this->perpage = 10;
+	}
 	public function validData($input=null, $activity=null, $default='')
 	{
 		if(!is_null($input)){
@@ -22,9 +25,9 @@ class ManageActivityController extends BaseController {
 			$q = Input::get('q');
 			$activities = $activities->Where('name','like','%'.$q.'%');
 		}
-		$activities = $activities->paginate(10);
+		$activities = $activities->paginate($this->perpage);
 		$activities->appends(['q'=>$q]);
-		return View::make('manage.activity',['activities' => $activities,'q'=>$q]);
+		return View::make('manage.activity',['activities' => $activities,'q'=>$q,'perpage'=>$this->perpage]);
   }
 
   public function showActivityTerm($id)
@@ -36,9 +39,9 @@ class ManageActivityController extends BaseController {
 			$q = Input::get('q');
 			$activityDetails = $activityDetails->Where('year','like','%'.$q.'%')->orWhere('sector','like','%'.$q.'%');
 		}
-		$activityDetails = $activityDetails->paginate(10);
+		$activityDetails = $activityDetails->paginate($this->perpage);
     $activityDetails->appends(['q'=>$q]);
-    return View::make('manage.activity_term',['activity' => $activity ,'activityDetails' => $activityDetails,'q'=>$q]);
+    return View::make('manage.activity_term',['activity' => $activity ,'activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
   }
 
   public function showActivityTermAdd($id)
@@ -369,18 +372,18 @@ class ManageActivityController extends BaseController {
 			$q = Input::get('q');
 			$activities = $activities->Where('name','like','%'.$q.'%');
 		}
-		$activities = $activities->paginate(10);
+		$activities = $activities->paginate($this->perpage);
 		$activities->appends(['q'=>$q]);
-		return View::make('manage.activity_summary',['activities' => $activities,'q'=>$q]);
+		return View::make('manage.activity_summary',['activities' => $activities,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivitySummaryUseradd()
 	{
     $q = Input::get('q');
     $activityDetails = ActivityDetail::responsibilityByUserIDAndSearch(Auth::user()->teacher->id,$q);
-		$activityDetails = $activityDetails->paginate(10);
+		$activityDetails = $activityDetails->paginate($this->perpage);
 		$activityDetails->appends(['q'=>$q]);
-		return View::make('manage.activity_summary_useradd',['activityDetails' => $activityDetails,'q'=>$q]);
+		return View::make('manage.activity_summary_useradd',['activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivityConclude()
@@ -391,9 +394,9 @@ class ManageActivityController extends BaseController {
 			$q = Input::get('q');
 			$activities = $activities->Where('name','like','%'.$q.'%');
 		}
-		$activities = $activities->paginate(10);
+		$activities = $activities->paginate($this->perpage);
 		$activities->appends(['q'=>$q]);
-		return View::make('manage.activity_conclude',['activities' => $activities,'q'=>$q]);
+		return View::make('manage.activity_conclude',['activities' => $activities,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivityDetail()
@@ -403,7 +406,7 @@ class ManageActivityController extends BaseController {
   
   public function showParticipation($activity_detail_id)
   {
-
+    $perpage = 20;
     $q = '';
     $participations = Participation::where('activity_detail_id',$activity_detail_id)->orderBy('student_id','DESC');
     if(Input::get('q') != NULL && Input::get('q') != ""){
@@ -411,7 +414,7 @@ class ManageActivityController extends BaseController {
       $student_list = Student::withTrashed()->where('firstname','like','%'.$q.'%')->orWhere('lastname','like','%'.$q.'%')->lists('id');
 			$participations = $participations->whereIn('student_id',$student_list);
 		}
-		$participations = $participations->paginate(20);
+		$participations = $participations->paginate($perpage);
     $participations->appends(['q'=>$q,'day'=>Input::get('day')]);
     
     $daylist = [];
@@ -432,7 +435,8 @@ class ManageActivityController extends BaseController {
         'q'=>$q,
         'dayList'=>$daylist,
         'nowDay'=>$nowDay,
-        'activity_detail_id'=>$activity_detail_id
+        'activity_detail_id'=>$activity_detail_id,
+        'perpage'=>$perpage
       ]
     );
   }

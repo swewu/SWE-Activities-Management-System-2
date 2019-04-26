@@ -36,9 +36,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($activities as $activity)
+            @foreach($activities as $i => $activity)
               <tr>
-                <td></td>
+                <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td class="text-left">{{$activity->name}}</td>
                 <td>{{$activity->details->count()}}</td>
                 <td>

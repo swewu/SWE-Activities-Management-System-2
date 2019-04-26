@@ -71,9 +71,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($students as $student)
+            @foreach ($students as $i => $student)
               <tr>
-                <td class="text-center"></td>
+                <td class="text-center">{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td class="text-center">{{ $student->id }}</td>
                 <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
                 <td class="text-center"></td>

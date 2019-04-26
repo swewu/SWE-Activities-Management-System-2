@@ -1,7 +1,10 @@
 <?php
 
 class ManageUserController extends BaseController {
-
+	public function __construct()
+	{
+		$this->perpage = 10;
+	}
 	public function showStudentSuspended()
   {
 		$q = '';
@@ -26,7 +29,7 @@ class ManageUserController extends BaseController {
 		}
 		
 			
-		$students = $students->paginate(10);
+		$students = $students->paginate($this->perpage);
 
 		if($isQ){
 			$students->appends(['q'=>$q]);
@@ -35,7 +38,7 @@ class ManageUserController extends BaseController {
 			$students->appends(['year'=>Input::get('year')]);
 		}
 
-    return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year,'onlyTrashed'=>true]);
+    return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year,'onlyTrashed'=>true,'perpage'=>$this->perpage]);
   }
   
   public function actionStudentUnsuspended($id)
@@ -67,9 +70,9 @@ class ManageUserController extends BaseController {
 			$teachers = $teachers->Where('firstname','like','%'.$q.'%')
 			->orWhere('lastname','like','%'.$q.'%');
 		}
-		$teachers = $teachers->paginate(10);
+		$teachers = $teachers->paginate($this->perpage);
 		$teachers->appends(['q'=>$q]);
-		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q,'onlyTrashed'=>true]);
+		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q,'onlyTrashed'=>true,'perpage'=>$this->perpage]);
   }
   
   public function actionTeacherUnsuspended($id)
@@ -113,7 +116,7 @@ class ManageUserController extends BaseController {
 		}
 		
 			
-		$students = $students->paginate(10);
+		$students = $students->paginate($this->perpage);
 
 		if($isQ){
 			$students->appends(['q'=>$q]);
@@ -122,7 +125,7 @@ class ManageUserController extends BaseController {
 			$students->appends(['year'=>Input::get('year')]);
 		}
 
-		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year]);
+		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year,'perpage'=>$this->perpage]);
 	}
 	
 	public function showUserTeacher()
@@ -136,9 +139,9 @@ class ManageUserController extends BaseController {
 			$q = '';
 			$teachers = new Teacher;
 		}
-		$teachers = $teachers->paginate(10);
+		$teachers = $teachers->paginate($this->perpage);
 		$teachers->appends(['q'=>$q]);
-		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q]);
+		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q,'perpage'=>$this->perpage]);
   }
 	
 	public function showUserTeacherAdd()

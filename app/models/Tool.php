@@ -67,5 +67,12 @@ class Tool
       $listOfDate[] = $to->addDays(1)->toDateString();
     }
     return $listOfDate;
-  }
+	}
+	public function calIndex($i,$nowpage,$perpage)
+	{
+		if($nowpage == null){
+			$nowpage = 1;
+		}
+		return  ( $i + 1 ) + ( $perpage * ($nowpage-1) );
+	}
 }

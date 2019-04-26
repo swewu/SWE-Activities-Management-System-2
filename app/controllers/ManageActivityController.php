@@ -60,7 +60,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::whereNotAdmin()->get();
+    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $term_years = Term::groupBy('year')->orderBy('year','desc')->limit(1)->lists('year');
@@ -110,7 +110,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::whereNotAdmin()->get();
+    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $term_years = [$activityDetail->term_year];

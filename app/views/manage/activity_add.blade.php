@@ -69,6 +69,7 @@
         <div class='card-body'>
           <h6 class="m-0 mb-2">รูปภาพ</h6>
           <input type="file" class="form-control-file" name="photo">
+          <p class="text-danger">*รองรับรูปภาพขนาด 800*300</p>
         </div>
         <div class="card-footer bg-light border-top p-3 text-muted">
           <button class="btn btn-outline-success ml-auto">

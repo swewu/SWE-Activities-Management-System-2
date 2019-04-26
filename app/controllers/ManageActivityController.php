@@ -308,12 +308,16 @@ class ManageActivityController extends BaseController {
 		if(isset($id)){
       $activity = Activity::find($id);
       $activity->updated_by = Auth::user()->id;
+      $isExistsActivityName = Activity::where('name',trim(Input::get("name")))->where('id','!=',$id)->count() > 0;
 		}else{
       $activity = new Activity;
       $activity->created_by = Auth::user()->id;
       $activity->updated_by = Auth::user()->id;
+      $isExistsActivityName = Activity::where('name',trim(Input::get("name")))->count() > 0;
+    }
+		if($isExistsActivityName){
+			return Redirect::back()->withInput()->with('error',"ไม่สามารถกิจกรรมได้เนื่องจากมีชื่ออยู่เเล้ว");
 		}
-
 		$save_image_path = 'assets/upload/image';
 
 		if (!is_null(Input::file('photo'))){
@@ -325,7 +329,7 @@ class ManageActivityController extends BaseController {
 			$activity->image = $save_image_path.'/'.$file_name;
 		}
 
-		$activity->name = Input::get("name");
+		$activity->name = trim(Input::get("name"));
     $activity->description = Input::get("detail");
 
 		try {

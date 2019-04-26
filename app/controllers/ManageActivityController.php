@@ -380,7 +380,7 @@ class ManageActivityController extends BaseController {
 	public function showActivitySummaryUseradd()
 	{
     $q = Input::get('q');
-    $activityDetails = ActivityDetail::responsibilityByUserIDAndSearch(Auth::user()->teacher->id,$q);
+    $activityDetails = ActivityDetail::responsibilitySearch($q,Auth::user()->teacher->id);
 		$activityDetails = $activityDetails->paginate($this->perpage);
 		$activityDetails->appends(['q'=>$q]);
 		return View::make('manage.activity_summary_useradd',['activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
@@ -388,15 +388,16 @@ class ManageActivityController extends BaseController {
   
 	public function showActivityConclude()
 	{
+    $all = Input::get('all');
     $q = '';
-    $activities = Activity::orderBy('id','DESC');
-    if(Input::get('q') != NULL && Input::get('q') != ""){
-			$q = Input::get('q');
-			$activities = $activities->Where('name','like','%'.$q.'%');
-		}
-		$activities = $activities->paginate($this->perpage);
-		$activities->appends(['q'=>$q]);
-		return View::make('manage.activity_conclude',['activities' => $activities,'q'=>$q,'perpage'=>$this->perpage]);
+    if($all == 'true'){
+      $activityDetails = ActivityDetail::responsibilitySearch($q);      
+    } else {
+      $activityDetails = ActivityDetail::responsibilitySearch($q,Auth::user()->teacher->id);
+    }
+		$activityDetails = $activityDetails->paginate($this->perpage);
+		$activityDetails->appends(['q'=>$q]);
+		return View::make('manage.activity_conclude',['activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivityDetail()

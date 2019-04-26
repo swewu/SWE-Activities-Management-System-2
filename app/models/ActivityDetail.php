@@ -26,7 +26,7 @@ class ActivityDetail extends Eloquent {
   {
     return $this->hasManyThrough('RankCheck', 'Participation');
   }
-  public function responsibilityByUserIDAndSearch($teacherId, $q)
+  public function responsibilitySearch($q, $teacherId = null)
   {
     $activities = new Activity;
     if($q != NULL && $q != ""){
@@ -34,12 +34,18 @@ class ActivityDetail extends Eloquent {
     }
     $activity_list = $activities->lists('id');
 
-    $responsibility_list = Responsibility::where('teacher_id',$teacherId)->lists('activity_detail_id');
+    if(!is_null($teacherId)){
+      $responsibility = Responsibility::where('teacher_id',$teacherId);
+    }else{
+      $responsibility = new Responsibility();
+    }
+    $responsibility_list = $responsibility->lists('activity_detail_id');
 
     $activityDetail = ActivityDetail::whereIn('activity_id',$activity_list)
                       ->whereIn('id',$responsibility_list)
                       ->orderBy('term_year','DESC')
-                      ->orderBy('term_sector','DESC');
+                      ->orderBy('term_sector','DESC')
+                      ->orderBy('day_start','DESC');
     
     return $activityDetail;
   }

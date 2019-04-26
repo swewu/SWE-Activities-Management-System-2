@@ -29,6 +29,12 @@
   <div class="col">
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
+        <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude')}}">
+          <i class="fa fa-plus"></i> เฉพาะฉัน
+        </a>
+        <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude?all=true')}}">
+          <i class="fa fa-plus"></i> ทังหมด
+        </a>
         <form class="input-group input-group-sg col-md-5 float-right">
           <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
           <span class="input-group-append">
@@ -51,35 +57,33 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($activities as $activity)
-              @foreach($activity->details as $detail)
-                <tr>
-                  <td class="text-left">{{$activity->name}}</td>
-                  <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
-                  <td> 
-                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentAllJoin()}}'>
-                      {{$detail->studentAllJoinCount()}} คน
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentJoin()}}'>
-                      {{$detail->studentJoinCount()}} คน
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentNotJoin()}}'>
-                      {{$detail->studentNotJoinCount()}} คน
-                    </button>
-                  </td>
-                </tr>
-              @endforeach
+            @foreach($activityDetails as $detail)
+              <tr>
+                <td class="text-left">{{$detail->activity->name}}</td>
+                <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
+                <td> 
+                  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentAllJoin()}}'>
+                    {{$detail->studentAllJoinCount()}} คน
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentJoin()}}'>
+                    {{$detail->studentJoinCount()}} คน
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentNotJoin()}}'>
+                    {{$detail->studentNotJoinCount()}} คน
+                  </button>
+                </td>
+              </tr>
             @endforeach
           </tbody>
         </table>
       </div>
 
       <div class="card-footer bg-light border-top text-muted">
-        <?php echo $activities->links('partials.pagination'); ?>
+        <?php echo $activityDetails->links('partials.pagination'); ?>
       </div>
     
     </div>

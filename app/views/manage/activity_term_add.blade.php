@@ -39,6 +39,9 @@
       ,disable: true
       @endif
     });
+    $("#daystart").on("change.datetimepicker", function (e) {
+        $('#dayend').datetimepicker('minDate', e.date);
+    });
     $('#dayend').datetimepicker({
       defaultDate: "<?=($text_dayend != '')?$text_dayend:Tool::nowForDatepicker()?>",
       format: 'DD/MM/YYYY'

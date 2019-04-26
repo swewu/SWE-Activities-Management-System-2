@@ -64,12 +64,10 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
 	Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
 
 	Route::get('/manage/activity/detail/{activity_detail_id}/decription', 'ManageActivityController@showActivityDecription');
-});
-
-//headteacher
-Route::group(array('before' => array('auth', 'headteacher')) , function () {
 	Route::get('/manage/activity/conclude', 'ManageActivityController@showActivityConclude');
 });
+
+
 
 //admin
 Route::group(array('before' => array('auth', 'admin')) , function () {

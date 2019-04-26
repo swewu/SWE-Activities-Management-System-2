@@ -29,15 +29,23 @@
   <div class="col">
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
-        <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude')}}">
-          <i class="fa fa-plus"></i> เฉพาะฉัน
-        </a>
-        <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude?all=true')}}">
-          <i class="fa fa-plus"></i> ทังหมด
-        </a>
+        @if(Auth::user()->teacher->role->isHeadTeacher)
+          <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude')}}">
+            <i class="fa fa-plus"></i> เฉพาะฉัน
+          </a>
+          <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude?all=true')}}">
+            <i class="fa fa-plus"></i> ทังหมด
+          </a>
+        @endif
         <form class="input-group input-group-sg col-md-5 float-right">
           <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
           <span class="input-group-append">
+            <select class="custom-select" name="term_year">
+                <option value="">ปีทั้งหมด</option>
+                @foreach($term_years as $y)
+                  <option value="{{$y}}" <?=($term_year == $y)?'selected':''?>>{{$y}}</option>
+                @endforeach
+            </select>
             <button class="btn btn-outline-secondary" type="submit">
               <i class="fa fa-search"></i>
             </button>

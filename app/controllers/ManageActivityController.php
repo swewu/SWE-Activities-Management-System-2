@@ -367,23 +367,34 @@ class ManageActivityController extends BaseController {
 	public function showActivitySummary()
 	{
     $q = '';
-    $activities = Activity::orderBy('id','DESC');
-    if(Input::get('q') != NULL && Input::get('q') != ""){
-			$q = Input::get('q');
-			$activities = $activities->Where('name','like','%'.$q.'%');
-		}
-		$activities = $activities->paginate($this->perpage);
-		$activities->appends(['q'=>$q]);
-		return View::make('manage.activity_summary',['activities' => $activities,'q'=>$q,'perpage'=>$this->perpage]);
+    $term_year = '';
+    $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
+
+    $activityDetails = ActivityDetail::responsibilitySearch($q);
+
+
+    if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+      $term_year = Input::get('term_year');
+      $activityDetails = $activityDetails->where('term_year',$term_year);
+    }
+		$activityDetails = $activityDetails->paginate($this->perpage);
+		$activityDetails->appends(['q'=>$q,'term_year'=>$term_year]);
+		return View::make('manage.activity_summary',['activityDetails' => $activityDetails,'term_year'=>$term_year,'term_years'=>$term_years,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivitySummaryUseradd()
 	{
     $q = Input::get('q');
     $activityDetails = ActivityDetail::responsibilitySearch($q,Auth::user()->teacher->id);
+    $term_year = '';
+    $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
+    if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+      $term_year = Input::get('term_year');
+      $activityDetails = $activityDetails->where('term_year',$term_year);
+    }
 		$activityDetails = $activityDetails->paginate($this->perpage);
 		$activityDetails->appends(['q'=>$q]);
-		return View::make('manage.activity_summary_useradd',['activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
+		return View::make('manage.activity_summary_useradd',['activityDetails' => $activityDetails,'term_year'=>$term_year,'term_years'=>$term_years,'q'=>$q,'perpage'=>$this->perpage]);
   }
   
 	public function showActivityConclude()
@@ -395,9 +406,17 @@ class ManageActivityController extends BaseController {
     } else {
       $activityDetails = ActivityDetail::responsibilitySearch($q,Auth::user()->teacher->id);
     }
+
+    $term_year = '';
+    $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
+    if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+      $term_year = Input::get('term_year');
+      $activityDetails = $activityDetails->where('term_year',$term_year);
+    }
+    
 		$activityDetails = $activityDetails->paginate($this->perpage);
-		$activityDetails->appends(['q'=>$q]);
-		return View::make('manage.activity_conclude',['activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
+		$activityDetails->appends(['q'=>$q,'all'=>$all,'term_year',$term_year]);
+		return View::make('manage.activity_conclude',['activityDetails' => $activityDetails,'q'=>$q,'term_years'=>$term_years,'term_year'=>$term_year,'perpage'=>$this->perpage]);
   }
   
 	public function showActivityDetail()

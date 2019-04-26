@@ -67,9 +67,7 @@
                   <!-- <a class="dropdown-item {{ Request::is('manage/activity/add') ? 'active' : '' }}" href="{{url('manage/activity/add')}}">สร้างกิจกรรม</a> -->
                   <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">กิจกรรมที่รับผิดชอบ</a>
                   <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">กิจกรรมทั้งหมด</a>
-                  @if(Auth::user()->isHeadTeacher())
                   <a class="dropdown-item {{ Request::is('manage/activity/conclude') ? 'active' : '' }}" href="{{url('manage/activity/conclude')}}">สรุปการเข้าร่วมกิจกรรม</a>
-                  @endif
                 </div>
               </li>
               @endif

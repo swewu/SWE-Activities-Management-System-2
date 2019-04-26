@@ -22,6 +22,7 @@
   $(document).ready(function () {
     $('#firstname').on("keydown", onPressOnlyThaiAndEng);
     $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#email').on("keydown", onPressOnlyEmail);
     $('#tel').on("keydown", onPressOnlyNumber);
     $('#tel').on("keydown", (e)=>{
       onPressLimit(e,$('#tel').val().length,10)
@@ -102,33 +103,38 @@
             </div>
             
             <div class="row">
-               <div class="col">
+               <div class="col-3">
                   <div class="form-group">
-                     <label for="name">เบอร์โทรศัพท์ (ระบุหรือไม่ระบุก็ได้)</label>
+                     <label for="name">เบอร์โทรศัพท์<br><small>(ระบุหรือไม่ระบุก็ได้)</small></label>
                      <input type="tel" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder="0899999999" >
                      <small class="form-text text-danger">{{$errors->first('tel')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">ห้องทำงาน</label>
+                     <label for="name">&nbsp;<br>ห้องทำงาน</label>
                      <input type="text" class="form-control {{$errors->has('room') ? 'is-invalid' : ''}}" id="room" name="room" value="{{$text_room}}" placeholder ="ห้องทำงาน" >
                      <small class="form-text text-danger">{{$errors->first('room')}}</small>
                   </div>
                </div>
             </div>
-            
-            <div class="form-group">
-               <label for="name">อีเมล</label>
-               <input type="text" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" id="email" name="email" value="{{$text_email}}" placeholder ="อีเมล" >
-               <small class="form-text text-danger">{{$errors->first('email')}}</small>
+
+            <div class="row">
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">อีเมล</label>
+                     <input type="text" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" id="email" name="email" value="{{$text_email}}" placeholder ="อีเมล" >
+                     <small class="form-text text-danger">{{$errors->first('email')}}</small>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">รหัสผ่าน</label>
+                     <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+                     <small class="form-text text-danger">{{$errors->first('password')}}</small>
+                  </div>
+               </div>
             </div>
-            <div class="form-group">
-               <label for="name">รหัสผ่าน</label>
-               <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
-               <small class="form-text text-danger">{{$errors->first('password')}}</small>
-            </div>
-            <br>
              
           <button class="btn btn-outline-success ml-auto float-right">
             <i class="material-icons">save</i> บันทึก

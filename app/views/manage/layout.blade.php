@@ -167,27 +167,24 @@
     <script src="{{asset('assets/shards-dashboard/scripts/extras.1.1.0.min.js')}}"></script>
     <script src="{{asset('assets/shards-dashboard/scripts/shards-dashboards.1.1.0.min.js')}}"></script>
     <script type="text/javascript">
-      const onPressOnlyThaiAndEng = (event) => {
+      const onPressOnly = (event, regex) => {
         var eventCode = event.which;
 		    if((eventCode >= 37 && eventCode <= 40) ||  eventCode == 8 || eventCode == 9 || eventCode == 46) { // Left  / Right Arrow, Backspace, Delete keys
 		        return;
 		    }
-        let isThaiEng = /^[a-zก-๛]+$/ig.test(event.key)
-        if(isThaiEng === false){
+        if(regex.test(event.key) === false){
           event.preventDefault()
           return false;
         }
       }
+      const onPressOnlyEmail = (event) => {
+        return onPressOnly(event,/^[A-Za-z0-9\-\_@.]+$/)
+      }
+      const onPressOnlyThaiAndEng = (event) => {
+        return onPressOnly(event,/^[a-zก-๛]+$/)
+      }
       const onPressOnlyNumber = (event) => {
-        var eventCode = event.which;
-		    if((eventCode >= 37 && eventCode <= 40) ||  eventCode == 8 || eventCode == 9 || eventCode == 46) { // Left  / Right Arrow, Backspace, Delete keys
-		        return;
-		    }
-        let isNumber = /^[0-9]+$/ig.test(event.key)
-        if(isNumber === false){
-          event.preventDefault()
-          return false;
-        }
+        return onPressOnly(event,/^[0-9]+$/)
       }
       const onPressLimit = (event,length,limit) => {
         var eventCode = event.which;

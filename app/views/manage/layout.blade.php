@@ -83,7 +83,14 @@
                   <a class="dropdown-item " href="{{url('manage/user/teacher')}}">ข้อมูลอาจารย์</a>
                 </div>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage/year')}}">
+                  <i class="material-icons">person</i>
+                  <span>จัดการปีการศึกษา</span>
+                </a>
+              </li>
               @endif
+
             </ul>
           </div>
         </aside>

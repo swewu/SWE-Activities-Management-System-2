@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/manage/year', 'ManageYearController@showYear');
+
+
 Route::get('/show-activity/{id}', 'HomeController@showActivity');
 Route::get('/activity-register/{id}', 'HomeController@registerActivity');
 Route::get('/activity-un-register/{id}', 'HomeController@unRegisterActivity');

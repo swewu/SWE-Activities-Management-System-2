@@ -47,6 +47,11 @@
                   </div>
                 </li>
               </ul>
+              <ul class="navbar-nav my-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">จัดการปีการศึกษา</a>
+                </li>
+              </ul>
               <ul class="login navbar-nav ml-md-auto d-none d-md-flex" style="margin-left:50px">
                 <li class="nav-item dropdown ">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ชื่อ login</a>

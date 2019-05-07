@@ -34,6 +34,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th scope="col" class="border-0">ลำดับที่</th>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาคการศึกษา/ปี</th>
               <th scope="col" class="border-0">วันและเวลาที่จัด</th>
@@ -42,8 +43,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($activityDetails as $activityDetail)
+            @foreach($activityDetails as $i => $activityDetail)
               <tr>
+                <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td class="text-left" style="vertical-align : middle;">{{$activityDetail->activity->name}}</td>
                 <td>{{$activityDetail->term_sector}}/{{$activityDetail->term_year}}</td>
                 <td>

@@ -30,6 +30,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th scope="col" class="border-0">ลำดับที่</th>
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาค/ปีการศึกษา</th>
               <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
@@ -37,8 +38,9 @@
             </tr>
           </thead>
           <tbody>
-              @foreach($activityDetails as $detail)
+              @foreach($activityDetails as $i => $detail)
                 <tr>
+                  <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                   <td class="text-left">{{$detail->activity->name}}</td>
                   <td>{{$detail->term_sector}}/{{$detail->term_year}}</td>
                   <td>{{$detail->studentAllJoinCount()}} คน </td>

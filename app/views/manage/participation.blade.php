@@ -81,6 +81,7 @@
         <table class="table mb-0 ">
           <thead class="bg-light">
             <tr>
+              <th scope="col" class="border-0">ลำดับที่</th>
               <th scope="col" class="border-0">รหัสนักศึกษา</th>
               <th scope="col" class="border-0">ชี่อ - สกุล</th>
               <th scope="col" class="border-0">ชั้นปี</th>
@@ -89,13 +90,14 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($participations as $participation)
+          @foreach($participations as $i => $participation)
             <?php 
               $rankCheckM = $participation->rankChecksByDateAndTime($nowDay,'เช้า');
               $rankCheckA = $participation->rankChecksByDateAndTime($nowDay,'บ่าย');
 
             ?>
               <tr>
+                <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td>{{$participation->student->id}}</td>
                 <td class="text-left">{{$participation->student->getFullName()}}</td>
                 <td>ชั้นปี {{$participation->student->getNowYear()}}</td>

@@ -316,7 +316,7 @@ class ManageUserController extends BaseController {
 
 		$isExistsUsername= User::where('username',Input::get("email"))->first() != NULL;
 		if(!$isID && $isExistsUsername){
-			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถเพิ่มอาจารย์ได้เนื่องจากมี email อยู่เเล้ว");
+			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถเพิ่มข้อมูลอาจารย์ได้เนื่องจากมี email อยู่เเล้ว");
 		}
 
 		if($isID){
@@ -397,7 +397,7 @@ class ManageUserController extends BaseController {
 		
 		$isExistsStudent = Student::find(Input::get("id")) != NULL;
 		if(!$isID && $isExistsStudent){
-			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถสร้างนักศึกได้เนื่องจากมีรหัสนักศึกษาอยู่เเล้ว");
+			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถสร้างนักศึกษาได้เนื่องจากมีรหัสนักศึกษาอยู่เเล้ว");
 		}
 
 		$isExistsUsername= User::where('username',Input::get("id"))->first() != NULL;

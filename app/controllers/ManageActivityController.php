@@ -319,7 +319,7 @@ class ManageActivityController extends BaseController {
       $isExistsActivityName = Activity::where('name',trim(Input::get("name")))->count() > 0;
     }
 		if($isExistsActivityName){
-			return Redirect::back()->withInput()->with('error',"ไม่สามารถกิจกรรมได้เนื่องจากมีชื่ออยู่เเล้ว");
+			return Redirect::back()->withInput()->with('error',"ไม่สามารถเพิ่มชื่อกิจกรรมได้เนื่องจากมีชื่อกิจกรรมอยู่เเล้ว");
 		}
 		$save_image_path = 'assets/upload/image';
 

@@ -59,7 +59,7 @@
               @if(Auth::user()->isTeacher())
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">local_activity</i>
+                  <i class="material-icons">event</i>
                   <span>จัดการกิจกรรม</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small" x-placement="bottom-start" style="display: none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-5px, 50px, 0px);">
@@ -85,7 +85,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage/year')}}">
-                  <i class="material-icons">person</i>
+                  <i class="material-icons">date_range</i>
                   <span>จัดการปีการศึกษา</span>
                 </a>
               </li>

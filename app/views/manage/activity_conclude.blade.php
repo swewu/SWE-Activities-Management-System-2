@@ -34,7 +34,7 @@
             <i class="fa fa-plus"></i> เฉพาะฉัน
           </a>
           <a class="btn btn-outline-success btn-sg" href="{{url('manage/activity/conclude?all=true')}}">
-            <i class="fa fa-plus"></i> ทังหมด
+            <i class="fa fa-plus"></i> ทั้งหมด
           </a>
         @endif
         <form class="input-group input-group-sg col-md-5 float-right">

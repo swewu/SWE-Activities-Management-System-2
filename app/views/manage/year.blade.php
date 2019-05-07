@@ -8,7 +8,7 @@
 @section('content')
 <form class="add-new-post" method="post" autocomplete="off" enctype="multipart/form-data" >
   <div class="row">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-4 col-md-12">
       <!-- Add New Post Form -->
       <div class="card card-small mb-3">
         <div class="card-body">
@@ -17,8 +17,8 @@
             
               <div class="col">
                 <div class="form-group">
-                    <label for="name"></label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" value="" placeholder ="ปีการศึกษา" >
+                    <label for="name">ปีการศึกษา</label>
+                    <input type="text" class="form-control" id="years" name="years" value="" placeholder ="ปีการศึกษา" >
                     <small class="form-text text-danger"></small>
                 </div>
               </div>

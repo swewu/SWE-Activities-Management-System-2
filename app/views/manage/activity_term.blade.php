@@ -38,9 +38,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($activityDetails as $activityDetail)
+            @foreach($activityDetails as $i => $activityDetail)
               <tr>
-                <td></td>
+                <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
                 <td>{{$activityDetail->term_year}}</td>
                 <td>{{$activityDetail->term_sector}}</td>
                 <td>{{$activityDetail->dayStartDayEnd()}}</td>

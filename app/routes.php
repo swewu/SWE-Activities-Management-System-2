@@ -12,6 +12,7 @@
 */
 
 Route::get('/manage/year', 'ManageYearController@showYear');
+Route::get('/manage/year/add', 'ManageYearController@actionYearAdd');
 
 
 Route::get('/show-activity/{id}', 'HomeController@showActivity');

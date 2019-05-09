@@ -24,7 +24,7 @@
                 <th class="text-center">ลำดับที่</th>
                 <th class="text-center">ปีการศึกษา</th>
                 <th class="text-center">จำนวนกิจกรรมที่จัด</th>
-                <th class="text-center">จัดการปีการศึกษา</th>
+                <th class="text-center">จัดการปีการศึกษา </th>
             </tr>
           </thead>
           <tbody>

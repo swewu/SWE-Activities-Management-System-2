@@ -13,7 +13,7 @@
 
        
           <a class="btn btn-outline-success btn-sg" href="{{url('/manage/year/add')}}">
-            <i class="fa fa-plus"></i> เพิ่มปีการศึกษา
+            <i class="fa fa-plus"></i> เพิ่มปีการศึกษา 
           </a>
          
       </div>

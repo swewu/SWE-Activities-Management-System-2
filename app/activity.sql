@@ -1,9 +1,12 @@
--- Adminer 4.3.1 MySQL dump
+-- Adminer 4.6.1 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+CREATE DATABASE `activity` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `activity`;
 
 DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity` (
@@ -15,10 +18,6 @@ CREATE TABLE `activity` (
   `created_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
-  `term_sector` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `term_year` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `day_end` date DEFAULT NULL,
-  `day_start` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
@@ -26,18 +25,18 @@ CREATE TABLE `activity` (
   CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `activity` (`id`, `name`, `description`, `image`, `created_at`, `created_by`, `updated_at`, `updated_by`, `term_sector`, `term_year`, `day_end`, `day_start`) VALUES
-(86,	'ค่ายอบบรม Testing',	'<p><br></p>',	NULL,	'2019-04-20 19:44:00',	56,	'2019-04-20 19:44:00',	56,	'',	'',	NULL,	NULL),
-(87,	'ค่าย 4 ชั้นปี',	'<p><br></p>',	'assets/upload/image/NIZF5957.jpg',	'2019-04-20 19:46:01',	56,	'2019-04-20 19:46:01',	56,	'',	'',	NULL,	NULL),
-(88,	'สัมนา',	'<p><br></p>',	NULL,	'2019-04-20 19:55:50',	56,	'2019-04-20 19:55:50',	56,	'',	'',	NULL,	NULL),
-(90,	'สอบโครงงาน2',	'<p><span style=\"color: rgb(29, 33, 41);\">ทุกกลุ่มที่สอบใน วันอังคารที่ 23 เม.ย. สอบห้องศูนย์วิศวกรรมซอฟต์แวร์</span></p><ol><li><span style=\"color: rgb(29, 33, 41);\">ทุกกลุ่มที่สอบใน วันอังคารที่ 30 เม.ย. และวันพุธ ที่ 1 พ.ค. เปลี่ยนห้องสอบเป็น ห้อง AD3501/ห้องบรรยาย1 อาคารเอสเอ็มทาวเวอร์ รายละเอียดดังไฟล์ที่แนบค่ะ</span></li><li><span style=\"color: rgb(29, 33, 41);\">วันที่/เวลาทั้งหมดเป็นไปตามกำหนดการเดิมค่ะ</span></li><li><span style=\"color: rgb(29, 33, 41);\">กลุ่ม กทม. ต้องเดินทางไปติดต่อ จนท. ก่อนจะถึงเวลาสอบจริงอย่างน้อยครึ่งชั่วโมงเพื่อเตรียมการนำเสนอผ่านโน๊ตบุ๊คของตนเอง</span></li></ol>',	NULL,	'2019-04-21 20:06:41',	56,	'2019-04-21 20:06:41',	56,	'',	'',	NULL,	NULL),
-(91,	' Present สหกิจศึกษา',	'<p>ให้นักศึกษาเตรียมความพร้อมมาให้เรียบร้อย</p>',	NULL,	'2019-04-21 20:15:22',	56,	'2019-04-21 20:15:22',	56,	'',	'',	NULL,	NULL),
-(92,	'อบรม React',	'<h2><span style=\"color: rgb(29, 33, 41);\">นศ. เตรียม notebook + ปลั๊ก ไปด้วยนะคะ</span><strong style=\"color: rgb(29, 33, 41);\"><span class=\"ql-cursor\">﻿</span></strong></h2>',	NULL,	'2019-04-21 20:18:33',	56,	'2019-04-21 20:18:33',	56,	'',	'',	NULL,	NULL),
-(93,	'อบรม MVC .Net',	'<h2><span style=\"color: rgb(29, 33, 41);\">นศ. เตรียม notebook + ปลั๊ก ไปด้วยนะคะ</span></h2>',	NULL,	'2019-04-21 20:20:46',	56,	'2019-04-21 20:20:46',	56,	'',	'',	NULL,	NULL),
-(94,	'workshop',	'<h2><span style=\"color: rgb(29, 33, 41);\">วิชา Software Project Management</span></h2>',	NULL,	'2019-04-21 20:22:25',	56,	'2019-04-21 20:22:25',	56,	'',	'',	NULL,	NULL),
-(95,	'Oracle Student Workshop',	'<p><span style=\"color: rgb(29, 33, 41);\">1. Download Program, Image File และ เอกสารการติดตั้ง จาก Link ต่างๆ การติดตั้ง Oracle Virtual Box&nbsp;</span><a href=\"https://drive.google.com/%EF%AC%81le/d/1eJrc11pw-HRjxJB81u41SKk4HY8TeSca/view?fbclid=IwAR1zdPUP_eQcSma_dKBE5qz0M2zjMkLtYaVlBvptJ-L6ABaJzmUda-fBM6Q\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1eJrc11pw-HRjxJB81u41SKk4HY…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">Import Image Files&nbsp;</span><a href=\"https://drive.google.com/%EF%AC%81le/d/1N4c6DVNECN_lzADBB-jJamRW-uZtGVBL/view?fbclid=IwAR3xZbV2kkcNNzLB8qADO9zqGVOCmiaepwW6kxIEDDmSI1mYOI3QI96cGmQ\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1N4c6DVNECN_lzADBB-jJamRW-u…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">File set up&nbsp;</span><a href=\"https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2F%EF%AC%81le%2Fd%2F1xDOQ76xaGbOMxXFbplp7_CkXxiynkReg%2Fview%3Ffbclid%3DIwAR23WaRkbrkpzeJCJmMls03ChKYBprNTIJ0yh06T30F2ByIjB5fdYtHErug&amp;h=AT0nZMcJIsT31CKGvPY71s0QvXvVumclqdG5zNzgt6PNujvMiGapdIh30PWD8tL1XSj9xYhcFrYwzzWHcesDuvzlCJj7EV7FkRw0LCvrDfgbNeqj1YXT2fNjUBuDPEKKgfO_xTDPMnI_hpGfYNj62oLX\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1xDOQ76xaGbOMxXFbplp7_CkXxi…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">2. ติดตั้งโปรแกรม และ Import File ตาม ORACLE_STUDENT_WORKSHOP_SETUP2018.pdf</span></p>',	NULL,	'2019-04-21 20:24:16',	56,	'2019-04-21 20:24:16',	56,	'',	'',	NULL,	NULL),
-(96,	'Circle CI + Automated Test',	'<p><span style=\"color: rgb(29, 33, 41);\">สิ่งที่ให้เตรียม</span></p><p><span style=\"color: rgb(29, 33, 41);\">1. Install Docker</span></p><p><span style=\"color: rgb(29, 33, 41);\">2. Editor เลือกลง VSCode หรือ Sublime</span></p><p><span style=\"color: rgb(29, 33, 41);\">3. สมัคร account Github</span></p><p><span style=\"color: rgb(29, 33, 41);\">4. ลง git bash หรือ source tree</span></p><p><span style=\"color: rgb(29, 33, 41);\">Note: PHP7 รอลงพร้อมกันในห้อง จะได้มี environment เหมือนๆ กัน</span></p><p><span style=\"color: rgb(29, 33, 41);\">ใครมีปัญหาเรื่อง notebook ไปขอเบิกจากพี่ตั้ม</span></p><h3><span style=\"color: rgb(29, 33, 41);\">ใครมีปัญหาเรื่องการติดตั้ง ติดต่อพี่ตั้ม ด่วนนะจ๊ะ</span></h3>',	NULL,	'2019-04-21 20:26:00',	56,	'2019-04-21 20:27:51',	56,	'',	'',	NULL,	NULL),
-(97,	'อบรม .Net for Web-based application',	'<h2><span style=\"color: rgb(29, 33, 41);\">ตามแผนพัฒนาศักยภาพนักศึกษา งบกิจกรรมเสริมหลักสูตร</span></h2>',	NULL,	'2019-04-21 20:34:38',	56,	'2019-04-21 20:34:38',	56,	'',	'',	NULL,	NULL);
+INSERT INTO `activity` (`id`, `name`, `description`, `image`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(86,	'ค่ายอบบรม Testing',	'<p><br></p>',	NULL,	'2019-04-20 19:44:00',	56,	'2019-04-20 19:44:00',	56),
+(87,	'ค่าย 4 ชั้นปี',	'<p><br></p>',	'assets/upload/image/NIZF5957.jpg',	'2019-04-20 19:46:01',	56,	'2019-04-20 19:46:01',	56),
+(88,	'สัมนา',	'<p><br></p>',	NULL,	'2019-04-20 19:55:50',	56,	'2019-04-20 19:55:50',	56),
+(90,	'สอบโครงงาน2',	'<p><span style=\"color: rgb(29, 33, 41);\">ทุกกลุ่มที่สอบใน วันอังคารที่ 23 เม.ย. สอบห้องศูนย์วิศวกรรมซอฟต์แวร์</span></p><ol><li><span style=\"color: rgb(29, 33, 41);\">ทุกกลุ่มที่สอบใน วันอังคารที่ 30 เม.ย. และวันพุธ ที่ 1 พ.ค. เปลี่ยนห้องสอบเป็น ห้อง AD3501/ห้องบรรยาย1 อาคารเอสเอ็มทาวเวอร์ รายละเอียดดังไฟล์ที่แนบค่ะ</span></li><li><span style=\"color: rgb(29, 33, 41);\">วันที่/เวลาทั้งหมดเป็นไปตามกำหนดการเดิมค่ะ</span></li><li><span style=\"color: rgb(29, 33, 41);\">กลุ่ม กทม. ต้องเดินทางไปติดต่อ จนท. ก่อนจะถึงเวลาสอบจริงอย่างน้อยครึ่งชั่วโมงเพื่อเตรียมการนำเสนอผ่านโน๊ตบุ๊คของตนเอง</span></li></ol>',	NULL,	'2019-04-21 20:06:41',	56,	'2019-04-21 20:06:41',	56),
+(91,	' Present สหกิจศึกษา',	'<p>ให้นักศึกษาเตรียมความพร้อมมาให้เรียบร้อย</p>',	NULL,	'2019-04-21 20:15:22',	56,	'2019-04-21 20:15:22',	56),
+(92,	'อบรม React',	'<h2><span style=\"color: rgb(29, 33, 41);\">นศ. เตรียม notebook + ปลั๊ก ไปด้วยนะคะ</span><strong style=\"color: rgb(29, 33, 41);\"><span class=\"ql-cursor\">﻿</span></strong></h2>',	NULL,	'2019-04-21 20:18:33',	56,	'2019-04-21 20:18:33',	56),
+(93,	'อบรม MVC .Net',	'<h2><span style=\"color: rgb(29, 33, 41);\">นศ. เตรียม notebook + ปลั๊ก ไปด้วยนะคะ</span></h2>',	NULL,	'2019-04-21 20:20:46',	56,	'2019-04-21 20:20:46',	56),
+(94,	'workshop',	'<h2><span style=\"color: rgb(29, 33, 41);\">วิชา Software Project Management</span></h2>',	NULL,	'2019-04-21 20:22:25',	56,	'2019-04-21 20:22:25',	56),
+(95,	'Oracle Student Workshop',	'<p><span style=\"color: rgb(29, 33, 41);\">1. Download Program, Image File และ เอกสารการติดตั้ง จาก Link ต่างๆ การติดตั้ง Oracle Virtual Box&nbsp;</span><a href=\"https://drive.google.com/%EF%AC%81le/d/1eJrc11pw-HRjxJB81u41SKk4HY8TeSca/view?fbclid=IwAR1zdPUP_eQcSma_dKBE5qz0M2zjMkLtYaVlBvptJ-L6ABaJzmUda-fBM6Q\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1eJrc11pw-HRjxJB81u41SKk4HY…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">Import Image Files&nbsp;</span><a href=\"https://drive.google.com/%EF%AC%81le/d/1N4c6DVNECN_lzADBB-jJamRW-uZtGVBL/view?fbclid=IwAR3xZbV2kkcNNzLB8qADO9zqGVOCmiaepwW6kxIEDDmSI1mYOI3QI96cGmQ\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1N4c6DVNECN_lzADBB-jJamRW-u…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">File set up&nbsp;</span><a href=\"https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2F%EF%AC%81le%2Fd%2F1xDOQ76xaGbOMxXFbplp7_CkXxiynkReg%2Fview%3Ffbclid%3DIwAR23WaRkbrkpzeJCJmMls03ChKYBprNTIJ0yh06T30F2ByIjB5fdYtHErug&amp;h=AT0nZMcJIsT31CKGvPY71s0QvXvVumclqdG5zNzgt6PNujvMiGapdIh30PWD8tL1XSj9xYhcFrYwzzWHcesDuvzlCJj7EV7FkRw0LCvrDfgbNeqj1YXT2fNjUBuDPEKKgfO_xTDPMnI_hpGfYNj62oLX\" target=\"_blank\" style=\"color: rgb(54, 88, 153); background-color: rgb(255, 255, 255);\">https://drive.google.com/…/1xDOQ76xaGbOMxXFbplp7_CkXxi…/view</a><span style=\"color: rgb(29, 33, 41);\">&nbsp;</span></p><p><span style=\"color: rgb(29, 33, 41);\">2. ติดตั้งโปรแกรม และ Import File ตาม ORACLE_STUDENT_WORKSHOP_SETUP2018.pdf</span></p>',	NULL,	'2019-04-21 20:24:16',	56,	'2019-04-21 20:24:16',	56),
+(96,	'Circle CI + Automated Test',	'<p><span style=\"color: rgb(29, 33, 41);\">สิ่งที่ให้เตรียม</span></p><p><span style=\"color: rgb(29, 33, 41);\">1. Install Docker</span></p><p><span style=\"color: rgb(29, 33, 41);\">2. Editor เลือกลง VSCode หรือ Sublime</span></p><p><span style=\"color: rgb(29, 33, 41);\">3. สมัคร account Github</span></p><p><span style=\"color: rgb(29, 33, 41);\">4. ลง git bash หรือ source tree</span></p><p><span style=\"color: rgb(29, 33, 41);\">Note: PHP7 รอลงพร้อมกันในห้อง จะได้มี environment เหมือนๆ กัน</span></p><p><span style=\"color: rgb(29, 33, 41);\">ใครมีปัญหาเรื่อง notebook ไปขอเบิกจากพี่ตั้ม</span></p><h3><span style=\"color: rgb(29, 33, 41);\">ใครมีปัญหาเรื่องการติดตั้ง ติดต่อพี่ตั้ม ด่วนนะจ๊ะ</span></h3>',	NULL,	'2019-04-21 20:26:00',	56,	'2019-04-21 20:27:51',	56),
+(97,	'อบรม .Net for Web-based application',	'<h2><span style=\"color: rgb(29, 33, 41);\">ตามแผนพัฒนาศักยภาพนักศึกษา งบกิจกรรมเสริมหลักสูตร</span></h2>',	NULL,	'2019-04-21 20:34:38',	56,	'2019-04-21 20:34:38',	56);
 
 DROP TABLE IF EXISTS `activity_details`;
 CREATE TABLE `activity_details` (
@@ -3031,7 +3030,7 @@ CREATE TABLE `teachers` (
 INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
 (8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ฐิมาพร',	'เพชรแก้ว',	NULL,	'2275456461',	'pthimapo2@wu.ac.th',	'c3',	'2019-01-27 22:34:34',	0,	'2019-04-19 00:59:54',	0,	NULL),
 (9,	56,	3,	3,	'อาจารย์ ดร.',	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'0899999999',	'kanchan.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:36:34',	0,	'2019-03-07 15:08:18',	0,	NULL),
-(10,	57,	1,	1,	'นาย',	'ประทีป',	'คงกล้า',	NULL,	'0123456789',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-05-09 19:17:50',	0,	NULL),
+(10,	57,	1,	1,	'นาย',	'ประทีป',	'คงกล้า',	NULL,	'',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-03-07 15:04:14',	0,	NULL),
 (11,	58,	2,	2,	'ผู้ช่วยศาสตราจารย์',	'อุหมาด',	'หมัดอาด้ำ',	NULL,	'0899909099',	'muhamard@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:41:14',	0,	'2019-03-07 15:08:19',	0,	NULL),
 (12,	59,	2,	2,	'อาจารย์ ดร.',	'พุทธิพร',	'ธนธรรมเมธี',	NULL,	'0800000000',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-03-07 15:08:20',	0,	NULL),
 (13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	'เยาวเรศ',	'ศิริสถิตย์กุล',	NULL,	'',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-03-07 15:08:21',	0,	NULL),
@@ -3074,8 +3073,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
 (55,	'pthimapo2@wu.ac.th',	'$2y$10$LSA1n/xcA4JVRfAuwv9aa.mOtXzTY.rLH9tdqpMSSGXBEe61K6QcS',	NULL,	'2019-03-07 15:49:05',	'',	'2019-03-07 15:49:05',	NULL),
-(56,	'kanchan.th@wu.ac.th',	'$2y$10$x48gxjz/J1ftdGXeVm3qOeoemix6iFgR1znDHXP6Zt9mlJiIJLTTy',	'qnEEbzq3Vw0E9pWA3mEzfsVZsOmNuOVOrYmLR7rny6GUpwvm4YGU9MEVZWwR',	'2019-05-09 16:43:46',	'',	'2019-04-21 20:57:53',	NULL),
-(57,	'pra@wu.ac.th',	'$2y$10$rN2p61c0dTpqWtwKHY3qK.Fw8mRKYI1BH058/6UAi90m.CTx3wLFS',	'qcSmFW4HRoKUYzumbGEeoPpztZwjzVCno2edCIxCABiC7uGhI828X2jtBNc5',	'2019-05-09 19:26:46',	'',	'2019-05-09 19:26:46',	NULL),
+(56,	'kanchan.th@wu.ac.th',	'$2y$10$hcmyFbQ0MOqD9/37bpSREOAYNeWmttQsF770Qp633Z86T6d5WpDWK',	'qnEEbzq3Vw0E9pWA3mEzfsVZsOmNuOVOrYmLR7rny6GUpwvm4YGU9MEVZWwR',	'2019-04-21 20:57:53',	'',	'2019-04-21 20:57:53',	NULL),
+(57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'GHbRkReg3u7vp4tmG2Im95hco69PWxTAMeJEP3k9vpKw2pbxhYZrqbE9RPXB',	'2019-04-22 18:31:24',	'',	'2019-04-22 18:31:24',	NULL),
 (58,	'muhamard@wu.ac.th',	'$2y$10$cjlExpqXoFsdtfqfO8oRxOzGAvxW6VBRhDf1haWT0JvW3i1qH8K0.',	NULL,	'2019-02-05 12:46:46',	'',	'2019-02-05 12:46:46',	NULL),
 (59,	'putthiporn.th@wu.ac.th',	'$2y$10$4iixfs8x4vmUj22ktXQMLe22s59bFZZSycs2EJc7XT0m9JXYu51a.',	NULL,	'2019-02-05 12:43:17',	'',	'2019-02-05 12:43:17',	NULL),
 (60,	'syaowara@wu.ac.th',	'$2y$10$EE5FpFUInqFHI4JbMxffi.ciyNbmFOifx8G/uwfl7ia9TpvCv3lU2',	NULL,	'2019-02-05 12:45:12',	'',	'2019-02-05 12:45:12',	NULL),
@@ -3157,7 +3156,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (142,	'58148602',	'$2y$10$YMsiqTwrXF66afM15qMhJuRH9o3lVPnxfRR69zv6KXuL6s.dqSM3O',	NULL,	'2019-03-20 15:35:05',	'',	'2019-03-20 15:35:05',	NULL),
 (143,	'58149840',	'$2y$10$XYULxUeeHYh7ZMQp50A9XuySsdwPprq4Fr05kdzlBtlhZUQXwj9zi',	NULL,	'2019-03-20 15:35:35',	'',	'2019-03-20 15:35:35',	NULL),
 (144,	'58162660',	'$2y$10$K53Suyg5IQXmOCfWh3P0MOQcnVPhD3lzVTymnR8fN3Gg3AmSOYnuK',	NULL,	'2019-03-20 15:36:01',	'',	'2019-03-20 15:36:01',	NULL),
-(145,	'58162694',	'$2y$10$x48gxjz/J1ftdGXeVm3qOeoemix6iFgR1znDHXP6Zt9mlJiIJLTTy',	'axjlhoA9sHuTDeoZVXlapH1NJRlz3TiRtcHUWOUyH3TQkpTjFgw2LwQU7zjI',	'2019-05-09 19:31:09',	'',	'2019-05-09 19:31:09',	NULL),
+(145,	'58162694',	'$2y$10$C43NLF8N3wQRy5chFa7vouqS9OnTrSoZpdGX5jMQruAp4lhowujci',	NULL,	'2019-03-20 15:36:32',	'',	'2019-03-20 15:36:32',	NULL),
 (146,	'so@hotmail.com',	'$2y$10$IOgs5yFOUtJfDwhevADNmem.ZpcQ7vcpjT2QSxOQ2ARV5fu9wCr.m',	NULL,	'2019-03-22 09:37:06',	'',	'2019-03-22 09:37:06',	NULL),
 (147,	'12345678',	'$2y$10$SQxmhTbnq2XNeUuaWlhHSOtj6s1BKDR1Hiv9Zv.QyI0.rjAr/cwZq',	NULL,	'2019-03-22 09:37:55',	'',	'2019-03-22 09:37:55',	NULL),
 (148,	'sudarat@gmail.com',	'$2y$10$wPcnfqLfGUVLDjteuZZe4.i1kpMS7gjhjhO99wtv7Fa.LbTs574Nu',	'MklQHYxP0pXuBfKWW77vEt7E1dhSnBGWhj2nUXBaLuMKYC48HxFf3eJgvPGh',	'2019-03-31 17:27:00',	'',	'2019-03-31 17:27:00',	NULL),
@@ -3167,4 +3166,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (152,	'57140980',	'$2y$10$.W1jW0dJltTtRFxosPN.5.AsVeqI7eUMzCV77.d079AWWOLr.HT86',	NULL,	'2019-04-22 18:08:28',	'',	'2019-04-22 18:08:28',	NULL),
 (153,	'56666666',	'$2y$10$XdOS0neLDMb23blmMdHnv.eJU7xjA8tE7JjdmPgUhqA5jO0Xyj8ae',	NULL,	'2019-04-22 18:09:53',	'',	'2019-04-22 18:09:53',	NULL);
 
--- 2019-05-09 12:50:40
+-- 2019-04-22 13:20:52

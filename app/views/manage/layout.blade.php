@@ -50,11 +50,19 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage')}}">
-                  <i class="material-icons">person</i>
-                  <span>ข้อมูลนักศึกษา</span>
-                </a>
+                <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('/teacher')}}">
+                   <i class="material-icons">person</i>
+                   <span >ข้อมูลอาจารย์</span>
+               </a>
               </li>
+              @if(Auth::user()->isTeacher())
+              <li class="nav-item">
+               <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('/studentprofile')}}">
+                  <i class="material-icons">person</i>
+                  <span >โปรไฟล์นักศึกษา</span>
+              </a>
+              </li>
+              @endif
 
               @if(Auth::user()->isTeacher())
               <li class="nav-item dropdown">
@@ -109,15 +117,15 @@
                     <span class="d-none d-md-inline-block">{{$login_name}}</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="user-profile-lite.html">
-                      <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="components-blog-posts.html">
-                      <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="add-new-post.html">
-                      <i class="material-icons">note_add</i> Add New Post</a>
+                    <a class="dropdown-item" href="{{url('profile')}}">
+                      <i class="material-icons">&#xE7FD;</i> โปรไฟล์</a>
+                    <a class="dropdown-item" href="{{url('profile/edit')}}">
+                      <i class="material-icons">vertical_split</i>แก้ไขข้อมูลส่วนตัว</a>
+                    <a class="dropdown-item" href="{{url('resetpassword')}}">
+                      <i class="material-icons">note_add</i> แก้ไขรหัสผ่าน</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{url('logout')}}">
-                      <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                      <i class="material-icons text-danger">&#xE879;</i> ออกจากระบบ </a>
                   </div>
                 </li>
               </ul>

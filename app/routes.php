@@ -108,7 +108,7 @@ Route::get('/student_upload', 'StudentUploadController@studentUpload');
 Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 
 
-// Saharat Rakdam
+// // Saharat Rakdam
 
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
@@ -119,7 +119,16 @@ Route::get('/profile/edit', 'UserController@getProfileUpdate');
 Route::post('/profile/edit', 'UserController@postProfileUpdate');
 Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
 Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
-// Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
+
+Route::get('/teacher', 'UsersController@showUsersTeacher');
+Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
+
+Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
+Route::post('/resetpassword', 'ManageController@postUserTeacherAdd');
+
+
+
+// Route::get('manage/activity/check/status-student/{userid}/{acid}','UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');
 // });
@@ -138,5 +147,6 @@ Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
 // 	});
 
 // });
+
 
 

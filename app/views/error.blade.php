@@ -1,24 +1,11 @@
 @if(Session::has('message'))
-<script type="text/javascript">
-$(function(){
-  Swal.fire({
-    title: 'สำเร็จ!',
-    text: '{{Session::get('message')}}',
-    type: 'success',
-    confirmButtonText: 'ตกลง'
-  })
-})
-</script>
+<div class="alert alert-success text-right" role="alert">
+    {{Session::get('message')}}
+</div>
 @endif
 @if(Session::has('error'))
-<script type="text/javascript">
-$(function(){
-  Swal.fire({
-    title: 'พบข้อผิดพลาด!',
-    text: '{{Session::get('error')}}',
-    type: 'error',
-    confirmButtonText: 'ตกลง'
-  })
-})
-</script>
+<div class="alert alert-danger text-right" role="alert">
+    {{Session::get('error')}}
+</div>
 @endif
+

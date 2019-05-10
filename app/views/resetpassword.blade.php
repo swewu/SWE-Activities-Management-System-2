@@ -11,9 +11,25 @@
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 @stop
+@section('js')
+<script>
+  $(document).ready(function () {
+    $('#password').on("keydown", (e)=>{
+      onPressLimit(e,$('#password').val().length,16)
+    });
+    $('#new_password').on("keydown", (e)=>{
+      onPressLimit(e,$('#new_password').val().length,16)
+    });
+    $('#new_password2').on("keydown", (e)=>{
+      onPressLimit(e,$('#new_password2').val().length,16)
+    });
+  })
+  
+</script>
+@stop
 @section('content')
 <br>
-@include('layouts.alert')
+
 @section('page_heading','Dashboard')
 
 
@@ -41,7 +57,7 @@
 
             <div class="form-group">
                   <label for="name">รหัสผ่านใหม่</label>
-                  <input type="password" class="form-control {{$errors->has('new_password') ? 'is-invalid' : ''}}" id="password" name="new_password" value="{{$text_password}}" placeholder ="รหัสผ่านใหม่" >
+                  <input type="password" class="form-control {{$errors->has('new_password') ? 'is-invalid' : ''}}" id="password" name="new_password" value="{{$text_password}}" placeholder ="รหัสผ่านใหม่">
                   <small class="form-text text-danger">{{$errors->first('new_password')}}</small>
             </div>
 

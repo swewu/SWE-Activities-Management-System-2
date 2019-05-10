@@ -95,7 +95,7 @@ foreach($setActivityRec as $s) {
 
 @stop
 @section('content')
-@include('layouts.alert')
+
     <br>
     {{-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -259,7 +259,7 @@ foreach($setActivityRec as $s) {
                                             <div class="img-activity">
                                                 <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
                                                 <div class="">
-                                                        {{ $value->activity_name }}
+                                                        {{ $value->name }}
                                                         <br>
                                                         <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
                                                 </div>

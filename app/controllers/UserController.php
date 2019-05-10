@@ -49,22 +49,22 @@ class UserController extends Controller {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    $activity = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
+    $activity = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
 
     if(!empty(Request::get('term_year'))) {
         $term_year = Request::get('term_year');
-        $activity = $activity->where('student', 'LIKE', "%{$term_year}%");
+        $activity = $activity->where('students', 'LIKE', "%{$term_year}%");
     }
 
     $grapYearActivityReg = \DB::table('rank_checks')->select('activity_details_id')->where('id', $user->id)->get();
 
     $setIdReg = [];
     foreach ($grapYearActivityReg as $key => $value) {
-        $setIdReg[] = $value->activityID;
+        $setIdReg[] = $value->activity_id;
     }
 
-    $grapYearActivityReg = Activity::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
-    $grapYearActivityRec = Activity::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->get()->toArray();
+    $grapYearActivityReg = ActivityDetail::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
+    $grapYearActivityRec = ActivityDetail::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->get()->toArray();
 
 
     $setActivityRec = [];
@@ -78,15 +78,15 @@ class UserController extends Controller {
 
     }
 
-    $history = Activity::whereIn('id', $setIdReg);
+    $history = ActivityDetail::whereIn('id', $setIdReg);
 
     // if(!empty(Request::get('year'))) {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
     if (@$_GET['type'] === "2") {
-        $history = $history->where('activity_name', 'LIKE', "%{$_GET['activity']}%");
+        $history = $history->where('name', 'LIKE', "%{$_GET['activity']}%");
     } elseif (@$_GET['type'] == '1') {
-        $activity = $activity->where('activity_name', 'LIKE', "%{$_GET['activity']}%");
+        $activity = $activity->where('name', 'LIKE', "%{$_GET['activity']}%");
     }
     $history = $history->orderBy("day_end",'asc')->get();
     $activity = $activity->orderBy("day_end",'asc')->get();
@@ -94,7 +94,7 @@ class UserController extends Controller {
 
     if (empty(Request::get('userID'))) {
         if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
-            $activities = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
+            $activities = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
             return View::make('welcome-teacher', ['activities' => $activities]);
         }
     }
@@ -105,7 +105,7 @@ class UserController extends Controller {
 
 public function checkStudentActivity($uid, $aid)
 {
-    $a = \DB::table('checking')->where('UserID', $uid)->where('activityID', $aid)->update(array('status'=> 0));
+    $a = \DB::table('rank_checks')->where('id', $uid)->where('activity_details_id', $aid)->update(array('status'=> 0));
     return Redirect::back();
 }
   public function getProfileUpdate() {
@@ -132,6 +132,8 @@ public function checkStudentActivity($uid, $aid)
 
     return View::make('profile-form', array('user' => $user));
   }
+  
+
 
 
   public function postProfileUpdate() {

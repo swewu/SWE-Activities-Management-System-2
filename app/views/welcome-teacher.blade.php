@@ -29,7 +29,7 @@
   <br>
  
 
-  @include('layouts.alert')
+
 @section('page_heading','Dashboard')
 
 

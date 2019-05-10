@@ -75,6 +75,21 @@
 
 
 @stop
+@section('js')
+<script>
+  $(document).ready(function () {
+    $('#firstname').on("keydown", onPressOnlyThaiAndEng);
+    $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#tel').on("keydown", onPressOnlyNumber);
+    $('#tel').on("keydown", (e)=>{
+      onPressLimit(e,$('#tel').val().length,10)
+    });
+    $('#password').on("keydown", (e)=>{
+      onPressLimit(e,$('#password').val().length,16)
+    });
+  })
+</script>
+@stop
 @section('content')
     <br>
 
@@ -252,7 +267,7 @@
                             <label for="username" class="cols-sm-2 control-label">เบอร์ติดต่อ</label>
                             <div class="cols-sm-5">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"/>
+                                    <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"{{isset($tel) ? 'disabled' : ''}}/>
                                 </div>
                                 @if($errors->has('tel'))
                                     <div class="form-text text-danger" role="alert">

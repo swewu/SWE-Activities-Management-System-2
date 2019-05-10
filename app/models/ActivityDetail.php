@@ -45,7 +45,8 @@ class ActivityDetail extends Eloquent {
                       ->whereIn('id',$responsibility_list)
                       ->orderBy('term_year','DESC')
                       ->orderBy('term_sector','DESC')
-                      ->orderBy('day_start','DESC');
+                      ->orderBy('day_start','DESC')
+                      ->orderBy('day_end','DESC');
     
     return $activityDetail;
   }

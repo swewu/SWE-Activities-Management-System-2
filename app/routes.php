@@ -13,7 +13,7 @@
 
 Route::get('/manage/year', 'ManageYearController@showYear');
 Route::get('/manage/year/add', 'ManageYearController@actionYearAdd');
-
+Route::get('/manage/year/delete', 'ManageYearController@actionYearDelete');
 
 Route::get('/show-activity/{id}', 'HomeController@showActivity');
 Route::get('/activity-register/{id}', 'HomeController@registerActivity');

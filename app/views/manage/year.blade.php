@@ -35,7 +35,7 @@
                 <td class="text-center">{{ActivityDetail::where('term_year',$year)->count()}}</td>
                 <td class="text-center">
                     @if($now_year == $year)  
-                      <a href="" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{url('/manage/year/delete')}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
                     @endif
                 </td>
               </tr>

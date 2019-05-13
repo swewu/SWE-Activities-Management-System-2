@@ -9,7 +9,7 @@ class ManageUserController extends BaseController {
   {
 		$q = '';
 		$year = '';
-		$students = Student::onlyTrashed();
+		$students = Student::onlyTrashed()->orderBy('id','desc');
 		$isQ = Input::get('q') != NULL && Input::get('q') != "";
 		$isYear = Input::get('year') != NULL && Input::get('year') != "";
 
@@ -99,7 +99,6 @@ class ManageUserController extends BaseController {
 		$students = Student::orderBy('id','desc');
 		$isQ = Input::get('q') != NULL && Input::get('q') != "";
 		$isYear = Input::get('year') != NULL && Input::get('year') != "";
-
 		if($isYear){
 			$year = Input::get('year');
 			$students = $students->searchYear(Input::get('year'));

@@ -32,16 +32,25 @@ class ManageActivityController extends BaseController {
 
   public function showActivityTerm($id)
   {
-    $q = '';
+    $term_year = '';
     $activity = Activity::find($id);
     $activityDetails = ActivityDetail::where('activity_id',$id)->orderBy('day_start','DESC');
-    if(Input::get('q') != NULL && Input::get('q') != ""){
-			$q = Input::get('q');
-			$activityDetails = $activityDetails->Where('year','like','%'.$q.'%')->orWhere('sector','like','%'.$q.'%');
-		}
+    $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');  
+    if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+      $term_year = Input::get('term_year');
+      $activityDetails = $activityDetails->where('term_year',$term_year);
+    }
 		$activityDetails = $activityDetails->paginate($this->perpage);
-    $activityDetails->appends(['q'=>$q]);
-    return View::make('manage.activity_term',['activity' => $activity ,'activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
+    $activityDetails->appends(['term_year'=>$term_year]);
+    return View::make('manage.activity_term',
+      [
+        'activity' => $activity ,
+        'activityDetails' => $activityDetails,
+        'perpage'=>$this->perpage,
+        'term_year'=>$term_year,
+        'term_years'=>$term_years
+       ]
+    );
   }
 
   public function showActivityTermAdd($id)

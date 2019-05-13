@@ -46,7 +46,7 @@
             @foreach($activityDetails as $i => $activityDetail)
               <tr>
                 <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
-                <td class="text-left" style="vertical-align : middle;">{{$activityDetail->activity->name}}</td>
+                <td class="text-left">{{$activityDetail->activity->name}}</td>
                 <td>{{$activityDetail->term_sector}}/{{$activityDetail->term_year}}</td>
                 <td>
                   <div>

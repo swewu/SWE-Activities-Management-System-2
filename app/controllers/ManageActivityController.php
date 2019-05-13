@@ -354,13 +354,17 @@ class ManageActivityController extends BaseController {
 			return Redirect::back()->with('error', 'ไม่พบข้อมูลกิจกรรม');
 		}
 
+    $countActivityDetail =  ActivityDetail::where('activity_id',$id)->count();
+    if($countActivityDetail >= 1){
+      return Redirect::to('manage/activity')->with('error','ไม่สามารถลบกิจกรรมได้เนื่องจากมีรายละเอียดกิจกรรม');
+    }
+
 		try {
 			$activity->delete();
 		}
 		catch ( \Exception $e ) {
 			return Redirect::back()->with('error', $e->getMessage());
 		}
-
 		return Redirect::back()->with('message','ลบข้อมูลกิจกรรมสำเร็จ');
   }
 

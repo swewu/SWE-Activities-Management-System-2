@@ -152,6 +152,7 @@ public function checkStudentActivity($uid, $aid)
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
+        'email' => 'กรุณากรอข้อมูลให้ครบถ้วน',
         'digits' => 'กรุณากรอกเบอร์โทร 10 ตัว'
       ),
       array(

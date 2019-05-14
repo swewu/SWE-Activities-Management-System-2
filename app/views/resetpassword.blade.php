@@ -17,11 +17,11 @@
     $('#password').on("keydown", (e)=>{
       onPressLimit(e,$('#password').val().length,16)
     });
-    $('#new_password').on("keydown", (e)=>{
-      onPressLimit(e,$('#new_password').val().length,16)
+    $('#tel').on("keydown", (e)=>{
+      onPressLimit(e,$('#tel').val().length,16)
     });
-    $('#new_password2').on("keydown", (e)=>{
-      onPressLimit(e,$('#new_password2').val().length,16)
+    $('#newpasswords').on("keydown", (e)=>{
+      onPressLimit(e,$('#newpasswords').val().length,16)
     });
   })
   
@@ -57,14 +57,14 @@
 
             <div class="form-group">
                   <label for="name">รหัสผ่านใหม่</label>
-                  <input type="password" class="form-control {{$errors->has('new_password') ? 'is-invalid' : ''}}" id="password" name="new_password" value="{{$text_password}}" placeholder ="รหัสผ่านใหม่">
-                  <small class="form-text text-danger">{{$errors->first('new_password')}}</small>
+                  <input type="password" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_password}}" placeholder ="รหัสผ่านใหม่">
+                  <small class="form-text text-danger">{{$errors->first('tel')}}</small>
             </div>
 
             <div class="form-group">
                   <label for="name">กรอกรหัสผ่านใหม่อีกครั้ง</label>
-                  <input type="password" class="form-control {{$errors->has('new_password2') ? 'is-invalid' : ''}}" id="password" name="new_password2" value="{{$text_password}}" placeholder ="ยืนยันรหัสผ่านใหม่" >
-                  <small class="form-text text-danger">{{$errors->first('new_password2')}}</small>
+                  <input type="password" class="form-control {{$errors->has('newpasswords') ? 'is-invalid' : ''}}" id="newpasswords" name="newpasswords" value="{{$text_password}}" placeholder ="ยืนยันรหัสผ่านใหม่" >
+                  <small class="form-text text-danger">{{$errors->first('newpasswords')}}</small>
             </div>
 
             <br>

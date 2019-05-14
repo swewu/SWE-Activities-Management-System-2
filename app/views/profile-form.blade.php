@@ -78,8 +78,8 @@
 @section('js')
 <script>
   $(document).ready(function () {
-    $('#firstname').on("keydown", onPressOnlyThaiAndEng);
-    $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#email').on("keydown", onPressOnlyEmail);
+    $('#emails').on("keydown", onPressOnlyThaiAndEng);
     $('#tel').on("keydown", onPressOnlyNumber);
     $('#tel').on("keydown", (e)=>{
       onPressLimit(e,$('#tel').val().length,10)

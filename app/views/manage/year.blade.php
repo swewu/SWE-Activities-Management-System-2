@@ -12,7 +12,7 @@
       <div class="card-header border-bottom">
 
        
-          <a class="btn btn-outline-success btn-sg" href="{{url('/manage/year/add')}}">
+          <a class="btn btn-outline-success btn-sg" data-toggle="modal" data-target="#addYear">
             <i class="fa fa-plus"></i> เพิ่มปีการศึกษา 
           </a>
          
@@ -49,5 +49,20 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="addYear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">คุณต้องการเพิ่มปีการศึกษา {{Term::getLastYear()+1}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+        <a class="btn btn-success" href="{{url('manage/year/add')}}">เพิ่ม</a>
+      </div>
+    </div>
+  </div>
+</div>
 @stop

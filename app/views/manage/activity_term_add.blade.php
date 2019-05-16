@@ -1,8 +1,8 @@
 @extends('manage.layout')
 
 @section('title')
-  @if(isset($activity))
-    แก้ไขข้อมูลปีและเดือน
+  @if(isset($activityDetail))
+    แก้ไขรายละเอียดกิจกรรม
   @else
     เพิ่มรายละเอียดกิจกรรม
   @endif

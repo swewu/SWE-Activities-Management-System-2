@@ -5,6 +5,25 @@
 @section('subtitle')
 จัดการกิจกรรม
 @stop
+@section('js')
+<script>
+   $(document).ready(function () {
+      $('#showStudent').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var students = button.data('students')
+        $("#student-table tbody tr").remove();
+        students.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)); 
+        students.forEach( student => {
+          $('#student-table tbody').append(`<tr>
+            <td>${student.id}</td>
+            <td>${student.fullName}</td>
+          </tr>`)
+        });
+        // id="student-table"
+      })
+   })
+</script>
+@stop
 @section('content')
 <div class="row">
   <div class="col">
@@ -18,24 +37,24 @@
           <h4 class="font-weight-bold">{{$activityDetail->activity->name}}</h4><br>
             <div class="row">
               <div class="col-2"><p class="text-primary">รายละเอียดกิจกรรม </p></div>
-              <div class="col-4">{{$activityDetail->activity->description}}</div>
+              <div class="col-10">{{$activityDetail->activity->description}}</div>
             </div>
             <div class="row">
             
               <div class="col-2"><p class="text-primary">วันที่จัดกิจกรรม </p></div>
-              <div class="col-4">{{$activityDetail->day_start}} &nbsp ถึง &nbsp {{$activityDetail->day_end}}</div>
+              <div class="col-10">{{Tool::formatDateForsave($activityDetail->day_start)}} &nbsp ถึง &nbsp {{Tool::formatDateForsave($activityDetail->day_end)}}</div>
             </div>
             <div class="row">
               <div class="col-2"><p class="text-primary">เวลาที่จัดกิจกรรม </P></div>
-              <div class="col-4">{{$activityDetail->time_start}} &nbsp ถึง &nbsp {{$activityDetail->time_end}}</div>
+              <div class="col-10">{{Tool::formatTimeToDatepicker($activityDetail->time_start)}} &nbsp ถึง &nbsp {{Tool::formatTimeToDatepicker($activityDetail->time_end)}}</div>
             </div>
             <div class="row">
               <div class="col-2"><p class="text-primary">สถานที่จัดกิจกรรม </p></div>
-              <div class="col-4">{{$activityDetail->location}}</div>
+              <div class="col-10">{{$activityDetail->location}}</div>
             </div>
             <div class="row">
               <div class="col-2"><p class="text-primary">อาจารย์ที่รับผิดชอบ</p></div>
-              <div class="col-4">
+              <div class="col-10">
                 @foreach($activityDetail->teachers as $t)
                   <div class="text-left">{{$t->getFullName()}}</div>
                 @endforeach
@@ -43,8 +62,8 @@
             </div>
             <div class="row">
               <div class="col-2"><p class="text-primary">นักศึกษาที่เข้าร่วม</p></div>
-              <div class="col-4">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$activityDetail->studentJoin()}}'>
+              <div class="col-10">
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$activityDetail->studentAllJoin()}}'>
                   {{$activityDetail->studentAllJoinCount()}}
                 </button> คน 
               </div>

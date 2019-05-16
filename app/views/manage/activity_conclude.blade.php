@@ -12,6 +12,7 @@
         var button = $(event.relatedTarget) 
         var students = button.data('students')
         $("#student-table tbody tr").remove();
+        students.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)); 
         students.forEach( student => {
           $('#student-table tbody').append(`<tr>
             <td>${student.id}</td>

@@ -1,7 +1,7 @@
 @extends('manage.layout')
 
 @section('title')
-  @if(isset($activity))
+  @if(isset($teacher))
     แก้ไขข้อมูลอาจารย์
   @else
     เพิ่มข้อมูลอาจารย์

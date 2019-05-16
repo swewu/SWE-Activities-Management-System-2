@@ -149,7 +149,8 @@ class ManageActivityController extends BaseController {
 			'isPastDayEnd'=>$isPastDayEnd,
       'teachers'=>$teachers,
       'students'=>$students,
-      'nowTeachers'=>$nowTeachers
+      'nowTeachers'=>$nowTeachers,
+      'activityDetail'=>$activityDetail
       
 		];
 		return View::make('manage.activity_term_add',$data);

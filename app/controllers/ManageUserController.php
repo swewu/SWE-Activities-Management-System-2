@@ -129,15 +129,15 @@ class ManageUserController extends BaseController {
 	
 	public function showUserTeacher()
 	{
+		$q = '';
+		$teachers = Teacher::orderBy('prefix_level','DESC')->orderBy('firstname')->orderBy('lastname');
+
 		if(Input::get('q') != NULL && Input::get('q') != ""){
 			$q = Input::get('q');
-			$teachers = Teacher::Where('firstname','like','%'.$q.'%')
+			$teachers = $teachers->Where('firstname','like','%'.$q.'%')
 			->orWhere('lastname','like','%'.$q.'%');
 		}
-		else {
-			$q = '';
-			$teachers = new Teacher;
-		}
+
 		$teachers = $teachers->paginate($this->perpage);
 		$teachers->appends(['q'=>$q]);
 		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q,'perpage'=>$this->perpage]);
@@ -342,6 +342,7 @@ class ManageUserController extends BaseController {
 		$teacher->role_id = Input::get("role");
 		$teacher->position_id = Input::get("position");
 		$teacher->prefix = Input::get("prefix");
+		$teacher->prefix_level = Teacher::prefixToLevel(Input::get("prefix"));
 		$teacher->firstname = Input::get("firstname");
 		$teacher->lastname = Input::get("lastname");
 		$teacher->tel = Input::get("tel");

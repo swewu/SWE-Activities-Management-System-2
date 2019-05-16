@@ -203,16 +203,16 @@
       }
       $(function(){
         var delete_href = null
-        $('.delete-confirm').click((e)=>{
-          event.preventDefault()
-          delete_href = e.target.href
+        $('.delete-confirm').click(function(e){
+          e.preventDefault()
+          delete_href = this.href
+          console.log(delete_href)
           if(delete_href){
             $('#deleteModal').modal('show')
-            console.log('delete_href',delete_href)
           }
         })
-        $('#deleteModal .confirm').click((e)=>{
-          event.preventDefault()
+        $('#deleteModal .confirm').click(function(e){
+          e.preventDefault()
           window.location = delete_href
         })
         $('[data-toggle="tooltip"]').tooltip()

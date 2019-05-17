@@ -54,20 +54,22 @@
       <table class="table mb-0 ">
         <thead class="bg-light">
           <tr>
+            <th class="text-center">ลำดับที่</th>
             <th class="text-center">รหัสนักศึกษา</th>
             <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
-       
+            <th class="text-center">ชั้นปี</th>
             <th class="text-center">ข้อมูลโปรไฟล์</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($students as $student)
+          @foreach ($students as $i => $student)
             <tr>
+              <td class="text-center">{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
               <td class="text-center">{{ $student->id }}</td>
               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
-         
+              <td class="text-center">{{ $student->getNowYear() }}</td>
               <td class="text-center">  	             
-                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">โปรไฟล์</a>
+                <a class="btn btn-info btn-sm" href="{{url('profile')}}?id={{$student->id}}">โปรไฟล์</a>
               </td>
             </tr>
           @endforeach

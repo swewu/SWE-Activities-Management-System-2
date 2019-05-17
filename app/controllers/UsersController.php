@@ -1,6 +1,10 @@
 <?php
 
 class UsersController extends BaseController {
+	public function __construct()
+	{
+		$this->perpage = 10;
+	}
 
 
 	public function showUserStudentprofile()
@@ -20,14 +24,15 @@ class UsersController extends BaseController {
 			$q = Input::get('q');
 			$students = $students->where(function ($query) use ($q)
 			{
-				$query
+				$query->orWhere('id','like','%'.$q.'%')
 				->orWhere('firstname','like','%'.$q.'%')
 				->orWhere('lastname','like','%'.$q.'%');
 			});
+			
 		}
 
-
-		$students = $students->join('users', 'users.username', '=', 'students.id')->select('students.*')->paginate(10);
+       
+		$students = $students->join('users', 'users.username', '=', 'students.id')->select('students.*')->paginate($this->perpage);
 
 		if($isQ){
 			$students->appends(['q'=>$q]);
@@ -40,7 +45,7 @@ class UsersController extends BaseController {
 			// return  View::make('studentprofile-find');
 		}
 
-		return View::make('studentprofile',['students'=>$students,'q'=>$q,'year'=>$year]);
+		return View::make('studentprofile',['students'=>$students,'q'=>$q,'year'=>$year,'perpage'=>$this->perpage]);
 	}
 
 	public function showUsersTeacher()

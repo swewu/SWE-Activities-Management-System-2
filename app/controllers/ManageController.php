@@ -33,7 +33,7 @@ class ManageController extends BaseController {
 		    if (Hash::check($request['newpasswords'],$tel)) {
 			Auth::user()->password = Hash::make($request['tel']);
 			Auth::user()->save();
-			return Redirect::to('/resetpassword')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');
+			return Redirect::to('/profile')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');
 		    } else {
 			return Redirect::back()->withErrors(['newpasswords'=>'รหัสผ่านใหม่ไม่ตรงกัน']);
 		    }

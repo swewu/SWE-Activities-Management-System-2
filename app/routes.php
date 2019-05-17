@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -34,11 +33,13 @@ Route::get('/logout', 'AuthController@logout');
 
 //student
 
+Route::get('/manage', function(){
+    return Redirect::to('/');
+  });
 //teacher
 Route::group(array('before' => array('auth', 'teacher')) , function () {
-  Route::get('/manage', function(){
-    return View::make('manage.index');
-  });
+
+  
   Route::get('/manage/activity', 'ManageActivityController@showActivity');
 	Route::get('/manage/activity/add', 'ManageActivityController@showActivityAdd');
 	Route::post('/manage/activity/add', 'ManageActivityController@actionActivityAdd');
@@ -67,10 +68,10 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
 
 	Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
 
-	Route::get('/manage/activity/detail/{activity_detail_id}/decription', 'ManageActivityController@showActivityDecription');
+	
 	Route::get('/manage/activity/conclude', 'ManageActivityController@showActivityConclude');
 });
-
+Route::get('/manage/activity/detail/{activity_detail_id}/decription', 'ManageActivityController@showActivityDecription');
 
 
 //admin
@@ -108,7 +109,7 @@ Route::get('/student_upload', 'StudentUploadController@studentUpload');
 Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 
 
-// // Saharat Rakdam
+// Saharat Rakdam
 
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
@@ -119,16 +120,12 @@ Route::get('/profile/edit', 'UserController@getProfileUpdate');
 Route::post('/profile/edit', 'UserController@postProfileUpdate');
 Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
 Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
-
+// Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
 Route::get('/teacher', 'UsersController@showUsersTeacher');
 Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
 
 Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
 Route::post('/resetpassword', 'ManageController@postUserTeacherAdd');
-
-
-
-// Route::get('manage/activity/check/status-student/{userid}/{acid}','UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');
 // });
@@ -147,6 +144,5 @@ Route::post('/resetpassword', 'ManageController@postUserTeacherAdd');
 // 	});
 
 // });
-
 
 

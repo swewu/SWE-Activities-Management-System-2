@@ -69,7 +69,7 @@
 
             <br>
             
-            <button type="submit" class="btn btn-primary">บันทึก</button>
+            <button type="submit" class="btn btn-outline-success ml-auto float-right">บันทึก</button>
             <h6></h6>
 
             <label for="name"></label>

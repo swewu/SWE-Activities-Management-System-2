@@ -15,6 +15,7 @@ class UserController extends Controller {
       return Redirect::to('/login')->with('status', false)->with('message', 'ไม่พบข้อมูลผู้ใช้งานระบบ')->withInput();
     }
 
+
     if (!Hash::check(Input::get('password'), $students->password)) {
       return Redirect::to('/login')->with('status', false)->with('message', 'รหัสผ่านผู้ใช้งานระบบไม่ถูกต้อง')->withInput();
     }
@@ -25,87 +26,108 @@ class UserController extends Controller {
   }
 
   public function getProfile () {
-    try {
-      if(!empty(Request::get('id')))
-      {
-          $userID = Request::get('id');
-          $user = User::where("username", Request::get('id'))->first();
-      } else {
-          $userID = Auth::user()->id;
-          $user = Auth::user();
-      }
-      if ( Teacher::where('user_id', $user->id)->first() != null) {
-          $user->type = 'teacher';
-          $user->teacher = Teacher::where('user_id', $user->id)->first();
-      } else {
-          $user->type = 'student';
-          $user->student = Student::where('user_id', $user->id)->first();
-      }
-    } catch (\Exception $e) {
-        return Redirect::to('login');
-    }
-    
+    if(!empty(Request::get('userID')))
+    {
+        $userID = Request::get('userID');
+        $user = User::find(Request::get('userID'));
+    } else {
+        $userID = Auth::user()->id;
+        $user = Auth::user();
 
+    }
+    $activityID = [];
+    $activityYear = [];
+    $historyID = [];
+    $historyYear = [];
+    foreach ($user->participations as $key => $value) {
+      // dd($value->rankChecks()->where('status', 1)->first()->activity_details_id);
+
+      $activityID[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->activity_id;
+      $activityYear[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->term_year;
+
+      $historyID[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->activity_id;
+      $historyYear[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->term_year;
+    };
+
+    $activityYearSet = [];
+    foreach(@array_count_values($activityYear) as $k => $c) {
+      $activityYearSet[] = ['label' => $k, 'y' => $c];
+    }
+    $historyYearSet = [];
+    foreach(@array_count_values($historyYear) as $k => $c) {
+      $historyYearSet[] = ['label' => $k, 'y' => $c];
+    }
+    $activityID = array_unique($activityID);
+    $historyID = array_unique($historyID);
+
+    if ( Teacher::where('user_id', $user->id)->first() != null) {
+        $user->type = 'teacher';
+        $user->teacher = Teacher::where('user_id', $user->id)->first();
+    } else {
+        $user->type = 'student';
+        $user->student = Student::where('user_id', $user->id)->first();
+    }
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    $activity = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
+    $activity = Activity::whereIn('id', $activityID)->take(3);
+    $history = Activity::whereIn('id', $historyID)->take(3)->get();
 
-    if(!empty(Request::get('term_year'))) {
-        $term_year = Request::get('term_year');
-        $activity = $activity->where('students', 'LIKE', "%{$term_year}%");
+    if(!empty(Request::get('year'))) {
+        $year = Request::get('year');
+        $activity = $activity->where('student', 'LIKE', "%{$year}%");
     }
 
-    $grapYearActivityReg = \DB::table('rank_checks')->select('activity_details_id')->where('id', $user->id)->get();
 
-    $setIdReg = [];
-    foreach ($grapYearActivityReg as $key => $value) {
-        $setIdReg[] = $value->activity_id;
-    }
+    // $grapYearActivityReg = \DB::table('checking')->select('activityID')->where('UserID', $userID)->get();
+    // $setIdReg = [];
+    // foreach ($grapYearActivityReg as $key => $value) {
+    //     $setIdReg[] = $value->activityID;
+    // }
+    // $grapYearActivityReg = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->whereIn('id', $setIdReg)->get()->toArray();
+    // $grapYearActivityRec = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->get()->toArray();
 
-    $grapYearActivityReg = ActivityDetail::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
-    $grapYearActivityRec = ActivityDetail::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->get()->toArray();
 
+    // $setActivityRec = [];
+    // foreach ($grapYearActivityRec as $key => $value) {
+    //     $setActivityRec[] = ['label'=> $value['sector'], 'y'=>$value['count']];
 
-    $setActivityRec = [];
-    foreach ($grapYearActivityRec as $key => $value) {
-        $setActivityRec[] = ['label'=> $value['term_sector'].'/'. $value['term_year'], 'y'=>$value['count']];
+    // }
+    // $setActivityReg = [];
+    // foreach ($grapYearActivityReg as $key => $value) {
+    //     $setActivityReg[] = ['label'=> $value['sector'], 'y'=>$value['count']];
 
-    }
-    $setActivityReg = [];
-    foreach ($grapYearActivityReg as $key => $value) {
-        $setActivityReg[] = ['label'=> $value['term_sector'].'/'. $value['term_year'], 'y'=>$value['count']];
+    // }
 
-    }
-
-    $history = ActivityDetail::whereIn('id', $setIdReg);
+    // $history = Activity::whereIn('id', $setIdReg);
 
     // if(!empty(Request::get('year'))) {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
-    if (@$_GET['type'] === "2") {
-        $history = $history->where('name', 'LIKE', "%{$_GET['activity']}%");
-    } elseif (@$_GET['type'] == '1') {
-        $activity = $activity->where('name', 'LIKE', "%{$_GET['activity']}%");
-    }
-    $history = $history->orderBy("day_end",'asc')->get();
-    $activity = $activity->orderBy("day_end",'asc')->get();
+    // $history = $history->get();
+    $activity = $activity->get();
 
 
     if (empty(Request::get('userID'))) {
-        if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
-            $activities = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
+        if (Auth::user()->teacher !=  null) {
+            $activities = Activity::get();
             return View::make('welcome-teacher', ['activities' => $activities]);
         }
     }
 
-    return View::make('profile', array('users'=>$user,'activity'=>$activity, 'setActivityRec'=>$setActivityRec, 'setActivityReg'=>$setActivityReg, 'history'=>$history));
+    return View::make('profile', array(
+      'user'=>$user,
+      'activity'=>$activity, 
+      'activityYearSet'=>$activityYearSet, 
+      'historyYearSet'=>$historyYearSet, 
+      'history'=>$history
+    ));
 
 }
 
 public function checkStudentActivity($uid, $aid)
 {
-    $a = \DB::table('rank_checks')->where('id', $uid)->where('activity_details_id', $aid)->update(array('status'=> 0));
+    $a = \DB::table('checking')->where('userID', $uid)->where('activityID', $aid)->update(array('status'=> 2));
     return Redirect::back();
 }
   public function getProfileUpdate() {
@@ -119,6 +141,7 @@ public function checkStudentActivity($uid, $aid)
     } else {
         $userID = Auth::user()->id;
         $user = Auth::user();
+
     }
 
     if (Teacher::where('user_id', $user->id)->first() != null) {
@@ -132,8 +155,6 @@ public function checkStudentActivity($uid, $aid)
 
     return View::make('profile-form', array('user' => $user));
   }
-  
-
 
 
   public function postProfileUpdate() {
@@ -144,26 +165,21 @@ public function checkStudentActivity($uid, $aid)
     $validator = Validator::make(
       Input::all(),
       array(
-        'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
-        'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+        'firstname' => 'required|min:3',
+        'lastname' => 'required|min:3',
         'email' => 'required|email|min:5',
-        'tel' => 'required|digits:10',
-        'image' =>  'mimes:jpeg,jpg,png|max:3072',
+        'tel' => 'required',
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
-        'email' => 'กรุณากรอข้อมูลให้ครบถ้วน',
-        'digits' => 'กรุณากรอกเบอร์โทร 10 ตัว'
       ),
       array(
-        'firstname' => 'ให้ครบถ้วน',
-        'lastname' => 'ให้ครบถ้วน',
-        'email' => 'ให้ครบถ้วน',
-        'code' => 'ให้ครบถ้วน',
-        'tel' => 'ให้ครบถ้วน',
-        'image' => 'ให้ครบถ้วน',
+        'firstname' => 'ชื่อ',
+        'lastname' => 'นามสกุล',
+        'email' => 'Email',
+        'code' => 'รหัสนักศึกษา',
+        'tel' => 'เบอร์ติดต่อ',
       )
-
     );
 
     if ($validator->fails())
@@ -173,7 +189,7 @@ public function checkStudentActivity($uid, $aid)
 
     if ( Teacher::where('user_id', Auth::user()->id)->first() != null) {
         $user = Teacher::where('user_id', Auth::user()->id)->first();
-        $user->room = Input::get('room');
+        $user->room = Input::get('room_num');
     } else {
         $user = Student::where('user_id', Auth::user()->id)->first();
     }

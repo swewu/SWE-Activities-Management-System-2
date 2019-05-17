@@ -277,7 +277,7 @@
                             </div>
                         </div>
             <div class="form-group ">
-                <button type="submit" class="btn btn-primary btn-block login-button">บันทึก</button>
+                <button type="submit" class="btn btn-outline-success ml-auto float-right">บันทึก</button>
             </div>
         </div>
     </div>

@@ -380,7 +380,7 @@ class ManageActivityController extends BaseController {
 
 	public function showActivitySummary()
 	{
-    $q = '';
+    $q = Input::get('q');
     $term_year = '';
     $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
 
@@ -414,7 +414,7 @@ class ManageActivityController extends BaseController {
 	public function showActivityConclude()
 	{
     $all = Input::get('all');
-    $q = '';
+    $q = Input::get('q');
     if($all == 'true'){
       $activityDetails = ActivityDetail::responsibilitySearch($q);      
     } else {

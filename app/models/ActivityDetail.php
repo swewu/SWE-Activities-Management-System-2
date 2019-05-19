@@ -30,7 +30,7 @@ class ActivityDetail extends Eloquent {
   {
     $activities = new Activity;
     if($q != NULL && $q != ""){
-      $activities = $activities->where('name',$q);
+      $activities = $activities->where('name','like','%'.$q.'%');
     }
     $activity_list = $activities->lists('id');
 

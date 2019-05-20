@@ -160,158 +160,136 @@ $dataPoints2 = array(
               </form>
               @if(@$_GET['type'] == 1)
               <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
-                    <div class="mb-3 mx-auto">
-                       <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
-                    </div>
-                 </div>
+                  <div class="text-center">
+                      <div class="mb-3 mx-auto">
+                          <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                      </div>
+                  </div>
               </div>
-           </div>
-           @if(empty($activity->count()))
-           ไม่พบข้อมูล
-           @endif
-           @foreach ($activity as $key => $value)
-           <div class="col-md-4">
-              <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                 <div class="">
-                    {{ $value->name }}
-                    <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                 </div>
-                 <div class="text-right">
-                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                 </div>
-              </div>
-           </div>
-           @endforeach   
-           <div class="col-md-12">
-                       {{ $activity->appends($_GET)->links() }}
-                   </div>                                    
-           @elseif(@$_GET['type'] == 2)
-           <div class="col-md-12">
-              <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
-                    <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
-                 </div>
-              </div>
-           </div>
-           @if(empty($history->count()))
-           ไม่พบข้อมูล
-           @endif
-           @foreach ($history as $key => $value)
-           <div class="col-md-4">
-              <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                 <div class="">
-                    {{ $value->name }}
-                    <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                 </div>
-                 <div class="text-right">
-                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                 </div>
-              </div>
-            </div>  
-                        @endforeach  
-                        <div class="col-md-12">
-                                {{ $history->appends($_GET)->links() }}
-                         </div>              
-           @else
-           <div class="row">
-              <!-- /.col-lg-4 -->
-              <div class="col-md-12">
-                 <div class="card card-small mb-4 pt-3">
-                    <div class="text-center">
-                       <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
-                    </div>
-                </div>
-            </div>
-        @if(empty($history->count()))
-            ไม่พบข้อมูล
-        @endif
-        @foreach ($history as $key => $value)
-            <div class="col-md-4">
-                <div class="img-activity">
-                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                        <div class="">
-                            {{ $value->name }}
-                            <br>
-                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                        </div>
-                        <div class="text-right">
-                            <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                        </div>
-                </div>
-            </div>  
-
-            @endforeach  
-            <div class="col-md-12">
-                    {{ $history->appends($_GET)->links() }}
-             </div>  
-            @else
-            
-                <div class="row">
-                    <!-- /.col-lg-4 -->
-                    <div class="col-md-12">
-                        <div class="card card-small mb-4 pt-3">
-                            <div class="text-center">
-                                <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                    </div>
-                 </div>
-              </div>
-              @endforeach
-              <div class="col-md-12">
-                {{ $activity->appends($_GET)->links() }}
-            </div>
-              <div class="col-md-12">
-                 <div class="card card-small mb-4 pt-3">
-                    <div class="text-center">
-                       <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
-                    </div>
-                 </div>
-              </div>
-              @if(empty($history->count()))
+              </div>  
+          @if(empty($activity->count()))
               ไม่พบข้อมูล
+          @endif
+          @foreach ($activity as $key => $value)
+              <div class="col-md-4">
+                  <div class="img-activity">
+                      <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                          <div class="">
+                              {{ $value->name }}
+                              <br>
+                              <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                          </div>
+                  <div class="text-right">
+                      <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                  </div>
+              </div>
+              </div>
+          @endforeach                                  
+           
+          <div class="col-md-12">
+                      {{ $activity->appends($_GET)->links() }}
+                  </div>                               
+          @elseif(@$_GET['type'] == 2)
+              <div class="col-md-12">
+                  <div class="card card-small mb-4 pt-3">
+                      <div class="text-center">
+                          <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
+                      </div>
+                  </div>
+              </div>
+          @if(empty($history->count()))
+              ไม่พบข้อมูล
+          @endif
+          @foreach ($history as $key => $value)
+              <div class="col-md-4">
+                  <div class="img-activity">
+                      <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                          <div class="">
+                              {{ $value->name }}
+                              <br>
+                              <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                          </div>
+                          <div class="text-right">
+                              <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                          </div>
+                  </div>
+                           
+              </div>  
+  
+              @endforeach  
+              <div class="col-md-12">
+                      {{ $history->appends($_GET)->links() }}
+               </div>  
+              @else
+  
+                  <div class="row">
+                      <!-- /.col-lg-4 -->
+                      <div class="col-md-12">
+                          <div class="card card-small mb-4 pt-3">
+                              <div class="text-center">
+                                  <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                              </div>
+                          </div>
+                      </div>
+                 
+              @if(empty($activity->count()))
+                  ไม่พบข้อมูล
+              @endif
+              @foreach ($activity as $key => $value)
+                  <div class="col-md-4">
+                      <div class="img-activity">
+                          <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                              <div class="">
+                                  {{ $value->name }}
+                                  <br>
+                                  <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                              </div>
+                              <div class="text-right">
+                                  <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                              </div>
+                      </div>
+                  </div>
+              @endforeach
+  
+                  <div class="col-md-12">
+                      {{ $activity->appends($_GET)->links() }}
+                  </div>
+              <div class="col-md-12">
+                  <div class="card card-small mb-4 pt-3">
+                      <div class="text-center">
+                              <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
+                          </div>
+                      </div>
+                  </div>
+              @if(empty($history->count()))
+                  ไม่พบข้อมูล
               @endif
               @foreach ($history as $key => $value)
-              <div class="col-md-4">
-                 <div class="img-activity">
-                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                    <div class="">
-                       {{ $value->name }}
-                       <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                    </div>
-                    <div class="text-right">
-                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                    </div>
-                 </div>
-              </div>
+                  <div class="col-md-4">
+                      <div class="img-activity">
+                          <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                              <div class="">
+                                  {{ $value->name }}
+                                  <br>
+                                  <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                              </div>
+                          <div class="text-right">
+                              <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                          </div>
+                      </div>
+                  </div>
               @endforeach
               <div class="col-md-12">
-                {{ $history->appends($_GET)->links() }}
-            </div>
-           </div>
-           @endif
-           @else
-           @endif
+                  {{ $history->appends($_GET)->links() }}
+              </div>
+  
+              </div>
+  
+          @endif
+          @else
+          @endif
            <div class="col-md-8 text-right" style="padding-top:35px">
-              <nav aria-label="Page navigation example">
-                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&userID={{Request::get('userID')}}">1</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&userID={{Request::get('userID')}}">2</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&userID={{Request::get('userID')}}">3</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&userID={{Request::get('userID')}}">4</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=5&s={{Request::get('s')}}&userID={{Request::get('userID')}}"></a></li>
-                    <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&userID={{Request::get('userID')}}">ทั้งหมด</a></li>
-                 </ul>
-              </nav>
+              
            </div>
            <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
            {{--  <script src="scripts/app/app-blog-overview.1.1.0.js"></script>  --}}

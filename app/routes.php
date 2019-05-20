@@ -114,8 +114,10 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
 // Route::post('/login', 'UserController@postLogin');
-
+Route::get('/manage/layout', 'UserController@getProfile');
 Route::get('/profile', 'UserController@getProfile');
+Route::get('/getActivityByTermYear', 'GraphController@getActivityByTermYear'); // return json
+Route::get('/getActivityDetail', 'GraphController@getActivityDetail');
 Route::get('/profile/edit', 'UserController@getProfileUpdate');
 Route::post('/profile/edit', 'UserController@postProfileUpdate');
 Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');

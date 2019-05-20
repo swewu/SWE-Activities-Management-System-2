@@ -96,6 +96,26 @@ class ManageController extends BaseController {
 
 	public function showUserTeacherAdd()
 	{
+		if (!Auth::check()) {
+			return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
+		  }
+		  if(!empty(Request::get('userID')))
+		  {
+			  $userID = Request::get('userID');
+			  $user = User::find(Request::get('userID'));
+		  } else {
+			  $userID = Auth::user()->id;
+			  $user = Auth::user();
+	  
+		  }
+	  
+		  if (Teacher::where('user_id', $user->id)->first() != null) {
+			  $user->type = 'teacher';
+			  $user->teacher = Teacher::where('user_id', $user->id)->first();
+		  } else {
+			  $user->type = 'student';
+			  $user->student = Student::where('user_id', $user->id)->first();
+		  }
 		$tool = new Tool;
 
 		$roles = Role::get();

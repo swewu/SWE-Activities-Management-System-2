@@ -26,14 +26,24 @@ class UserController extends Controller {
   }
 
   public function getProfile () {
-    if(!empty(Request::get('userID')))
-    {
-        $userID = Request::get('userID');
-        $user = User::find(Request::get('userID'));
-    } else {
-        $userID = Auth::user()->id;
-        $user = Auth::user();
-
+    try {
+      if(!empty(Request::get('id')))
+      {
+          $userID = Request::get('id');
+          $user = User::where("username", Request::get('id'))->first();
+      } else {
+          $userID = Auth::user()->id;
+          $user = Auth::user();
+      }
+      if ( Teacher::where('user_id', $user->id)->first() != null) {
+          $user->type = 'teacher';
+          $user->teacher = Teacher::where('user_id', $user->id)->first();
+      } else {
+          $user->type = 'student';
+          $user->student = Student::where('user_id', $user->id)->first();
+      }
+    } catch (\Exception $e) {
+        return Redirect::to('login');
     }
     $activityID = [];
     $activityYear = [];
@@ -44,7 +54,7 @@ class UserController extends Controller {
 
       $activityID[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->activity_id;
       $activityYear[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->term_year;
-
+      
       $historyID[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->activity_id;
       $historyYear[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->term_year;
     };
@@ -70,8 +80,8 @@ class UserController extends Controller {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    $activity = Activity::whereIn('id', $activityID)->take(3);
-    $history = Activity::whereIn('id', $historyID)->take(3)->get();
+    $activity = Activity::whereIn('id', $activityID);
+    $history = Activity::whereIn('id', $historyID);
 
     if(!empty(Request::get('year'))) {
         $year = Request::get('year');
@@ -105,22 +115,39 @@ class UserController extends Controller {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
     // $history = $history->get();
-    $activity = $activity->get();
+    //$activity = $activity->get();
 
+
+    /// graph
+    $lastYear = Term::getLastYear();
+    $username = Auth::user()->username;
+    $startYear = (int)("25".substr($username,0,2));
+    // $endYear = $lastYear - $startYear + 1;
 
     if (empty(Request::get('userID'))) {
-        if (Auth::user()->teacher !=  null) {
-            $activities = Activity::get();
-            return View::make('welcome-teacher', ['activities' => $activities]);
-        }
-    }
+      if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
+          return View::make('welcome-teacher');
+      }
+  }
+  if(Request::get('type') == 1) {
+    $history = [];
+    $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+  } elseif(Request::get('type') == 2) {
+    $activity = [];
+    $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+  } else {
+    $history = $history->paginate(3);
+    $activity = $activity->paginate(3);
+  }
 
     return View::make('profile', array(
       'user'=>$user,
       'activity'=>$activity, 
       'activityYearSet'=>$activityYearSet, 
       'historyYearSet'=>$historyYearSet, 
-      'history'=>$history
+      'history'=>$history,
+      'startYear'=>$startYear
+      // 'endYear'=>$endYear
     ));
 
 }
@@ -165,20 +192,24 @@ public function checkStudentActivity($uid, $aid)
     $validator = Validator::make(
       Input::all(),
       array(
-        'firstname' => 'required|min:3',
-        'lastname' => 'required|min:3',
+        'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+        'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
         'email' => 'required|email|min:5',
-        'tel' => 'required',
+        'tel' => 'required|digits:10',
+        'image' =>  'mimes:jpeg,jpg,png|max:3072'
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
+        'email' => 'กรุณากรอข้อมูลให้ครบถ้วน',
+        'digits' => 'กรุณากรอกเบอร์โทร 10 ตัว'
       ),
       array(
-        'firstname' => 'ชื่อ',
-        'lastname' => 'นามสกุล',
-        'email' => 'Email',
-        'code' => 'รหัสนักศึกษา',
-        'tel' => 'เบอร์ติดต่อ',
+        'firstname' => 'ให้ครบถ้วน',
+        'lastname' => 'ให้ครบถ้วน',
+        'email' => 'ให้ครบถ้วน',
+        'code' => 'ให้ครบถ้วน',
+        'tel' => 'ให้ครบถ้วน',
+        'image' => 'ให้ครบถ้วน'
       )
     );
 
@@ -189,7 +220,7 @@ public function checkStudentActivity($uid, $aid)
 
     if ( Teacher::where('user_id', Auth::user()->id)->first() != null) {
         $user = Teacher::where('user_id', Auth::user()->id)->first();
-        $user->room = Input::get('room_num');
+        $user->room = Input::get('room');
     } else {
         $user = Student::where('user_id', Auth::user()->id)->first();
     }
@@ -220,7 +251,7 @@ public function checkStudentActivity($uid, $aid)
     $user->save();
 
 
-    return Redirect::to('/profile')->with('status', true)->with('message', 'บันทึกข้อมูลโปรไฟล์เรียบร้อย')->withInput();
+    return Redirect::to('/profile')->with('status', true)->with('message', 'แก้ไขข้อมูลส่วนตัวสำเร็จ')->withInput();
 
   }
 

@@ -16,6 +16,7 @@
         height: 196px;
         object-fit: contain;
     }
+<<<<<<< HEAD
     
     .pagination {
         display: inline-block;
@@ -26,6 +27,19 @@
         padding: 8px 16px;
         text-decoration: none;
       }
+=======
+
+    .pagination {
+      display: inline-block;
+    }
+
+    .pagination li {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
 </style>
 
 <?php
@@ -137,6 +151,7 @@ $dataPoints2 = array(
           
               </div>
             </div>
+<<<<<<< HEAD
           </div>
         <!-- /.row -->
         @if($user->type == 'student')
@@ -222,9 +237,20 @@ $dataPoints2 = array(
               <!-- /.col-lg-4 -->
               <div class="col-md-12">
                  <div class="card card-small mb-4 pt-3">
+=======
+            </div>
+        @endforeach   
+        <div class="col-md-12">
+                    {{ $activity->appends($_GET)->links() }}
+                </div>                               
+        @elseif(@$_GET['type'] == 2)
+            <div class="col-md-12">
+                <div class="card card-small mb-4 pt-3">
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
                     <div class="text-center">
                        <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
                     </div>
+<<<<<<< HEAD
                  </div>
               </div>
               @if(empty($activity->count()))
@@ -238,10 +264,47 @@ $dataPoints2 = array(
                        {{ $value->name }}
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+=======
+                </div>
+            </div>
+        @if(empty($history->count()))
+            ไม่พบข้อมูล
+        @endif
+        @foreach ($history as $key => $value)
+            <div class="col-md-4">
+                <div class="img-activity">
+                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                        <div class="">
+                            {{ $value->name }}
+                            <br>
+                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                        </div>
+                        <div class="text-right">
+                            <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                        </div>
+                </div>
+            </div>  
+
+            @endforeach  
+            <div class="col-md-12">
+                    {{ $history->appends($_GET)->links() }}
+             </div>  
+            @else
+            
+                <div class="row">
+                    <!-- /.col-lg-4 -->
+                    <div class="col-md-12">
+                        <div class="card card-small mb-4 pt-3">
+                            <div class="text-center">
+                                <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                            </div>
+                        </div>
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
                     </div>
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
+<<<<<<< HEAD
                  </div>
               </div>
               @endforeach
@@ -250,6 +313,16 @@ $dataPoints2 = array(
             </div>
               <div class="col-md-12">
                  <div class="card card-small mb-4 pt-3">
+=======
+                </div>
+            @endforeach
+
+                <div class="col-md-12">
+                    {{ $activity->appends($_GET)->links() }}
+                </div>
+            <div class="col-md-12">
+                <div class="card card-small mb-4 pt-3">
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
                     <div class="text-center">
                        <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
                     </div>
@@ -267,6 +340,7 @@ $dataPoints2 = array(
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
+<<<<<<< HEAD
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
@@ -275,6 +349,14 @@ $dataPoints2 = array(
               @endforeach
               <div class="col-md-12">
                 {{ $history->appends($_GET)->links() }}
+=======
+                </div>
+            @endforeach
+            <div class="col-md-12">
+                {{ $history->appends($_GET)->links() }}
+            </div>
+           
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
             </div>
            </div>
            @endif

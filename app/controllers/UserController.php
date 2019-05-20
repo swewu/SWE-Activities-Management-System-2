@@ -80,8 +80,16 @@ class UserController extends Controller {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
+<<<<<<< HEAD
     $activity = Activity::whereIn('id', $activityID);
     $history = Activity::whereIn('id', $historyID);
+=======
+
+
+    $activity = Activity::whereIn('id', $activityID);
+    $history = Activity::whereIn('id', $historyID);
+
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
 
     if(!empty(Request::get('year'))) {
         $year = Request::get('year');
@@ -115,8 +123,11 @@ class UserController extends Controller {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
     // $history = $history->get();
+<<<<<<< HEAD
     //$activity = $activity->get();
 
+=======
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
 
     /// graph
     $lastYear = Term::getLastYear();
@@ -125,6 +136,7 @@ class UserController extends Controller {
     // $endYear = $lastYear - $startYear + 1;
 
     if (empty(Request::get('userID'))) {
+<<<<<<< HEAD
       if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
           return View::make('welcome-teacher');
       }
@@ -139,6 +151,23 @@ class UserController extends Controller {
     $history = $history->paginate(3);
     $activity = $activity->paginate(3);
   }
+=======
+        if (Auth::user()->teacher !=  null) {
+            $activities = Activity::get();
+            return View::make('welcome-teacher', ['activities' => $activities]);
+        }
+    }
+    if(Request::get('type') == 1) {
+      $history = [];
+      $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } elseif(Request::get('type') == 2) {
+      $activity = [];
+      $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } else {
+      $history = $history->paginate(3);
+      $activity = $activity->paginate(3);
+    }
+>>>>>>> e53bbeb41f4f31ebf2cc04570888d65e4226c53c
 
     return View::make('profile', array(
       'user'=>$user,

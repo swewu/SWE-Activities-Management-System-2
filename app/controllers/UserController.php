@@ -70,8 +70,11 @@ class UserController extends Controller {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    $activity = Activity::whereIn('id', $activityID)->take(3);
-    $history = Activity::whereIn('id', $historyID)->take(3)->get();
+
+
+    $activity = Activity::whereIn('id', $activityID);
+    $history = Activity::whereIn('id', $historyID);
+
 
     if(!empty(Request::get('year'))) {
         $year = Request::get('year');
@@ -105,7 +108,6 @@ class UserController extends Controller {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
     // $history = $history->get();
-    $activity = $activity->get();
 
 
     if (empty(Request::get('userID'))) {
@@ -113,6 +115,16 @@ class UserController extends Controller {
             $activities = Activity::get();
             return View::make('welcome-teacher', ['activities' => $activities]);
         }
+    }
+    if(Request::get('type') == 1) {
+      $history = [];
+      $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } elseif(Request::get('type') == 2) {
+      $activity = [];
+      $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } else {
+      $history = $history->paginate(3);
+      $activity = $activity->paginate(3);
     }
 
     return View::make('profile', array(

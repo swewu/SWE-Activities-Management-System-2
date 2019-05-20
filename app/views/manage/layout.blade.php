@@ -113,7 +113,7 @@
               <ul class="navbar-nav border-left flex-row ">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="{{asset('assets/shards-dashboard/images/avatars/0.jpg')}}" alt="User Avatar">
+                    <img class="user-avatar rounded-circle mr-2" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{Auth::user()->getAvatar()}}" alt="User Avatar">
                     <span class="d-none d-md-inline-block">{{$login_name}}</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">

@@ -16,6 +16,17 @@
         height: 196px;
         object-fit: contain;
     }
+
+    .pagination {
+      display: inline-block;
+    }
+
+    .pagination li {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
 </style>
 
 <?php
@@ -189,7 +200,10 @@ $dataPoints2 = array(
                 </div>
             </div>
             </div>
-        @endforeach                                  
+        @endforeach   
+        <div class="col-md-12">
+                    {{ $activity->appends($_GET)->links() }}
+                </div>                               
         @elseif(@$_GET['type'] == 2)
             <div class="col-md-12">
                 <div class="card card-small mb-4 pt-3">
@@ -214,8 +228,12 @@ $dataPoints2 = array(
                             <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
                         </div>
                 </div>
-            </div>   
-            @endforeach               
+            </div>  
+
+            @endforeach  
+            <div class="col-md-12">
+                    {{ $history->appends($_GET)->links() }}
+             </div>  
             @else
             
                 <div class="row">
@@ -246,6 +264,10 @@ $dataPoints2 = array(
                     </div>
                 </div>
             @endforeach
+
+                <div class="col-md-12">
+                    {{ $activity->appends($_GET)->links() }}
+                </div>
             <div class="col-md-12">
                 <div class="card card-small mb-4 pt-3">
                     <div class="text-center">
@@ -271,6 +293,9 @@ $dataPoints2 = array(
                     </div>
                 </div>
             @endforeach
+            <div class="col-md-12">
+                {{ $history->appends($_GET)->links() }}
+            </div>
            
             </div>
         

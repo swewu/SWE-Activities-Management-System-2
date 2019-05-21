@@ -1814,7 +1814,7 @@ CREATE TABLE `teachers` (
 INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `prefix_level`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
 (8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	100,	'ฐิมาพร',	'เพชรแก้ว',	NULL,	'2275456461',	'pthimapo2@wu.ac.th',	'c3',	'2019-01-27 22:34:34',	0,	'2019-05-19 17:59:00',	0,	NULL),
 (9,	56,	3,	3,	'อาจารย์ ดร.',	60,	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'0899999999',	'kanchan.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:36:34',	0,	'2019-05-17 01:25:08',	0,	NULL),
-(10,	57,	1,	1,	'นาย',	0,	'ประทีป',	'คงกล้า',	NULL,	'',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-03-07 15:04:14',	0,	NULL),
+(10,	57,	1,	1,	'นาย',	0,	'ประทีป',	'คงกล้า',	'avatar/57/20190521143413icon_198x278.png',	'0908243820',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-05-21 14:34:13',	0,	NULL),
 (11,	58,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'อุหมาด',	'หมัดอาด้ำ',	NULL,	'0899909099',	'muhamard@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:41:14',	0,	'2019-05-17 01:28:50',	0,	NULL),
 (12,	59,	2,	2,	'อาจารย์ ดร.',	60,	'พุทธิพร',	'ธนธรรมเมธี',	'avatar/59/20190519210207screencapture-localhost-SWE-Activities-Management-System-2-manage-user-student-suspended-2019-05-18-19_02_22.png',	'0800000000',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-05-19 21:02:07',	0,	NULL),
 (13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'เยาวเรศ',	'ศิริสถิตย์กุล',	NULL,	'',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-05-17 01:30:53',	0,	NULL),
@@ -1977,4 +1977,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (161,	's@gmail.com',	'$2y$10$lSQHjsoOdLrUoJWyDRLmIOp7qM2z0kB7HxVPbDigbF1ThTcpEF8su',	NULL,	'2019-05-19 17:45:06',	'',	'2019-05-19 17:45:06',	NULL),
 (162,	'58512265',	'$2y$10$zm9o9H.UlPjlXXGTXYeDQON0HS4nDwr/1SQBDN.7VwBwJjguFe.dK',	NULL,	'2019-05-19 17:49:11',	'',	'2019-05-19 17:49:11',	NULL);
 
--- 2019-05-20 19:40:40
+-- 2019-05-21 07:43:32

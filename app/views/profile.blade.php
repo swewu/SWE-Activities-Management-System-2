@@ -207,7 +207,8 @@ $dataPoints2 = array(
                  <div class="">
                     {{ $value->name }}
                     <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
                  </div>
                  <div class="text-right">
                     <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
@@ -266,7 +267,8 @@ $dataPoints2 = array(
                     <div class="">
                        {{ $value->name }}
                        <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>

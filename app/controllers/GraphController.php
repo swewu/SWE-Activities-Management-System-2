@@ -5,7 +5,7 @@ class GraphController extends Controller {
 	protected function getActivityByTermYear()
 	{
 		$year = Input::get('year');
-		$username = Auth::user()->username;
+		$username = Input::get('username');
 		$student = ActivityDetail::getCountOfTermYear($year, $username);
 		$data['total'] = [0,0,0];
 		foreach($student as $key => $row){
@@ -26,7 +26,7 @@ class GraphController extends Controller {
 		$term = Input::get('term');
 		$datasetIndex = Input::get('datasetIndex');
 
-		$username = Auth::user()->username;
+		$username = Input::get('username');
 		$data = [];
 
 		if(!empty($datasetIndex)){

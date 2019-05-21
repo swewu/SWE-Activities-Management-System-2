@@ -1,6 +1,10 @@
 <?php
 
 class UserController extends Controller {
+  public function __construct()
+	{
+		$this->perpage = 10;
+	}
 
   public function getLogin() {
     return View::make('login');
@@ -27,20 +31,20 @@ class UserController extends Controller {
 public function getProfile () {
     try {
       if(!empty(Request::get('id')))
-      {
-          $userID = Request::get('id');
-          $user = User::where("username", Request::get('id'))->first();
-      } else {
-          $userID = Auth::user()->id;
-          $user = Auth::user();
-      }
-      if ( Teacher::where('user_id', $user->id)->first() != null) {
-          $user->type = 'teacher';
-          $user->teacher = Teacher::where('user_id', $user->id)->first();
-      } else {
-          $user->type = 'student';
-          $user->student = Student::where('user_id', $user->id)->first();
-      }
+			{
+				$userID = Request::get('id');
+				$user = User::where("username", Request::get('id'))->first();
+			} else {
+				$userID = Auth::user()->id;
+				$user = Auth::user();
+			}
+			if ( Teacher::where('user_id', $user->id)->first() != null) {
+				$user->type = 'teacher';
+				$user->teacher = Teacher::where('user_id', $user->id)->first();
+			} else {
+				$user->type = 'student';
+				$user->student = Student::where('user_id', $user->id)->first();
+			}
     } catch (\Exception $e) {
         return Redirect::to('login');
     }
@@ -80,8 +84,18 @@ public function getProfile () {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    $activity = Activity::whereIn('id', $activityID)->take(6);
-    $history = Activity::whereIn('id', $historyID)->take(3)->get();
+    
+ //   $activity = Input::get('activity');
+ //   if (@$_GET['type'] === "2") {
+ //     $history = $history->where('name', 'LIKE', "%{$_GET['activity']}%");
+ // } elseif (@$_GET['type'] == '1') {
+  //    $activity = $activity->where('name', 'LIKE', "%{$_GET['activity']}%");
+ // }
+    
+ $activity = Activity::whereIn('id', $activityID);
+ $history = Activity::whereIn('id', $historyID);
+
+   
 
     if(!empty(Request::get('year'))) {
         $year = Request::get('year');
@@ -114,13 +128,18 @@ public function getProfile () {
     // if(!empty(Request::get('year'))) {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
-    // $history = $history->get();
-    $activity = $activity->get();
+    //$history = $history->get();
+    //$activity = $activity->get();
+    //if (@$_GET['type'] == '2') {
+    //    $history = $history->where('name', 'LIKE', "%{$_GET['activity']}%");
+    // } elseif (@$_GET['type'] == '1') {
+    //  $activity = $activity->where('name', 'LIKE', "%{$_GET['activity']}%");
+    //  }
 
 
     /// graph
     $lastYear = Term::getLastYear();
-    $username = Auth::user()->username;
+    $username = $user->username;
     $startYear = (int)("25".substr($username,0,2));
     // $endYear = $lastYear - $startYear + 1;
 
@@ -128,7 +147,45 @@ public function getProfile () {
       if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
           return View::make('welcome-teacher');
       }
-  }
+    }
+     if ( Teacher::where('user_id', $user->id)->first() != null) {
+        $user->type = 'teacher';
+        $user->teacher = Teacher::where('user_id', $user->id)->first();
+    } else {
+        $user->type = 'student';
+        $user->student = Student::where('user_id', $user->id)->first();
+    }
+    if (!Auth::check()) {
+      return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
+    }
+    if(Request::get('type') == 1) {
+      $history = [];
+      $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } elseif(Request::get('type') == 2) {
+      $activity = [];
+      $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    } else {
+      $history = $history->paginate(3);
+      $activity = $activity->paginate(3);
+    }
+  // $all = Input::get('all');
+  //$q = Input::get('q');
+  // if($all == 'true'){
+  //   $activityDetails = ActivityDetail::responsibilitySearch($q);      
+  // } else {
+  //   $activityDetails = ActivityDetail::responsibilitySearch($q,Auth::user()->teacher->id);
+  // }
+
+  // $term_year = '';
+  // $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
+  // if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+  //   $term_year = Input::get('term_year');
+  //   $activityDetails = $activityDetails->where('term_year',$term_year);
+  // }
+  
+  // $activityDetails = $activityDetails->paginate($this->perpage);
+  // $activityDetails->appends(['q'=>$q,'all'=>$all,'term_year',$term_year]);
+ 
 
     return View::make('profile', array(
       'user'=>$user,
@@ -136,10 +193,17 @@ public function getProfile () {
       'activityYearSet'=>$activityYearSet, 
       'historyYearSet'=>$historyYearSet, 
       'history'=>$history,
-      'startYear'=>$startYear
+      'startYear'=>$startYear,
+      //'activityDetails' => $activityDetails,
+      //'q'=>$q,
+      //'term_years'=>$term_years,
+      //'term_year'=>$term_year,
+      //'perpage'=>$this->perpage,
+      'username' => $username
       // 'endYear'=>$endYear
     ));
-
+    
+    
 }
 
 public function checkStudentActivity($uid, $aid)
@@ -241,7 +305,7 @@ public function postProfileUpdate() {
   $user->save();
 
 
-  return Redirect::to('/profile')->with('status', true)->with('message', 'แก้ไขข้อมูลส่วนตัวสำเร็จ')->withInput();
+  return Redirect::to('/profile')->with('status', true)->with('message', 'บันทึกการแก้ไขโปรไฟล์')->withInput();
 
 }
 

@@ -3,6 +3,7 @@
     
 @stop
 @section('cdn')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
@@ -69,6 +70,33 @@
         background-position: center;
     }
     </style>
+    <script>
+            function changeProfile() {
+                $('#image').click();
+            }
+            $('#image').change(function () {
+                var imgPath = this.value;
+                var ext = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                if (ext == "gif" || ext == "png" || ext == "jpg" || ext == "jpeg")
+                    readURL(this);
+                else
+                    alert("Please select image file (jpg, jpeg, png).")
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(input.files[0]);
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+        //              $("#remove").val(0);
+                    };
+                }
+            }
+            function removeImage() {
+                $('#preview').attr('src', 'noimage.jpg');
+        //      $("#remove").val(1);
+            }
+        </script>
 
 
 
@@ -120,13 +148,10 @@
                                 <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
                             </div>
                             <div class="avatar-preview">
-                                    
-                                <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('image/x3.jpg')}});">
-                                    <a href="{{url('/profile/upload-avatar')}}">
-                                        <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
-                                    </a>
+                                    <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
+                                <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('')}});">
                                 </div>
-                           
+                               
                             </div>
                         </div>
                     </div>
@@ -264,7 +289,7 @@
                         </div>
 
                         <div class="form-group  {{$errors->has('tel') ? 'has-error' : ''}}">
-                            <label for="username" class="cols-sm-2 control-label">เบอร์ติดต่อ</label>
+                            <label for="username" class="cols-sm-2 control-label">เบอร์โทรศัพท์</label>
                             <div class="cols-sm-5">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"{{isset($tel) ? 'disabled' : ''}}/>
@@ -285,6 +310,7 @@
 </div>
 </form>
 </div>
+
 
         <script>
         $(function() {

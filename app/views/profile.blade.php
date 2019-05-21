@@ -16,6 +16,15 @@
         height: 196px;
         object-fit: contain;
     }
+    .pagination {
+        display: inline-block;
+      }
+      .pagination li {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
 </style>
 
 <?php
@@ -84,14 +93,15 @@ $dataPoints2 = array(
                 <div class="col-md-12">
                     <form class="input-group input-group-lg col-md-10" id="graph">
                         <span class="input-group-append">
-                           <select class="custom-select" name="year" id="year">
+                           <select class="input-group-append" name="year" id="year">
                               {{--  <option value="">ชั้นปีทั้งหมด</option>  --}}
                               @for ($i = 0; $i < 4; $i++)
                                 <option value="{{$startYear+$i}}">ชั้นปีที่ {{$i+1}}</option>
                               @endfor                  
                               <option value="5" >ชั้นปีที่อื่นๆ</option>
                            </select>
-                           <button class="btn btn-outline-secondary" type="submit">
+                           <input type="hidden" name="username" id="username" value="{{$username}}">
+                           <button class="btn btn-outline-secondary btn-secondary" type="submit">
                            <i class="fa fa-search"></i>
                            </button>
                         </span>
@@ -143,6 +153,7 @@ $dataPoints2 = array(
                        <option value="2" {{ @$_GET['type'] == 2 ? "selected" : '' }}>ประวัติกิจกรรมที่เข้าร่วม</option>
                        </select>
                     </div>
+                    <input type="hidden" name="username" id="username" value="{{$username}}">
                     <button class="btn btn-outline-secondary btn-secondary" type="submit">
                     <i class="fa fa-search"></i>
                     </button>
@@ -163,7 +174,7 @@ $dataPoints2 = array(
            @foreach ($activity as $key => $value)
            <div class="col-md-4">
               <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
                     {{ $value->name }}
                     <br>
@@ -174,7 +185,10 @@ $dataPoints2 = array(
                  </div>
               </div>
            </div>
-           @endforeach                                  
+           @endforeach   
+           <div class="col-md-12 text-right">
+                       {{ $activity->appends($_GET)->links() }}
+                   </div>                                                                 
            @elseif(@$_GET['type'] == 2)
            <div class="col-md-12">
               <div class="card card-small mb-4 pt-3">
@@ -189,7 +203,7 @@ $dataPoints2 = array(
            @foreach ($history as $key => $value)
            <div class="col-md-4">
               <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
                     {{ $value->name }}
                     <br>
@@ -199,8 +213,11 @@ $dataPoints2 = array(
                     <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
                  </div>
               </div>
-           </div>
-           @endforeach               
+            </div>  
+            @endforeach  
+                <div class="col-md-12 text-right">
+                    {{ $history->appends($_GET)->links() }}
+                </div>              
            @else
            <div class="row">
               <!-- /.col-lg-4 -->
@@ -211,10 +228,38 @@ $dataPoints2 = array(
                     </div>
                  </div>
               </div>
-              @if(empty($activity->count()))
+            @if(empty($activity->count()))
+              ไม่พบข้อมูล
+            @endif
+            @foreach ($activity as $key => $value)
+              <div class="col-md-4">
+                 <div class="img-activity">
+                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
+                    <div class="">
+                       {{ $value->name }}
+                       <br>
+                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                    </div>
+                    <div class="text-right">
+                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                    </div>
+                 </div>
+              </div>
+            @endforeach
+                <div class="col-md-12 text-right">
+                     {{ $activity->appends($_GET)->links() }}
+                </div>
+              <div class="col-md-12">
+                 <div class="card card-small mb-4 pt-3">
+                    <div class="text-center">
+                       <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
+                    </div>
+                 </div>
+              </div>
+              @if(empty($history->count()))
               ไม่พบข้อมูล
               @endif
-              @foreach ($activity as $key => $value)
+              @foreach ($history as $key => $value)
               <div class="col-md-4">
                  <div class="img-activity">
                     <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
@@ -229,46 +274,15 @@ $dataPoints2 = array(
                  </div>
               </div>
               @endforeach
-              <div class="col-md-12">
-                 <div class="card card-small mb-4 pt-3">
-                    <div class="text-center">
-                       <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
-                    </div>
-                 </div>
-              </div>
-              @if(empty($history->count()))
-              ไม่พบข้อมูล
-              @endif
-              @foreach ($history as $key => $value)
-              <div class="col-md-4">
-                 <div class="img-activity">
-                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                    <div class="">
-                       {{ $value->name }}
-                       <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                    </div>
-                    <div class="text-right">
-                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
-                    </div>
-                 </div>
-              </div>
-              @endforeach
+              <div class="col-md-12 text-right">
+                {{ $history->appends($_GET)->links() }}
+            </div>
            </div>
            @endif
            @else
            @endif
            <div class="col-md-8 text-right" style="padding-top:35px">
-              <nav aria-label="Page navigation example">
-                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&userID={{Request::get('userID')}}">1</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&userID={{Request::get('userID')}}">2</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&userID={{Request::get('userID')}}">3</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&userID={{Request::get('userID')}}">4</a></li>
-                    <li class="page-item"><a class="page-link" href="?year=5&s={{Request::get('s')}}&userID={{Request::get('userID')}}"></a></li>
-                    <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&userID={{Request::get('userID')}}">ทั้งหมด</a></li>
-                 </ul>
-              </nav>
+             
            </div>
            <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
            {{--  <script src="scripts/app/app-blog-overview.1.1.0.js"></script>  --}}
@@ -301,7 +315,8 @@ $dataPoints2 = array(
                         var data  = {
                             year: year,
                             term: term+1,
-                            datasetIndex: datasetIndex+1
+                            datasetIndex: datasetIndex+1,
+                            username: $("#username").val()
                         };
 
                         $.getJSON(base_url+"/getActivityDetail",data,function(data){

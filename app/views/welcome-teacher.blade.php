@@ -48,9 +48,9 @@
                                     <br>
 
                                     @if(Auth::user()->teacher != NULL)
-                                    <span class="welcome">ยินดีต้อนรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->prefix}} {{ Auth::user()->teacher->firstname}} {{ Auth::user()->teacher->lastname}}</a></b></span>
+                                    <span class="welcome">ยินดีต้อนรับ <b><a>{{ Auth::user()->teacher->prefix}} {{ Auth::user()->teacher->firstname}} {{ Auth::user()->teacher->lastname}}</a></b></span>
                                 @else
-                                    <span class="welcome">ยินดีต้อนรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->prefix}} {{ Auth::user()->student->firstname}} {{ Auth::user()->student->lastname}}</a></b></span>
+                                    <span class="welcome">ยินดีต้อนรับ <b><a>{{ Auth::user()->teacher->prefix}} {{ Auth::user()->student->firstname}} {{ Auth::user()->student->lastname}}</a></b></span>
                                 @endif
                                     <br>
 <br><br><br>

@@ -9,6 +9,25 @@ class UsersController extends BaseController {
 
 	public function showUserStudentprofile()
 	{
+		try {
+			if(!empty(Request::get('id')))
+			{
+				$userID = Request::get('id');
+				$user = User::where("username", Request::get('id'))->first();
+			} else {
+				$userID = Auth::user()->id;
+				$user = Auth::user();
+			}
+			if ( Teacher::where('user_id', $user->id)->first() != null) {
+				$user->type = 'teacher';
+				$user->teacher = Teacher::where('user_id', $user->id)->first();
+			} else {
+				$user->type = 'student';
+				$user->student = Student::where('user_id', $user->id)->first();
+			}
+		  } catch (\Exception $e) {
+			  return Redirect::to('login');
+		  }
 		$q = '';
 		$year = '';
 		$students = new Student;
@@ -50,18 +69,18 @@ class UsersController extends BaseController {
 
 	public function showUsersTeacher()
 	{
+		$q = '';
+		$teachers = Teacher::orderBy('prefix_level','DESC')->orderBy('firstname')->orderBy('lastname');
+
 		if(Input::get('q') != NULL && Input::get('q') != ""){
 			$q = Input::get('q');
-			$teachers = Teacher::Where('firstname','like','%'.$q.'%')
+			$teachers = $teachers->Where('firstname','like','%'.$q.'%')
 			->orWhere('lastname','like','%'.$q.'%');
 		}
-		else {
-			$q = '';
-			$teachers = new Teacher;
-		}
+
 		$teachers = $teachers->paginate(10);
 		$teachers->appends(['q'=>$q]);
-		return View::make('teacher',['teachers' => $teachers,'q'=>$q]);
+		return View::make('teacher',['teachers' => $teachers,'q'=>$q,'perpage'=>$this->perpage]);
     }
 
 	public function showUsersTeacherAdd()

@@ -2918,12 +2918,12 @@ CREATE TABLE `teachers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `prefix_level`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
-(8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	100,	'ฐิมาพร',	'เพชรแก้ว',	'avatar/55/20190521145032Thimaporn.jpg',	'2275456461',	'pthimapo2@wu.ac.th',	'c3',	'2019-01-27 22:34:34',	0,	'2019-05-21 18:01:27',	0,	NULL),
-(9,	56,	3,	3,	'อาจารย์ ดร.',	60,	'กรัณรัตน์',	'ธรรมรักษ์',	'avatar/56/20190521144853Karanrat.jpg',	'0899999999',	'kanchan.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:36:34',	0,	'2019-05-21 14:48:53',	0,	NULL),
-(10,	57,	1,	1,	'นาย',	0,	'ประทีป',	'คงกล้า',	'',	'0908243820',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-05-21 14:34:13',	0,	NULL),
-(11,	58,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'อุหมาด',	'หมัดอาด้ำ',	'avatar/58/20190521145115Uhamard.jpg',	'0899909099',	'muhamard@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:41:14',	0,	'2019-05-21 14:51:15',	0,	NULL),
-(12,	59,	2,	2,	'อาจารย์ ดร.',	60,	'พุทธิพร',	'ธนธรรมเมธี',	'avatar/59/2019052321014161469719_526183991248245_5098543994770554880_n.jpg',	'0800000000',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-05-23 21:01:41',	0,	NULL),
-(13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'เยาวเรศ',	'ศิริสถิตย์กุล',	'avatar/60/20190521145258Yaowarat.jpg',	'0123456789',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-05-21 14:52:58',	0,	NULL);
+(8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	100,	'ฐิมาพร',	'เพชรแก้ว',	'avatar/55/20190521145032Thimaporn.jpg',	'0815387210',	'pthimapo2@wu.ac.th',	'c3',	'2019-01-27 22:34:34',	0,	'2019-05-23 21:46:30',	0,	NULL),
+(9,	56,	3,	3,	'อาจารย์ ดร.',	60,	'กรัณรัตน์',	'ธรรมรักษ์',	'avatar/56/20190521144853Karanrat.jpg',	'',	'kanchan.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:36:34',	0,	'2019-05-23 21:44:41',	0,	NULL),
+(10,	57,	1,	1,	'นาย',	0,	'ประทีป',	'คงกล้า',	'',	'0987249979',	'pra@wu.ac.th',	'ตึกนวัตรกรรม',	'2019-01-27 22:37:37',	0,	'2019-05-23 21:48:21',	0,	NULL),
+(11,	58,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'อุหมาด',	'หมัดอาด้ำ',	'avatar/58/20190521145115Uhamard.jpg',	'',	'muhamard@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:41:14',	0,	'2019-05-23 21:44:29',	0,	NULL),
+(12,	59,	2,	2,	'อาจารย์ ดร.',	60,	'พุทธิพร',	'ธนธรรมเมธี',	'avatar/59/2019052321014161469719_526183991248245_5098543994770554880_n.jpg',	'0818948295',	'putthiporn.th@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:43:19',	0,	'2019-05-23 21:45:25',	0,	NULL),
+(13,	60,	2,	2,	'ผู้ช่วยศาสตราจารย์',	90,	'เยาวเรศ',	'ศิริสถิตย์กุล',	'avatar/60/20190521145258Yaowarat.jpg',	'0837827276',	'syaowara@wu.ac.th',	'อาคารวิชาการ3',	'2019-01-27 22:44:52',	0,	'2019-05-23 21:46:49',	0,	NULL);
 
 DROP TABLE IF EXISTS `terms`;
 CREATE TABLE `terms` (
@@ -2964,7 +2964,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
 (55,	'pthimapo2@wu.ac.th',	'$2y$10$LSA1n/xcA4JVRfAuwv9aa.mOtXzTY.rLH9tdqpMSSGXBEe61K6QcS',	'QGCovXyrnk1LWj8mbYh7lXCUiZgX972Mb11Smu4b2F74jblIxKuo3skvtLze',	'2019-05-21 14:50:38',	'',	'2019-05-21 14:50:38',	NULL),
 (56,	'kanchan.th@wu.ac.th',	'$2y$10$hcmyFbQ0MOqD9/37bpSREOAYNeWmttQsF770Qp633Z86T6d5WpDWK',	't80UrOoobf6PWVjdRAoGVOh3wRE8cdkXE9OrgQqFiyUnf9WPNdJL5Imhgmof',	'2019-05-23 20:55:56',	'',	'2019-05-23 20:55:56',	NULL),
-(57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'KIkQMpZpxlYrORjvRvJyxGrjqgMwp5sWRCIx438jz61wy0TuzWemXOYKXAN8',	'2019-05-23 20:55:31',	'',	'2019-05-23 20:55:31',	NULL),
+(57,	'pra@wu.ac.th',	'$2y$10$A.lILFswamQywIkyiVhEn.eUOH4UkFdOs2MOe2NEN8UkMd78akSey',	'p1vFDenLvsXXSPzNA8VS9cKlVy3a5denJj8PF83USJm38l1eTwtTqqYODeTr',	'2019-05-23 21:58:34',	'',	'2019-05-23 21:58:34',	NULL),
 (58,	'muhamard@wu.ac.th',	'$2y$10$cjlExpqXoFsdtfqfO8oRxOzGAvxW6VBRhDf1haWT0JvW3i1qH8K0.',	'BEGZ9wSwsKuMcmmvyT9rtobtu087hQDkacAqWfIA5Chgv4lwSlSYCc6h3Yoj',	'2019-05-21 14:51:21',	'',	'2019-05-21 14:51:21',	NULL),
 (59,	'putthiporn.th@wu.ac.th',	'$2y$10$4iixfs8x4vmUj22ktXQMLe22s59bFZZSycs2EJc7XT0m9JXYu51a.',	'MgP53ePbFTrGSAjnugIeibCwGUTTYaa2NxWPw1ou7UQy5WFUkllNxKyY2Out',	'2019-05-23 21:26:42',	'',	'2019-05-23 21:26:42',	NULL),
 (60,	'syaowara@wu.ac.th',	'$2y$10$EE5FpFUInqFHI4JbMxffi.ciyNbmFOifx8G/uwfl7ia9TpvCv3lU2',	'oqI3bcUNW6b4POh5Iyz6jz7xOk8g2qAV2sHGhxPLanYx77BHfb5M0WNKttxe',	'2016-05-23 20:06:23',	'',	'2016-05-23 20:06:23',	NULL),
@@ -3041,7 +3041,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (137,	'58143900',	'$2y$10$ObqGUXhBvN01JIJOFpjJ6O79JeycE2fMpdacGznr5Mm3m.HKJpB6K',	NULL,	'2019-03-20 15:19:01',	'',	'2019-03-20 15:19:01',	NULL),
 (138,	'58144239',	'$2y$10$e6eT4A1kyezMObkY6LjN9.k77hp01/yfv.pH0c6/3saz6gs910OaK',	NULL,	'2019-03-20 15:21:56',	'',	'2019-03-20 15:21:56',	NULL),
 (139,	'58144924',	'$2y$10$F42q9jdgMeUHvY7b2e9SAuWIilD2ejuEL2QAoALp/WOivGLjR.pwa',	NULL,	'2019-03-20 15:23:25',	'',	'2019-03-20 15:23:25',	NULL),
-(140,	'58145236',	'$2y$10$x9m2zF2gKEVDZkBUoyjMyu5rD/bDIIgwe1/tRwbo6yadzw7KWpJjO',	'3FFq15rGqXCgE4PTNXr3FVG14DoGseo3VdeWMjgZeKCZUXNkcfvQXdXiSbkD',	'2019-05-21 16:16:47',	'',	'2019-05-21 16:16:47',	NULL),
+(140,	'58145236',	'$2y$10$x9m2zF2gKEVDZkBUoyjMyu5rD/bDIIgwe1/tRwbo6yadzw7KWpJjO',	'08eQvLISWChKv7gCiqeKvsk1JBpwV6lXTQzasxnlgzyup7NbCM3ke5A7eKG8',	'2019-05-23 21:59:03',	'',	'2019-05-23 21:59:03',	NULL),
 (141,	'58147406',	'$2y$10$CSj.RuMd37.8tvjxnjwHZ.cVk7R7Rrv0qnM82ksNCiBUjd5OkRr6O',	NULL,	'2019-03-20 15:34:35',	'',	'2019-03-20 15:34:35',	NULL),
 (142,	'58148602',	'$2y$10$YMsiqTwrXF66afM15qMhJuRH9o3lVPnxfRR69zv6KXuL6s.dqSM3O',	NULL,	'2019-03-20 15:35:05',	'',	'2019-03-20 15:35:05',	NULL),
 (143,	'58149840',	'$2y$10$XYULxUeeHYh7ZMQp50A9XuySsdwPprq4Fr05kdzlBtlhZUQXwj9zi',	NULL,	'2019-03-20 15:35:35',	'',	'2019-03-20 15:35:35',	NULL),
@@ -3066,4 +3066,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (162,	'58512265',	'$2y$10$zm9o9H.UlPjlXXGTXYeDQON0HS4nDwr/1SQBDN.7VwBwJjguFe.dK',	NULL,	'2019-05-19 17:49:11',	'',	'2019-05-19 17:49:11',	NULL),
 (163,	'chid@gmail.com',	'$2y$10$vQ6tZ7RqJwxHILDxc0vi3OmQZXSoufPUza7qmDeFfscCScbJtcs6y',	NULL,	'2019-05-21 17:05:32',	'',	'2019-05-21 17:05:32',	NULL);
 
--- 2019-05-23 14:32:54
+-- 2019-05-23 15:04:45

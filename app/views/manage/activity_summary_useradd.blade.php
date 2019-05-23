@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-กิจกรรมที่รับผิดชอบ
+บันทึกการเข้าร่วมกิจกรรม
 @stop
 @section('subtitle')
 จัดการกิจกรรม
@@ -40,6 +40,7 @@
               <th scope="col" class="border-0">วันและเวลาที่จัด</th>
               <th scope="col" class="border-0">จำนวนนักศึกษา</th>
               <th scope="col" class="border-0">บันทึกการเข้าร่วม</th>
+              <th scope="col" class="border-0">ไฟล์ใบลงชื่อ</th>
             </tr>
           </thead>
           <tbody>
@@ -63,6 +64,9 @@
                       ยังไม่ถึงเวลาในการจัดกิจกรรม
                     </small>
                   @endif
+                </td>
+                <td>
+                <a href="{{url('manage')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="พิมพ์ใบลงชื่อ"><i class="fas fa-print"></i></a>
                 </td>
               </tr>
             @endforeach

@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-กิจกรรมทั้งหมด
+รายละเอียดกิจกรรมทั้งหมด
 @stop
 @section('subtitle')
 จัดการกิจกรรม
@@ -34,7 +34,7 @@
               <th scope="col" class="border-0">ชื่อกิจกรรม</th>
               <th scope="col" class="border-0">ภาค/ปีการศึกษา</th>
               <th scope="col" class="border-0">นักศึกษาที่เข้าร่วม</th>
-              <th scope="col" class="border-0">รายละเอียดกิจกรรมเพิ่มเติม</th>
+              <th scope="col" class="border-0">รายละเอียดกิจกรรม</th>
             </tr>
           </thead>
           <tbody>

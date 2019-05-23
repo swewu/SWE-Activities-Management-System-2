@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-เช็คการเข้าร่วมกิจกรรม
+บันทึกการเข้าร่วมกิจกรรม
 @stop
 @section('subtitle')
 จัดการกิจกรรม

@@ -73,9 +73,9 @@
                 <div class="dropdown-menu dropdown-menu-small" x-placement="bottom-start" style="display: none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-5px, 50px, 0px);">
                   <a class="dropdown-item {{ Request::is('manage/activity') ? 'active' : '' }}" href="{{url('manage/activity')}}">เพิ่มกิจกรรม</a>
                   <!-- <a class="dropdown-item {{ Request::is('manage/activity/add') ? 'active' : '' }}" href="{{url('manage/activity/add')}}">สร้างกิจกรรม</a> -->
-                  <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">กิจกรรมที่รับผิดชอบ</a>
-                  <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">กิจกรรมทั้งหมด</a>
+                  <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">บันทึกการเข้าร่วมกิจกรรม</a>
                   <a class="dropdown-item {{ Request::is('manage/activity/conclude') ? 'active' : '' }}" href="{{url('manage/activity/conclude')}}">สรุปการเข้าร่วมกิจกรรม</a>
+                  <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">รายละเอียดกิจกรรมทั้งหมด</a>
                 </div>
               </li>
               @endif

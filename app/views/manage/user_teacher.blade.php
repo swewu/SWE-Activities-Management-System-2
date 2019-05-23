@@ -1,7 +1,7 @@
 @extends('manage.layout')
 @section('title')
   @if(isset($onlyTrashed))
-    อาจารย์ <small class="text-danger">(ลาออก)</small>
+   <small class="text-danger">อาจารย์ที่ลาออก</small>
   @else
     ข้อมูลอาจารย์
   @endif
@@ -31,7 +31,7 @@
           </a>
         @else
           <a class="btn btn-outline-primary btn-sg" href="{{url('/manage/user/teacher')}}">
-          อาจารย์
+          ข้อมูลอาจารย์
           </a>
         @endif
 

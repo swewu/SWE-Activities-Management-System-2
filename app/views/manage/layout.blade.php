@@ -4,9 +4,9 @@
  if(!is_null(Auth::user()->getFullName())){
    $login_name = Auth::user()->getFullName();
  }
- $user='';
+ $g='';
  if(!is_null(Auth::user()->getAvatar())){
-  $user = Auth::user()->getAvatar();
+  $g = Auth::user()->getAvatar();
 }
 ?>
 <!doctype html>
@@ -47,7 +47,7 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('/manage')}}">
+                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="url('home')">
                   <i class="material-icons">home</i>
                   <span>หน้าหลัก</span>
                 </a>

@@ -144,7 +144,7 @@ public function getProfile () {
     // $endYear = $lastYear - $startYear + 1;
 
     if (empty(Request::get('userID'))) {
-      if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
+      if (Auth::user()->teacher !=  null && empty($_GET['id'] )) {
           return View::make('welcome-teacher');
       }
     }
@@ -158,7 +158,7 @@ public function getProfile () {
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
-    //$id = $user->id;
+    $id = $user->id;
     if(Request::get('type') == 1) {
       $history = [];
       $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
@@ -168,7 +168,7 @@ public function getProfile () {
       $activity = [];
       $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
       //$user->type = 'student';
-			//$user->student = Student::where('user_id', $user->id)->first();
+      //$user->student = Student::where('user_id', $user->id)->first();
     } else {
       $history = $history->paginate(3);
       $activity = $activity->paginate(3);
@@ -191,9 +191,9 @@ public function getProfile () {
   // $activityDetails = $activityDetails->paginate($this->perpage);
   // $activityDetails->appends(['q'=>$q,'all'=>$all,'term_year',$term_year]);
  
-
+	$id = $user->username;
     return View::make('profile', array(
-      //'id'=>$id,
+      'id'=>$id,
       'user'=>$user,
       'activity'=>$activity, 
       'activityYearSet'=>$activityYearSet, 

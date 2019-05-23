@@ -62,9 +62,9 @@ $dataPoints2 = array(
            <div class="card card-small mb-4 pt-3">
               <div class="card-header border-bottom text-center">
                  <div class="mb-3 mx-auto">
-                    <p>
+                
                        <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
-                    </p>
+                    
                     <div class="col-xs-9 text-left" style="padding-left:20px">
                        <div>
                           <h2>
@@ -111,7 +111,7 @@ $dataPoints2 = array(
               </div>
               <div class="row">
                   <div class="col-md-12">
-                    <canvas id="chartContainer" style="width: 100%;"></canvas>
+                    <canvas id="chartContainer" width="100" height="100"></canvas>
                   </div>
               </div>
            </div>
@@ -147,7 +147,7 @@ $dataPoints2 = array(
            <div class="col-md-12">
               <form>
                  <div class="input-group">
-                        <input type="hidden" name="username" id="username" value="{{$username}}">
+                        <input type="hidden" name="id" id="id" value="{{$id}}">
                     <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="{{@$_GET['activity']}}">
                     <div class="input-group-append">
                        <select class="form-control" name="type">
@@ -395,7 +395,7 @@ $dataPoints2 = array(
                             scales: {
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: true
+                                        beginAtZero: false
                                     }
                                 }]
                             }

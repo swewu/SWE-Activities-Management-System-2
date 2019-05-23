@@ -1,14 +1,27 @@
 @extends('manage.layout')
 
 @section('title')
-
+@if(isset($onlyTrashed))
+  ข้อมูลนักศึกษา <small class="text-danger">(นักศึกษาที่พ้นสภาพ)</small>
+@else
+  ข้อมูลนักศึกษา
+@endif
+@stop
+@section('subtitle')
+จัดการโปรไฟล์
+@stop
+@section('cdn')
+<style>
+  .input-group-lg>.input-group-append>.custom-select{
+    height: calc(2.875rem + 2px);
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0rem;
+  }
+</style>
 @stop
 
 @section('content')
-
-   <h2>ข้อมูลนักศึกษา</h2>
-
-   <hr>
      <div class="card card-small mb-4">
       <div class="card-header border-bottom">
 

@@ -1,12 +1,23 @@
 @extends('manage.layout')
 @section('title')
-@if(isset($activity))
-
+@if(isset($onlyTrashed))
+  แก้ไขรหัสผ่าน <small class="text-danger">(นักศึกษาที่พ้นสภาพ)</small>
 @else
-
+  แก้ไขรหัสผ่าน
 @endif
 @stop
+@section('subtitle')
+จัดการโปรไฟล์
+@stop
 @section('cdn')
+<style>
+  .input-group-lg>.input-group-append>.custom-select{
+    height: calc(2.875rem + 2px);
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0rem;
+  }
+</style>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
@@ -36,13 +47,7 @@
 <form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" method="post">
 <div class="container">
 
-      @if(isset($teacher))
-         <h2 style="margin-top:30px">แก้ไขรหัสผ่าน</h2>
-      @else
-         <h2 style="margin-top:30px">แก้ไขรหัสผ่าน</h2>
-      @endif
-
-      <hr>
+      
      
 
       <div class="row">

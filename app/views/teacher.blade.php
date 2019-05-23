@@ -8,7 +8,7 @@
 <style media="screen">
 
 </style>
- <hr>
+
 <div class="row">
 
     @foreach ($teachers as $teacher)

@@ -34,7 +34,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function getAvatar() {
-		return asset($this->image);
+		$get = '';
+		
+				$student = Student::where('user_id',$this->image)->first();
+				if(isset($student))
+				{
+					$get = $student->getAvatar();
+				}
+				$teacher = Teacher::where('user_id',$this->image)->first();
+				if(isset($teacher))
+				{
+					$get = $teacher->getAvatar();
+				}
+		return $get;
 	}
 
 	public function isTeacher()

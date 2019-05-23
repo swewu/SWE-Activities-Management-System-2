@@ -27,6 +27,7 @@
       }
 </style>
 
+
 <?php
 $dataPoints1 = array(
     array("label"=> "2010", "y"=> 3),
@@ -62,9 +63,7 @@ $dataPoints2 = array(
               <div class="card-header border-bottom text-center">
                  <div class="mb-3 mx-auto">
                     <p>
-                       <a href="{{url('/profile/upload-avatar')}}">
-                       <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
-                       </a>
+                       <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
                     </p>
                     <div class="col-xs-9 text-left" style="padding-left:20px">
                        <div>
@@ -92,8 +91,9 @@ $dataPoints2 = array(
               <div class="row">
                 <div class="col-md-12">
                     <form class="input-group input-group-lg col-md-10" id="graph">
+                        <div class="input-group">   
                         <span class="input-group-append">
-                           <select class="input-group-append" name="year" id="year">
+                           <select class="form-control" name="year" id="year">
                               {{--  <option value="">ชั้นปีทั้งหมด</option>  --}}
                               @for ($i = 0; $i < 4; $i++)
                                 <option value="{{$startYear+$i}}">ชั้นปีที่ {{$i+1}}</option>
@@ -102,9 +102,10 @@ $dataPoints2 = array(
                            </select>
                            <input type="hidden" name="username" id="username" value="{{$username}}">
                            <button class="btn btn-outline-secondary btn-secondary" type="submit">
-                           <i class="fa fa-search"></i>
-                           </button>
+                                <i class="fa fa-search"></i>
+                            </button>
                         </span>
+                        </div>
                      </form>
                 </div>
               </div>
@@ -146,6 +147,7 @@ $dataPoints2 = array(
            <div class="col-md-12">
               <form>
                  <div class="input-group">
+                        <input type="hidden" name="username" id="username" value="{{$username}}">
                     <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="{{@$_GET['activity']}}">
                     <div class="input-group-append">
                        <select class="form-control" name="type">
@@ -153,7 +155,7 @@ $dataPoints2 = array(
                        <option value="2" {{ @$_GET['type'] == 2 ? "selected" : '' }}>ประวัติกิจกรรมที่เข้าร่วม</option>
                        </select>
                     </div>
-                    <input type="hidden" name="username" id="username" value="{{$username}}">
+                   
                     <button class="btn btn-outline-secondary btn-secondary" type="submit">
                     <i class="fa fa-search"></i>
                     </button>
@@ -178,7 +180,9 @@ $dataPoints2 = array(
                  <div class="">
                     {{ $value->name }}
                     <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                    
                  </div>
                  <div class="text-right">
                     <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
@@ -239,7 +243,8 @@ $dataPoints2 = array(
                     <div class="">
                        {{ $value->name }}
                        <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
@@ -270,6 +275,8 @@ $dataPoints2 = array(
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                        <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
+                    
+                 <button type="submit" class="btn btn-outline-success ml-auto float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
@@ -286,6 +293,26 @@ $dataPoints2 = array(
            <div class="col-md-8 text-right" style="padding-top:35px">
              
            </div>
+             <!-- Modal -->
+             <div class="modal fade" id="Modal" role="dialog">
+               <div class="modal-dialog">
+               
+                 <!-- Modal content-->
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">เกียรติบัตร</h4>
+                   </div>
+                   <div class="modal-body">
+                     <p>ดาวน์โหลดเกียรติบัตร</p>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                   </div>
+                 </div>
+                 
+               </div>
+             </div>
            <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
            {{--  <script src="scripts/app/app-blog-overview.1.1.0.js"></script>  --}}
            <script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
@@ -349,7 +376,7 @@ $dataPoints2 = array(
                                 data: join
                             },
                             {
-                                label: "กิจกรรมที่ไม่ได้ร่วมเข้า",
+                                label: "กิจกรรมที่ไม่ได้เข้าร่วม",
                                 backgroundColor: "red",
                                 borderWidth: 1,
                                 data: unjoin

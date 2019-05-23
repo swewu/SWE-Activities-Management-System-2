@@ -113,6 +113,9 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
 // Route::post('/login', 'UserController@postLogin');
+Route::get('/manage', function(){
+    return View::make('manage.index');
+  });
 
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/getActivityByTermYear', 'GraphController@getActivityByTermYear'); // return json

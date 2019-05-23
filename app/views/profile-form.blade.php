@@ -1,8 +1,23 @@
 @extends('manage.layout')
 @section('title')
-    
+@if(isset($onlyTrashed))
+  แก้ไขข้อมูลส่วนตัว <small class="text-danger">(นักศึกษาที่พ้นสภาพ)</small>
+@else
+  แก้ไขข้อมูลส่วนตัว
+@endif
+@stop
+@section('subtitle')
+จัดการโปรไฟล์
 @stop
 @section('cdn')
+<style>
+  .input-group-lg>.input-group-append>.custom-select{
+    height: calc(2.875rem + 2px);
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0rem;
+  }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -151,7 +166,6 @@
                                     <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
                                 <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('')}});">
                                 </div>
-                               
                             </div>
                         </div>
                     </div>
@@ -166,10 +180,9 @@
             <div class="col-md-6">
                 <h3>
                     @if($user->type == 'student')
-                        แก้ไขโปรไฟล์นักศึกษา
+                        แก้ไขข้อมูลส่วนตัว
                     @else
                         แก้ไขข้อมูลส่วนตัว
-
                     @endif
                 </h3>
                 <div class="main-login main-center">
@@ -242,7 +255,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
                         @if($user->type == 'student')
+                       
+                            <div class="col-md-4">
                             <div class="form-group  {{$errors->has('code') ? 'has-error' : ''}}">
                                 <label for="name" class="cols-sm-2 control-label">รหัสนักศึกษา</label>
                                 <div class="cols-sm-10">
@@ -257,7 +273,9 @@
                                     @endif
                                 </div>
                             </div>
+                            </div>
                         @else
+                        <div class="col-md-4">
                             <div class="form-group  {{$errors->has('code') ? 'has-error' : ''}}">
                                 <label for="name" class="cols-sm-2 control-label">ห้อง</label>
                                 <div class="cols-sm-10">
@@ -271,35 +289,39 @@
                                     @endif
                                 </div>
                             </div>
-
-                        @endif
-
-                        <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
-                            <label for="email" class="cols-sm-2 control-label">Email</label>
-                            <div class="cols-sm-5">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="email" id="email"  placeholder="Email"  value="{{Request::old('email',$user->{$user->type}->email)}}" />
-                                </div>
-                                @if($errors->has('email'))
-                                    <div class="form-text text-danger" role="alert">
-                                        {{$errors->first('email')}}
-                                    </div>
-                                @endif
-                            </div>
                         </div>
-
-                        <div class="form-group  {{$errors->has('tel') ? 'has-error' : ''}}">
-                            <label for="username" class="cols-sm-2 control-label">เบอร์โทรศัพท์</label>
-                            <div class="cols-sm-5">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"{{isset($tel) ? 'disabled' : ''}}/>
-                                </div>
-                                @if($errors->has('tel'))
-                                    <div class="form-text text-danger" role="alert">
-                                        {{$errors->first('tel')}}
+                        @endif
+                        <div class="col-md-4">
+                                <div class="form-group  {{$errors->has('tel') ? 'has-error' : ''}}">
+                                        <label for="username" class="cols-sm-2 control-label">เบอร์โทรศัพท์</label>
+                                        <div class="cols-sm-5">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"{{isset($tel) ? 'disabled' : ''}}/>
+                                            </div>
+                                            @if($errors->has('tel'))
+                                                <div class="form-text text-danger" role="alert">
+                                                    {{$errors->first('tel')}}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>                            
+                        
+                        </div>
+                        <div class="col-md-8">
+                                <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
+                                        <label for="email" class="cols-sm-2 control-label">Email</label>
+                                        <div class="cols-sm-5">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="email" id="email"  placeholder="Email"  value="{{Request::old('email',$user->{$user->type}->email)}}" />
+                                            </div>
+                                            @if($errors->has('email'))
+                                                <div class="form-text text-danger" role="alert">
+                                                    {{$errors->first('email')}}
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                @endif
-                            </div>
+                        </div>
                         </div>
             <div class="form-group ">
                 <button type="submit" class="btn btn-outline-success ml-auto float-right">บันทึก</button>

@@ -72,7 +72,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
+    $teachers = Teacher::orderBy('prefix_level','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $nowTeachers = Auth::user()->teacher->id;
@@ -126,7 +126,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
+    $teachers = Teacher::orderBy('prefix_level','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $nowTeachers = Auth::user()->teacher->id;

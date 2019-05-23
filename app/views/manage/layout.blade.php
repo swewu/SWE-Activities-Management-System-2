@@ -138,7 +138,7 @@ try {
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="User Avatar" width="50" height="40">
-                    <span class="d-none d-md-inline-block">{{$login_name}}</span>
+                    <span class="d-none d-md-inline-block">{{ $user->{$user->type}->prefix }} {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="{{url('profile')}}">

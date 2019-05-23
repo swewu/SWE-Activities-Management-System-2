@@ -18,7 +18,7 @@ class UserController extends Controller {
         return Redirect::to('/login')->with('status', false)->with('message', 'ไม่พบข้อมูลผู้ใช้งานระบบ')->withInput();
       }
   
-  
+
       if (!Hash::check(Input::get('password'), $students->password)) {
         return Redirect::to('/login')->with('status', false)->with('message', 'รหัสผ่านผู้ใช้งานระบบไม่ถูกต้อง')->withInput();
       }
@@ -94,7 +94,7 @@ public function getProfile () {
     
  $activity = Activity::whereIn('id', $activityID);
  $history = Activity::whereIn('id', $historyID);
-
+ //$activity = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
    
 
     if(!empty(Request::get('year'))) {

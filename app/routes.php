@@ -116,7 +116,7 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 Route::get('/manage', function(){
     return View::make('manage.index');
   });
-
+//Route::get('/manage/layout', 'UserController@getProfile');
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/getActivityByTermYear', 'GraphController@getActivityByTermYear'); // return json
 Route::get('/getActivityDetail', 'GraphController@getActivityDetail');

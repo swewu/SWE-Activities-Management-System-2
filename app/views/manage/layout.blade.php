@@ -5,8 +5,28 @@
    $login_name = Auth::user()->getFullName();
  }
  $g='';
+ 
  if(!is_null(Auth::user()->getAvatar())){
   $g = Auth::user()->getAvatar();
+}
+try {
+  if(!empty(Request::get('id')))
+  {
+    $userID = Request::get('id');
+    $user = User::where("username", Request::get('id'))->first();
+  } else {
+    $userID = Auth::user()->id;
+    $user = Auth::user();
+  }
+  if ( Teacher::where('user_id', $user->id)->first() != null) {
+    $user->type = 'teacher';
+    $user->teacher = Teacher::where('user_id', $user->id)->first();
+  } else {
+    $user->type = 'student';
+    $user->student = Student::where('user_id', $user->id)->first();
+  }
+} catch (\Exception $e) {
+    return Redirect::to('login');
 }
 ?>
 <!doctype html>
@@ -47,7 +67,7 @@
             <ul class="nav flex-column">
 
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="url('home')">
+                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage')}}">
                   <i class="material-icons">home</i>
                   <span>หน้าหลัก</span>
                 </a>
@@ -117,7 +137,7 @@
               <ul class="navbar-nav border-left flex-row ">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{Auth::user()->getAvatar()}}" alt="User Avatar" width="50" height="50">
+                    <img class="user-avatar rounded-circle mr-2" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="User Avatar" width="50" height="40">
                     <span class="d-none d-md-inline-block">{{$login_name}}</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">

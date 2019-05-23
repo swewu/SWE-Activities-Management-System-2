@@ -159,7 +159,7 @@
                     <div class="container">
                         <div class="avatar-upload">
                             <div class="avatar-edit" style="font-family:'Font Awesome 5 Free'">
-                                <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="changeProfile()"/>
                                 <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
                             </div>
                             <div class="avatar-preview">

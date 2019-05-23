@@ -185,7 +185,7 @@ class ManageActivityController extends BaseController {
 		$message = [
 			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม',
 			'timeend.after'=> 'ไม่สามารถกรอกเวลาสิ้นสุดก่อนเวลาเริ่มต้นได้',
-      'exist_bettewn_in_db' => 'วันที่นี้ถูกจัดกิจรรมไปเเล้ว',
+      'exist_bettewn_in_db' => 'วันที่นี้ถูกจัดกิจกรรมไปเเล้ว',
       'sector.exist_term_and_sector_in_db' => 'กิจกรรมนี้ถูกสร้างไปเเล้วในเทอมนี้'
 		];
 		$validator = Validator::make(Input::all(),$rules,$message);

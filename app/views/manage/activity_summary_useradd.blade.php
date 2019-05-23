@@ -57,12 +57,16 @@
                 </td>
                 <td>{{$activityDetail->participations()->count()}} คน</td>
                 <td>
-                  @if(!$activityDetail->isPassDayStart())
-                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
-                  @else
+                  @if($activityDetail->isPassDayStart())
                     <small class="text-danger">
-                      ยังไม่ถึงเวลาในการจัดกิจกรรม
+                      ยังไม่ถึงเวลาจัดกิจกรรม
                     </small>
+                  @elseif($activityDetail->term_year < Term::getLastYear())
+                    <small class="text-danger">
+                     เลยเวลาจัดกิจกรรม
+                    </small>
+                  @else
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
                   @endif
                 </td>
                 <td>

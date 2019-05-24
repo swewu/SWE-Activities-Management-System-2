@@ -112,6 +112,25 @@
         //      $("#remove").val(1);
             }
         </script>
+        
+        <script>
+                $(function() {
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                                $('#imagePreview').hide();
+                                $('#imagePreview').show(650);
+                            }
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                    $("#imageUpload").change(function() {
+                        readURL(this);
+                    });
+                })
+                </script>
 
 
 
@@ -132,6 +151,33 @@
     });
   })
 </script>
+<script>
+        function changeProfile() {
+            $('#image').click();
+        }
+        $('#image').change(function () {
+            var imgPath = this.value;
+            var ext = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+            if (ext == "gif" || ext == "png" || ext == "jpg" || ext == "jpeg")
+                readURL(this);
+            else
+                alert("Please select image file (jpg, jpeg, png).")
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+    //              $("#remove").val(0);
+                };
+            }
+        }
+        function removeImage() {
+            $('#preview').attr('src', 'noimage.jpg');
+    //      $("#remove").val(1);
+        }
+    </script>
 @stop
 @section('content')
     <br>
@@ -158,20 +204,21 @@
                     </div>
                     <div class="container">
                         <div class="avatar-upload">
-                            <div class="avatar-edit" style="font-family:'Font Awesome 5 Free'">
-                                <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="changeProfile()"/>
-                                <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
-                            </div>
                             <div class="avatar-preview">
-                                    <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
-                                <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('')}});">
+                                    <div class="rounded-circle" type="image"  id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? $user->{$user->type}->getAvatar() :  asset('')}});"onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
+                                            <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >  
                                 </div>
                             </div>
                         </div>
+                        <div class='card-body mt-n5 ' style="margin-top: -3.25rem !important;">
+                            <h6 class="m-0 mb-2">รูปภาพ</h6>
+                            <input type="file" class="form-control-file" name="image" accept="image/*" >
+                            <p class="text-danger">*รูปภาพต้องมีขนาดไม่เกิน 3 MB และเป็นไฟล์รูปภาพ jpg,jpeg,png</p>
+                        </div>
                     </div>
+                       
                 </br>
                    
-                    <h6>รูปภาพต้องมีขนาดไม่เกิน 3 MB และเป็นไฟล์รูปภาพ jpg,jpeg,png</h6>
 
 
                     </div>
@@ -322,11 +369,12 @@
                                         </div>
                                     </div>
                         </div>
-                        </div>
-            <div class="form-group ">
-                <button type="submit" class="btn btn-outline-success ml-auto float-right">บันทึก</button>
-            </div>
+                        
         </div>
+        <div class="form-group ">
+                <button type="submit" class="btn btn-outline-success ml-auto float-left">บันทึก</button>
+            </div>
+
     </div>
 </div>
 </div>

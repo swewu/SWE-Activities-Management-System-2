@@ -4,6 +4,12 @@
  if(!is_null(Auth::user()->getFullName())){
    $login_name = Auth::user()->getFullName();
  }
+ $avatar='';
+ 
+ if(!is_null(Auth::user()->getAvatar())){
+  $avatar = Auth::user()->getAvatar();
+}
+
 ?>
 <!doctype html>
 <html class="no-js h-100" lang="en">
@@ -50,11 +56,19 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link {{ Request::is('manage') ? '' : '' }}" href="{{url('manage')}}">
-                  <i class="material-icons">person</i>
-                  <span>ข้อมูลนักศึกษา</span>
-                </a>
+                <a class="nav-link {{ Request::is('profile') ? '' : '' }}" href="{{url('/teacher')}}">
+                   <i class="material-icons">person</i>
+                   <span >ข้อมูลอาจารย์</span>
+               </a>
               </li>
+              @if(Auth::user()->isTeacher())
+              <li class="nav-item">
+               <a class="nav-link {{ Request::is('profile') ? '' : '' }}" href="{{url('/studentprofile')}}">
+                  <i class="material-icons">person</i>
+                  <span >ข้อมูลนักศึกษา</span>
+              </a>
+              </li>
+              @endif
 
               @if(Auth::user()->isTeacher())
               <li class="nav-item dropdown">
@@ -65,9 +79,9 @@
                 <div class="dropdown-menu dropdown-menu-small" x-placement="bottom-start" style="display: none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-5px, 50px, 0px);">
                   <a class="dropdown-item {{ Request::is('manage/activity') ? 'active' : '' }}" href="{{url('manage/activity')}}">เพิ่มกิจกรรม</a>
                   <!-- <a class="dropdown-item {{ Request::is('manage/activity/add') ? 'active' : '' }}" href="{{url('manage/activity/add')}}">สร้างกิจกรรม</a> -->
-                  <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">กิจกรรมที่รับผิดชอบ</a>
-                  <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">กิจกรรมทั้งหมด</a>
+                  <a class="dropdown-item {{ Request::is('manage/activity/summary/useradd') ? 'active' : '' }}" href="{{url('manage/activity/summary/useradd')}}">บันทึกการเข้าร่วมกิจกรรม</a>
                   <a class="dropdown-item {{ Request::is('manage/activity/conclude') ? 'active' : '' }}" href="{{url('manage/activity/conclude')}}">สรุปการเข้าร่วมกิจกรรม</a>
+                  <a class="dropdown-item {{ Request::is('manage/activity/summary') ? 'active' : '' }}" href="{{url('manage/activity/summary')}}">รายละเอียดกิจกรรมทั้งหมด</a>
                 </div>
               </li>
               @endif
@@ -105,19 +119,19 @@
               <ul class="navbar-nav border-left flex-row ">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="{{asset('assets/shards-dashboard/images/avatars/0.jpg')}}" alt="User Avatar">
-                    <span class="d-none d-md-inline-block">{{$login_name}}</span>
+                    <img class="user-avatar rounded-circle mr-2" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$avatar}}" alt="User Avatar" width="50" height="40">
+                    <span class="d-none d-md-inline-block">{{$login_name}}</span>                    
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="user-profile-lite.html">
-                      <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="components-blog-posts.html">
-                      <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="add-new-post.html">
-                      <i class="material-icons">note_add</i> Add New Post</a>
+                    <a class="dropdown-item" href="{{url('profile')}}">
+                      <i class="material-icons">&#xE7FD;</i> โปรไฟล์</a>
+                    <a class="dropdown-item" href="{{url('profile/edit')}}">
+                      <i class="material-icons">vertical_split</i>แก้ไขข้อมูลส่วนตัว</a>
+                    <a class="dropdown-item" href="{{url('resetpassword')}}">
+                      <i class="material-icons">note_add</i> แก้ไขรหัสผ่าน</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{url('logout')}}">
-                      <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                      <i class="material-icons text-danger">&#xE879;</i> ออกจากระบบ </a>
                   </div>
                 </li>
               </ul>
@@ -203,16 +217,16 @@
       }
       $(function(){
         var delete_href = null
-        $('.delete-confirm').click((e)=>{
-          event.preventDefault()
-          delete_href = e.target.href
+        $('.delete-confirm').click(function(e){
+          e.preventDefault()
+          delete_href = this.href
+          console.log(delete_href)
           if(delete_href){
             $('#deleteModal').modal('show')
-            console.log('delete_href',delete_href)
           }
         })
-        $('#deleteModal .confirm').click((e)=>{
-          event.preventDefault()
+        $('#deleteModal .confirm').click(function(e){
+          e.preventDefault()
           window.location = delete_href
         })
         $('[data-toggle="tooltip"]').tooltip()

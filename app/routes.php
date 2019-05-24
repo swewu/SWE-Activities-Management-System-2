@@ -13,7 +13,7 @@
 
 Route::get('/manage/year', 'ManageYearController@showYear');
 Route::get('/manage/year/add', 'ManageYearController@actionYearAdd');
-
+Route::get('/manage/year/delete', 'ManageYearController@actionYearDelete');
 
 Route::get('/show-activity/{id}', 'HomeController@showActivity');
 Route::get('/activity-register/{id}', 'HomeController@registerActivity');
@@ -97,7 +97,7 @@ Route::group(array('before' => array('auth', 'admin')) , function () {
 });
 
 
-
+Route::get('/manage/activity/detail/{activity_detail_id}/decription', 'ManageActivityController@showActivityDecription');
 Route::get('/student_profile', 'StudentProfileController@studentProfile');
 Route::post('/student_profile','StudentProfileController@showStudentEdit');
 
@@ -113,12 +113,23 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
 // Route::post('/login', 'UserController@postLogin');
-
+Route::get('/manage', function(){
+    return View::make('manage.index');
+  });
+//Route::get('/manage/layout', 'UserController@getProfile');
 Route::get('/profile', 'UserController@getProfile');
+Route::get('/getActivityByTermYear', 'GraphController@getActivityByTermYear'); // return json
+Route::get('/getActivityDetail', 'GraphController@getActivityDetail');
 Route::get('/profile/edit', 'UserController@getProfileUpdate');
 Route::post('/profile/edit', 'UserController@postProfileUpdate');
 Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
 Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
+// Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
+Route::get('/teacher', 'UsersController@showUsersTeacher');
+Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
+
+Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
+Route::post('/resetpassword', 'ManageController@postUserTeacherAdd');
 // Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');

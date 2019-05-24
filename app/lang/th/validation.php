@@ -69,7 +69,7 @@ return array(
 	),
 	"unique"               => "The :attribute has already been taken.",
 	"url"                  => "The :attribute format is invalid.",
-	"required_without_all" => "กรุณาเลือกรายการข้อมูล !",
+	"required_without_all" => "กรุณาเลือกข้อมูล",
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines
@@ -87,8 +87,16 @@ return array(
 		),
 		'prefix' => [
 			'required' => 'กรุณาเลือกข้อมูล',
-		]
+		],
+		'role' => [
+			'required' => 'กรุณาเลือกข้อมูล',
+		],
+		'position' => [
+			'required' => 'กรุณาเลือกข้อมูล',
+		],
+		
 	),
+
 
 	/*
 	|--------------------------------------------------------------------------

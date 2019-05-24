@@ -40,7 +40,19 @@ class Tool
 	{
 		if($day != ''){
 			$day = strtr($day, '/', '-');
-			return date('d/m/Y',strtotime($day));
+			return date('d/m/Y', strtotime($day));
+		}else{
+			return '';
+		}
+	}
+	public function formatDateForDisplayHu($day)
+	{
+		if($day != ''){
+			$day = strtr($day, '/', '-');
+			$day =  date('d/m/Y', strtotime($day));
+			$days = (explode("/",$day));
+			$days[2] = $days[2]+543;
+			return join("/",$days);
 		}else{
 			return '';
 		}

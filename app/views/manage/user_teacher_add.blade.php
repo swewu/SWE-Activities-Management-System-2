@@ -1,7 +1,7 @@
 @extends('manage.layout')
 
 @section('title')
-  @if(isset($activity))
+  @if(isset($teacher))
     แก้ไขข้อมูลอาจารย์
   @else
     เพิ่มข้อมูลอาจารย์
@@ -44,7 +44,7 @@
           <div class="row">
                <div class="col">
                   <div class="form-group">
-                     <label for="name">บทบาทในระบบ</label>
+                     <label for="name">บทบาทในระบบ <span class="text-danger">*</span> </label> 
                      <select id="role" name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
                         <option value="">- เลือกบทบาท -</option>
                         @foreach ($roles as $role)
@@ -56,7 +56,7 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">ตำแหน่ง</label>
+                     <label for="name">ตำแหน่ง <span class="text-danger">*</span> </label>
                      <select id="position" name="position" class="form-control {{$errors->has('position') ? 'is-invalid' : ''}}">
                         <option value="">- เลือกตำแหน่ง -</option>
                         @foreach ($positions as $position)
@@ -71,7 +71,7 @@
             <div class="row">
                <div class="col">
                   <div class="form-group">
-                     <label for="exampleFormControlSelect1">คำนำหน้า</label>
+                     <label for="exampleFormControlSelect1">คำนำหน้า <span class="text-danger">*</span> </label>
                      <select class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
                         <option value="">คำนำหน้า</option>
                         <option value="นาย"  <?=($select_prefix=="นาย")?'selected':''?>>นาย</option>
@@ -88,14 +88,14 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">ชื่อ</label>
+                     <label for="name">ชื่อ <span class="text-danger">*</span> </label> 
                      <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
                      <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">นามสกุล</label>
+                     <label for="name">นามสกุล <span class="text-danger">*</span> </label>
                      <input type="text" class="form-control {{$errors->has('lastname') ? 'is-invalid' : ''}}" id="lastname" name="lastname" value="{{$text_lastname}}" placeholder ="นามสกุล" >
                      <small class="form-text text-danger">{{$errors->first('lastname')}}</small>
                   </div>
@@ -105,14 +105,14 @@
             <div class="row">
                <div class="col-3">
                   <div class="form-group">
-                     <label for="name">เบอร์โทรศัพท์<br><small>(ระบุหรือไม่ระบุก็ได้)</small></label>
+                     <label for="name">เบอร์โทรศัพท์</label>
                      <input type="tel" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder="0899999999" >
                      <small class="form-text text-danger">{{$errors->first('tel')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">&nbsp;<br>ห้องทำงาน</label>
+                     <label for="name">&nbsp;ห้องทำงาน <span class="text-danger">*</span> </label>
                      <input type="text" class="form-control {{$errors->has('room') ? 'is-invalid' : ''}}" id="room" name="room" value="{{$text_room}}" placeholder ="ห้องทำงาน" >
                      <small class="form-text text-danger">{{$errors->first('room')}}</small>
                   </div>
@@ -122,14 +122,14 @@
             <div class="row">
                <div class="col">
                   <div class="form-group">
-                     <label for="name">อีเมล</label>
+                     <label for="name">อีเมล <span class="text-danger">*</span> </label>
                      <input type="text" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" id="email" name="email" value="{{$text_email}}" placeholder ="อีเมล" >
                      <small class="form-text text-danger">{{$errors->first('email')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     <label for="name">รหัสผ่าน</label>
+                     <label for="name">รหัสผ่าน <span class="text-danger">*</span> </label>
                      <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
                      <small class="form-text text-danger">{{$errors->first('password')}}</small>
                   </div>

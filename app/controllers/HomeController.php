@@ -57,8 +57,8 @@ class HomeController extends BaseController {
 		if(Auth::user()->teacher == null) {
 			return Redirect::to('/profile');
 		}
-		$activities = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
-		return View::make('welcome-teacher', ['activities' => $activities]);
+		// $activities = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
+		return View::make('welcome-teacher');
 	}
 
 

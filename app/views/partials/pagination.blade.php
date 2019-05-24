@@ -8,7 +8,7 @@
           @endfor
           <li class="page-item {{($paginator->getCurrentPage() == $paginator->getLastPage()) ? ' disabled' : '' }}"><a class="page-link" href="{{ $paginator->getUrl($paginator->getCurrentPage()+1) }}">ถัดไป</a></li>
       </ul>
-      <p class="text-sm-left">ข้อมูลทั้งหมด {{$paginator->getTotal()}} จำนวน</p>
+      <!-- <p class="text-sm-left">ข้อมูลทั้งหมด {{$paginator->getTotal()}} จำนวน</p> -->
+      <p class="text-sm-left"> {{$paginator->getFrom()}}-{{$paginator->getTo()}} จาก {{$paginator->getTotal()}}</p>
   </nav>
-
 @endif

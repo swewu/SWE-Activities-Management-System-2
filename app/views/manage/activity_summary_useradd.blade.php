@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-กิจกรรมที่รับผิดชอบ
+บันทึกการเข้าร่วมกิจกรรม
 @stop
 @section('subtitle')
 จัดการกิจกรรม
@@ -40,13 +40,14 @@
               <th scope="col" class="border-0">วันและเวลาที่จัด</th>
               <th scope="col" class="border-0">จำนวนนักศึกษา</th>
               <th scope="col" class="border-0">บันทึกการเข้าร่วม</th>
+              <th scope="col" class="border-0">ไฟล์ใบลงชื่อ</th>
             </tr>
           </thead>
           <tbody>
             @foreach($activityDetails as $i => $activityDetail)
               <tr>
                 <td>{{ Tool::calIndex($i,Input::get('page'),$perpage) }}</td>
-                <td class="text-left" style="vertical-align : middle;">{{$activityDetail->activity->name}}</td>
+                <td class="text-left">{{$activityDetail->activity->name}}</td>
                 <td>{{$activityDetail->term_sector}}/{{$activityDetail->term_year}}</td>
                 <td>
                   <div>
@@ -56,13 +57,20 @@
                 </td>
                 <td>{{$activityDetail->participations()->count()}} คน</td>
                 <td>
-                  @if(!$activityDetail->isPassDayStart())
-                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
-                  @else
+                  @if($activityDetail->isPassDayStart())
                     <small class="text-danger">
-                      ยังไม่ถึงเวลาในการจัดกิจกรรม
+                      ยังไม่ถึงเวลาจัดกิจกรรม
                     </small>
+                  @elseif($activityDetail->term_year < Term::getLastYear())
+                    <small class="text-danger">
+                     เลยเวลาจัดกิจกรรม
+                    </small>
+                  @else
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
                   @endif
+                </td>
+                <td>
+                <a href="{{url('manage')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="พิมพ์ใบลงชื่อ"><i class="fas fa-print"></i></a>
                 </td>
               </tr>
             @endforeach

@@ -32,16 +32,25 @@ class ManageActivityController extends BaseController {
 
   public function showActivityTerm($id)
   {
-    $q = '';
+    $term_year = '';
     $activity = Activity::find($id);
     $activityDetails = ActivityDetail::where('activity_id',$id)->orderBy('day_start','DESC');
-    if(Input::get('q') != NULL && Input::get('q') != ""){
-			$q = Input::get('q');
-			$activityDetails = $activityDetails->Where('year','like','%'.$q.'%')->orWhere('sector','like','%'.$q.'%');
-		}
+    $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');  
+    if(Input::get('term_year') != NULL && Input::get('term_year') != ""){
+      $term_year = Input::get('term_year');
+      $activityDetails = $activityDetails->where('term_year',$term_year);
+    }
 		$activityDetails = $activityDetails->paginate($this->perpage);
-    $activityDetails->appends(['q'=>$q]);
-    return View::make('manage.activity_term',['activity' => $activity ,'activityDetails' => $activityDetails,'q'=>$q,'perpage'=>$this->perpage]);
+    $activityDetails->appends(['term_year'=>$term_year]);
+    return View::make('manage.activity_term',
+      [
+        'activity' => $activity ,
+        'activityDetails' => $activityDetails,
+        'perpage'=>$this->perpage,
+        'term_year'=>$term_year,
+        'term_years'=>$term_years
+       ]
+    );
   }
 
   public function showActivityTermAdd($id)
@@ -63,7 +72,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
+    $teachers = Teacher::orderBy('prefix_level','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $nowTeachers = Auth::user()->teacher->id;
@@ -117,7 +126,7 @@ class ManageActivityController extends BaseController {
     $isPastDayStart = false;
 		$isPastDayEnd = false;
 
-    $teachers = Teacher::orderBy('role_id','desc')->orderBy('firstname')->get();
+    $teachers = Teacher::orderBy('prefix_level','desc')->orderBy('firstname')->get();
     $students = Student::get();
 
     $nowTeachers = Auth::user()->teacher->id;
@@ -140,7 +149,8 @@ class ManageActivityController extends BaseController {
 			'isPastDayEnd'=>$isPastDayEnd,
       'teachers'=>$teachers,
       'students'=>$students,
-      'nowTeachers'=>$nowTeachers
+      'nowTeachers'=>$nowTeachers,
+      'activityDetail'=>$activityDetail
       
 		];
 		return View::make('manage.activity_term_add',$data);
@@ -175,7 +185,7 @@ class ManageActivityController extends BaseController {
 		$message = [
 			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม',
 			'timeend.after'=> 'ไม่สามารถกรอกเวลาสิ้นสุดก่อนเวลาเริ่มต้นได้',
-      'exist_bettewn_in_db' => 'วันที่นี้ถูกจัดกิจรรมไปเเล้ว',
+      'exist_bettewn_in_db' => 'วันที่นี้ถูกจัดกิจกรรมไปเเล้ว',
       'sector.exist_term_and_sector_in_db' => 'กิจกรรมนี้ถูกสร้างไปเเล้วในเทอมนี้'
 		];
 		$validator = Validator::make(Input::all(),$rules,$message);
@@ -354,19 +364,23 @@ class ManageActivityController extends BaseController {
 			return Redirect::back()->with('error', 'ไม่พบข้อมูลกิจกรรม');
 		}
 
+    $countActivityDetail =  ActivityDetail::where('activity_id',$id)->count();
+    if($countActivityDetail >= 1){
+      return Redirect::to('manage/activity')->with('error','ไม่สามารถลบกิจกรรมได้เนื่องจากมีรายละเอียดกิจกรรม');
+    }
+
 		try {
 			$activity->delete();
 		}
 		catch ( \Exception $e ) {
 			return Redirect::back()->with('error', $e->getMessage());
 		}
-
 		return Redirect::back()->with('message','ลบข้อมูลกิจกรรมสำเร็จ');
   }
 
 	public function showActivitySummary()
 	{
-    $q = '';
+    $q = Input::get('q');
     $term_year = '';
     $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
 
@@ -400,7 +414,7 @@ class ManageActivityController extends BaseController {
 	public function showActivityConclude()
 	{
     $all = Input::get('all');
-    $q = '';
+    $q = Input::get('q');
     if($all == 'true'){
       $activityDetails = ActivityDetail::responsibilitySearch($q);      
     } else {

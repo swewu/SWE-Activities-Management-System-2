@@ -40,7 +40,7 @@
             <div class="row">
               <div class="col-3">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">คำนำหน้า</label>
+                    <label for="exampleFormControlSelect1">คำนำหน้า <span class="text-danger">*</span> </label>
                     <select class="form-control {{$errors->has('prefix') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
                       <option value="">คำนำหน้า</option>
                       <option value="นาย" <?=($select_prefix=="นาย")?'selected':''?>>นาย</option>
@@ -51,14 +51,14 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                    <label for="name">ชื่อ</label>
+                    <label for="name">ชื่อ <span class="text-danger">*</span> </label>
                     <input type="text" class="form-control  {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
                     <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                    <label for="name">นามสกุล</label>
+                    <label for="name">นามสกุล <span class="text-danger">*</span> </label>
                     <input type="text" class="form-control  {{$errors->has('lastname') ? 'is-invalid' : ''}}" id="lastname" name="lastname" value="{{$text_lastname}}" placeholder ="นามสกุล" >
                     <small class="form-text text-danger">{{$errors->first('lastname')}}</small>
                 </div>
@@ -68,14 +68,14 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-groups">
-                    <label for="name">รหัสนักศึกษา</label>
+                    <label for="name">รหัสนักศึกษา <span class="text-danger">*</span> </label>
                     <input type="text" class="form-control  {{$errors->has('id') ? 'is-invalid' : ''}}" id="id" name="id" value="{{$text_id}}" placeholder ="รหัสนักศึกษา" {{isset($id) ? 'disabled' : ''}}>
                     <small class="form-text text-danger">{{$errors->first('id')}}</small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
-                    <label for="name">รหัสผ่าน</label>
+                    <label for="name">รหัสผ่าน <span class="text-danger">*</span> </label>
                     <input type="password" class="form-control  {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
                     <small class="form-text text-danger">{{$errors->first('password')}}</small>
                 </div>

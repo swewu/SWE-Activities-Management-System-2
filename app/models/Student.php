@@ -42,8 +42,8 @@ class Student extends Eloquent{
 			return $querry->where('year',$search_year);
 		}
 		else{
-			$search_year = $now_year - $year;
-			return $querry->where('year','<',$search_year);
+			$search_year = $now_year - ($year - 1);
+			return $querry->where('year','<=',$search_year);
 		}
 
 	}

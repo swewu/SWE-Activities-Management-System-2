@@ -32,9 +32,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->hasOne('Teacher');
 	}
-
+	
 	public function getAvatar() {
-		return asset($this->image);
+		$get = '';
+		$student = Student::where('user_id',$this->id)->first();
+		if(isset($student))
+		{
+			$get = $student->getAvatar();
+		}
+		$teacher = Teacher::where('user_id',$this->id)->first();
+		if(isset($teacher))
+		{
+			$get = $teacher->getAvatar();
+		}
+		return $get;
 	}
 
 	public function isTeacher()
@@ -82,5 +93,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			$result = $teacher->getFullName();
 		}
 		return $result;
+	}
+
+	public function participations() {
+		return $this->hasMany(Participation::class, 'student_id', 'username');
 	}
 }

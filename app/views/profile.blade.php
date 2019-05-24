@@ -176,16 +176,16 @@ $dataPoints2 = array(
            @foreach ($activity as $key => $value)
            <div class="col-md-4">
               <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
+                 <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
                     {{ $value->name }}
                     <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
-                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     
                  </div>
                  <div class="text-right">
-                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                  </div>
               </div>
            </div>
@@ -207,15 +207,15 @@ $dataPoints2 = array(
            @foreach ($history as $key => $value)
            <div class="col-md-4">
               <div class="img-activity">
-                 <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
+                 <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
                     {{ $value->name }}
                     <br>
-                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
-                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                    <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                    <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                  </div>
                  <div class="text-right">
-                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                  </div>
               </div>
             </div>  
@@ -239,15 +239,15 @@ $dataPoints2 = array(
             @foreach ($activity as $key => $value)
               <div class="col-md-4">
                  <div class="img-activity">
-                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
+                    <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
                        {{ $value->name }}
                        <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
-                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
                     <div class="text-right">
-                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
                  </div>
               </div>
@@ -268,17 +268,17 @@ $dataPoints2 = array(
               @foreach ($history as $key => $value)
               <div class="col-md-4">
                  <div class="img-activity">
-                    <a href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
+                    <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
                        {{ $value->name }}
                        <br>
-                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
-                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->details()->first()->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                       <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
+                       <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
                     
                  <button type="submit" class="btn btn-outline-success ml-auto float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
                     <div class="text-right">
-                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->details()->first()->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                       <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
                  </div>
               </div>

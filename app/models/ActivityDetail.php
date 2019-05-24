@@ -51,7 +51,7 @@ class ActivityDetail extends Eloquent {
   }
   public function dayStartDayEnd()
   {
-    return Tool::formatDateForsave($this->day_start).' - '.Tool::formatDateForsave($this->day_end);
+    return Tool::formatDateForDisplayHu($this->day_start).' - '.Tool::formatDateForDisplayHu($this->day_end);
   }
   public function timeStartTimeEnd()
   {

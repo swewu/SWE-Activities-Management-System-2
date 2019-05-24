@@ -41,8 +41,12 @@
             </div>
             <div class="row">
             
+              <div class="col-2"><p class="text-primary">ภาค/ปีการศึกษา </p></div>
+              <div class="col-10">{{$activityDetail->term_sector}} / {{$activityDetail->term_year}} </div>
+            </div>
+            <div class="row">
               <div class="col-2"><p class="text-primary">วันที่จัดกิจกรรม </p></div>
-              <div class="col-10">{{Tool::formatDateForsave($activityDetail->day_start)}} &nbsp ถึง &nbsp {{Tool::formatDateForsave($activityDetail->day_end)}}</div>
+              <div class="col-10">{{Tool::formatDateForDisplayHu($activityDetail->day_start)}} &nbsp ถึง &nbsp {{Tool::formatDateForDisplayHu($activityDetail->day_end)}}</div>
             </div>
             <div class="row">
               <div class="col-2"><p class="text-primary">เวลาที่จัดกิจกรรม </P></div>

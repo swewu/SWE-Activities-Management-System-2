@@ -31,7 +31,7 @@
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อนักศึกษา" name="q">
             <span class="input-group-append">
               <select style="height:48px !important" class="custom-select" name="year">
-                <option value="all">ชั้นปีทั้งหมด</option>
+                <option value="">ชั้นปีทั้งหมด</option>
                 <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
                 <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
                 <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>

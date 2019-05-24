@@ -49,17 +49,23 @@ public function getProfile () {
         return Redirect::to('login');
     }
     $activityID = [];
+    $activityDetailID = [];
     $activityYear = [];
     $historyID = [];
+    $historyDetailID = [];
     $historyYear = [];
     
     foreach ($user->participations as $key => $value) {
       // dd($value->rankChecks()->where('status', 1)->first()->activity_details_id);
 
       $activityID[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->activity_id;
+      $activityDetailID[]  =  \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->id;
       $activityYear[] = \DB::table('activity_details')->where('id', $value->activity_detail_id)->first()->term_year;
       
       $historyID[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->activity_id;
+      if(@$value->rankChecks()->where('status', 0)->count() == 0)
+        $historyDetailID[]  =  @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->id;
+      
       $historyYear[] = @\DB::table('activity_details')->where('id', @$value->rankChecks()->where('status', 1)->first()->activity_details_id)->first()->term_year;
     };
 
@@ -72,7 +78,9 @@ public function getProfile () {
       $historyYearSet[] = ['label' => $k, 'y' => $c];
     }
     $activityID = array_unique($activityID);
+    $activityDetailID = array_unique($activityDetailID);
     $historyID = array_unique($historyID);
+    $historyDetailID = array_unique($historyDetailID);
 
     if ( Teacher::where('user_id', $user->id)->first() != null) {
         $user->type = 'teacher';
@@ -92,15 +100,12 @@ public function getProfile () {
   //    $activity = $activity->where('name', 'LIKE', "%{$_GET['activity']}%");
  // }
     
- $activity = Activity::whereIn('id', $activityID);
- $history = Activity::whereIn('id', $historyID);
+ 
+ $activity = ActivityDetail::whereIn('id', $activityDetailID)->orderBy('day_start','DESC');
+ $history = ActivityDetail::whereIn('id', $historyDetailID)->orderBy('day_start','DESC');
  //$activity = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
    
 
-    if(!empty(Request::get('year'))) {
-        $year = Request::get('year');
-        $activity = $activity->where('student', 'LIKE', "%{$year}%");
-    }
 
 
     // $grapYearActivityReg = \DB::table('checking')->select('activityID')->where('UserID', $userID)->get();

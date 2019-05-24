@@ -83,7 +83,7 @@ try {
               <li class="nav-item">
                <a class="nav-link {{ Request::is('profile') ? '' : '' }}" href="{{url('/studentprofile')}}">
                   <i class="material-icons">person</i>
-                  <span >โปรไฟล์นักศึกษา</span>
+                  <span >ข้อมูลนักศึกษา</span>
               </a>
               </li>
               @endif

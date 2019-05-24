@@ -16,7 +16,7 @@
         <div class="card" style="margin-bottom:15px;">
           <div class="card-body">
             <h5 class="card-title text-center"><input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$teacher->getAvatar()}}" alt="x3" width="150" height="200" ></h5>
-            <p class="card-text text-center">
+            <p class="card-text text-left">
                       {{ $teacher->getFullName() }} <br>
                     อีเมล : {{ $teacher->email }} <br>
                     เบอร์โทรศัพท์ : {{ $teacher->tel }} <br>

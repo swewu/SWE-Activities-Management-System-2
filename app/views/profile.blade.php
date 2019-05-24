@@ -111,7 +111,7 @@ $dataPoints2 = array(
               </div>
               <div class="row">
                   <div class="col-md-12">
-                    <canvas id="chartContainer" width="100" height="100"></canvas>
+                    <canvas id="chartContainer" width="10" height="10"></canvas>
                   </div>
               </div>
            </div>
@@ -329,7 +329,6 @@ $dataPoints2 = array(
                         //var label = data.datasets[datasetIndex].label;
                         var term = activePoint._index;
                         //var value = data.datasets[datasetIndex].data[activePoint._index];
-                        console.log(term, datasetIndex);
                         var arrTerm = ['ภาคการศึกษาที่ 1', 'ภาคการศึกษาที่ 2', 'ภาคการศึกษาที่ 3'];
                         var arrActivity = ['กิจกรรมทั้งหมด','กิจกรรมที่เข้าร่วมแล้ว','กิจกรรมที่ไม่ได้ร่วมเข้า'];
                     
@@ -395,10 +394,13 @@ $dataPoints2 = array(
                             scales: {
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: false
+                                        beginAtZero: true,
+                                        callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                                        stepSize: 1
                                     }
                                 }]
-                            }
+                            },
+                            
                         }
 
                         stackedBar = new Chart(ctx, {

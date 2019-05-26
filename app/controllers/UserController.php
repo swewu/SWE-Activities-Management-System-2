@@ -166,12 +166,25 @@ public function getProfile () {
     $id = $user->id;
     if(Request::get('type') == 1) {
       $history = [];
-      $activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+      $activity_name = Request::get('activity');
+      $activity = ActivityDetail::whereIn('id', $activityDetailID)->whereHas('activity', function($activity) use($activity_name) {
+      $activity->where('name', 'like', '%'.$activity_name.'%');})->paginate(6);
+    //$activity = $activity->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+    //dd($activity);
+    //$activity = \Event::whereHas('name', function ($query) {
+      //$query->where('activity', '=', 1); })->get();
     	//$user->type = 'student';
       //$user->student = Student::where('user_id', $user->id)->first();
+      //$activity = ActivityDetail::with(["name" => function($q)  use($activity_name){
+      // $q->where('name.id', '=', 1);
+      //}])->paginate(6);
+
     } elseif(Request::get('type') == 2) {
       $activity = [];
-      $history = $history->where('name', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
+      $history_name = Request::get('activity');
+      $history = ActivityDetail::whereIn('id', $historyDetailID)->whereHas('activity', function($history) use($history_name) {
+      $history->where('name', 'like', '%'.$history_name.'%');})->paginate(6);
+      //$history = $history->where('id', 'LIKE', "%" . trim(Request::get('activity')) . "%")->paginate(6);
       //$user->type = 'student';
       //$user->student = Student::where('user_id', $user->id)->first();
     } else {

@@ -149,7 +149,7 @@ class ActivityDetail extends Eloquent {
           ->where('participations.student_id', '=', $userId);
 
           if($year == "5"){
-            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getfourYear());
+            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId));
           }else{
             $activityDetail = $activityDetail->where('activity_details.term_year', $year);
           }
@@ -160,9 +160,8 @@ class ActivityDetail extends Eloquent {
     return $activityDetail;
   }
 
-  function getfourYear(){
-    $username = Auth::user()->username;
-    $startYear = (int)("25".substr($username,0,2));
+  function getfourYear($userId){
+    $startYear = (int)("25".substr($userId,0,2));
     return $startYear+4;
   }
 
@@ -173,7 +172,7 @@ class ActivityDetail extends Eloquent {
     ->where('participations.student_id', '=', $userId);
 
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear())->get();
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }
@@ -215,7 +214,7 @@ class ActivityDetail extends Eloquent {
     ->where('activity_details.term_sector', $term);
     
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear())->get();
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }

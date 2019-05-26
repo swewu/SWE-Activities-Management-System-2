@@ -1,6 +1,9 @@
 @extends('manage.layout')
 @section('title')
-    โปรไฟล์นักศึกษา
+ โปรไฟล์นักศึกษา
+@stop
+@section('subtitle')
+จัดการโปรไฟล์
 @stop
 @section('cdn')
 
@@ -94,11 +97,12 @@ $dataPoints2 = array(
                         <div class="input-group">   
                         <span class="input-group-append">
                            <select class="form-control" name="year" id="year">
-                              {{--  <option value="">ชั้นปีทั้งหมด</option>  --}}
+                              {{--  <option value="0">ชั้นปีทั้งหมด</option>  --}}
+                              {{--  <option value= {{$startYear+3}} selected>ชั้นปีที่ 4</option> --}}
                               @for ($i = 0; $i < 4; $i++)
                                 <option value="{{$startYear+$i}}">ชั้นปีที่ {{$i+1}}</option>
                               @endfor                  
-                              <option value="5" >ชั้นปีที่อื่นๆ</option>
+                                <option value="5" >ชั้นปีอื่นๆ</option>
                            </select>
                            <input type="hidden" name="username" id="username" value="{{$username}}">
                            <button class="btn btn-outline-secondary btn-secondary" type="submit">
@@ -148,7 +152,7 @@ $dataPoints2 = array(
               <form>
                  <div class="input-group">
                         <input type="hidden" name="id" id="id" value="{{$id}}">
-                    <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="{{@$_GET['activity']}}">
+                    <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหาจากชื่อกิจกรรม" value="{{@$_GET['activity']}}">
                     <div class="input-group-append">
                        <select class="form-control" name="type">
                        <option value="1" {{ @$_GET['type'] == 1 ? "selected" : '' }}>กิจกรรมที่ต้องเข้าร่วม</option>
@@ -178,7 +182,7 @@ $dataPoints2 = array(
               <div class="img-activity">
                  <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
-                    {{ $value->name }}
+                    {{Activity::find($value->activity_id)->name}}
                     <br>
                     <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                     <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
@@ -209,11 +213,12 @@ $dataPoints2 = array(
               <div class="img-activity">
                  <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
-                    {{ $value->name }}
+                    {{Activity::find($value->activity_id)->name}}
                     <br>
                     <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                     <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                  </div>
+                 <button type="submit" class="btn btn-outline-success ml-auto float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
                  <div class="text-right">
                     <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                  </div>
@@ -241,7 +246,7 @@ $dataPoints2 = array(
                  <div class="img-activity">
                     <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
-                       {{ $value->name }}
+                       {{Activity::find($value->activity_id)->name}}
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                        <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
@@ -270,7 +275,7 @@ $dataPoints2 = array(
                  <div class="img-activity">
                     <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
-                       {{ $value->name }}
+                       {{Activity::find($value->activity_id)->name}}
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                        <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>

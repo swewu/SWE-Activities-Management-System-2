@@ -2,6 +2,9 @@
 @section('title')
 ข้อมูลอาจารย์
 @stop
+@section('subtitle')
+จัดการโปรไฟล์
+@stop
 
    @section('content')
    @include('error')

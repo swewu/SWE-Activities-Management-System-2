@@ -8,8 +8,17 @@ class GraphController extends Controller {
 		$username = Input::get('username');
 		$student = ActivityDetail::getCountOfTermYear($year, $username);
 		$data['total'] = [0,0,0];
+
 		foreach($student as $key => $row){
-			$data['total'][$key] = $row->total;
+			$data['total'][$row->term_sector-1] = $row->total;
+			// if($term = "1"){
+			// 	   $data[0] = $term;
+			// }elseif ($term = "2"){
+			//     $data[1] = $term;
+			// }elseif ($term = "3"){
+			// 	   $data[2] = $term;
+			// }else{
+			// }
 		}
 		$data['join'] = ActivityDetail::getActivityOfJoinActivity($year, $username);
 		$data['unjoin'] = [0,0,0];

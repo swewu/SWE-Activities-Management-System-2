@@ -148,15 +148,22 @@ class ActivityDetail extends Eloquent {
           ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
           ->where('participations.student_id', '=', $userId);
 
+          $activityDetailyear = DB::table('activity_details')
+          ->select('activity_details.term_sector', DB::raw('count(*) as total'))
+          ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+          ->where('participations.student_id', '=', $userId);
+
           if($year == "5"){
-            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId));
+            $activityDetail = $activityDetailyear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId));
+          }elseif($year == "0"){
+            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId));
           }else{
             $activityDetail = $activityDetail->where('activity_details.term_year', $year);
           }
 
     $activityDetail = $activityDetail->groupBy('activity_details.term_sector')
           ->get();
-      
+
     return $activityDetail;
   }
 
@@ -165,14 +172,26 @@ class ActivityDetail extends Eloquent {
     return $startYear+4;
   }
 
+  function getAllYear($userId){
+    $startYear = (int)("25".substr($userId,0,2));
+    return $startYear;
+  }
+
   function getAllPaticipationByUserId($year, $userId){
     $participation = DB::table('activity_details')
     ->select('participations.id', 'participations.activity_detail_id', 'participations.student_id', 'activity_details.term_sector')    
     ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
     ->where('participations.student_id', '=', $userId);
 
+    $participationYear = DB::table('activity_details')
+    ->select('participations.id', 'participations.activity_detail_id', 'participations.student_id', 'activity_details.term_sector')    
+    ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+    ->where('participations.student_id', '=', $userId);
+
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId))->get();
+      $participation = $participationYear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
+    }elseif($year == "0"){
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }
@@ -212,9 +231,18 @@ class ActivityDetail extends Eloquent {
     ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
     ->where('participations.student_id', $userId)
     ->where('activity_details.term_sector', $term);
+
+    $participationYear = DB::table('activity')
+    ->select('activity.name', 'activity.id', 'activity.description', 'activity_details.id as activity_detail_id', 'participations.id as participations_id')    
+    ->join('activity_details', 'activity.id', '=', 'activity_details.activity_id')
+    ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+    ->where('participations.student_id', $userId)
+    ->where('activity_details.term_sector', $term);
     
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear($userId))->get();
+      $participation = $participationYear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
+    }elseif($year == "0"){
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }

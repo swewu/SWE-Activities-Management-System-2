@@ -101,7 +101,7 @@ public function getProfile () {
  // }
     
  
- $activity = ActivityDetail::whereIn('id', $activityDetailID)->orderBy('day_start','DESC');
+ $activity = ActivityDetail::whereIn('id', $activityDetailID)->orderBy('day_start','ASC');
  $history = ActivityDetail::whereIn('id', $historyDetailID)->orderBy('day_start','DESC');
  //$activity = ActivityDetail::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start');
    
@@ -208,7 +208,8 @@ public function getProfile () {
   
   // $activityDetails = $activityDetails->paginate($this->perpage);
   // $activityDetails->appends(['q'=>$q,'all'=>$all,'term_year',$term_year]);
- 
+  $y = $user->{$user->type}->getNowYear();
+  $j = $user->{$user->type}->getNowYear()-1;
 	$id = $user->username;
     return View::make('profile', array(
       'id'=>$id,
@@ -218,6 +219,8 @@ public function getProfile () {
       'historyYearSet'=>$historyYearSet, 
       'history'=>$history,
       'startYear'=>$startYear,
+      'y'=>$y,
+      'j'=>$j,
       //'activityDetails' => $activityDetails,
       //'q'=>$q,
       //'term_years'=>$term_years,

@@ -84,8 +84,9 @@ $dataPoints2 = array(
                        @else
                        <div>ห้อง : {{ $user->{$user->type}->room_num }}</div>
                        @endif
-                       <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
-                       <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
+                       <div>เบอร์โทร : {{ $user->{$user->type}->tel }}</div>
+                       <div>อีเมล : {{ $user->{$user->type}->email }}</div>
+                       <div>ชั้นปีที่ : {{ $user->{$user->type}->getNowYear()  }}</div>
                     </div>
                  </div>
               </div>
@@ -97,12 +98,15 @@ $dataPoints2 = array(
                         <div class="input-group">   
                         <span class="input-group-append">
                            <select class="form-control" name="year" id="year">
-                              {{--  <option value="0">ชั้นปีทั้งหมด</option>  --}}
-                              {{--  <option value= {{$startYear+3}} selected>ชั้นปีที่ 4</option> --}}
-                              @for ($i = 0; $i < 4; $i++)
+                                <option value="{{$startYear+$j}}"selected>ชั้นปีที่ {{$y}}</option>
+                            {{--<option value= {{$startYear+3}} selected>ชั้นปีที่ 4</option> --}}
+                            @for ($i = 0; $i < $user->{$user->type}->getNowYear(); $i++)
                                 <option value="{{$startYear+$i}}">ชั้นปีที่ {{$i+1}}</option>
-                              @endfor                  
-                                <option value="5" >ชั้นปีอื่นๆ</option>
+                            @endfor                  
+                            {{--<option value="5">ชั้นปีอื่นๆ</option>--}}
+                                <option value="0">ทุกชั้นปี</option>
+                            {{--<option value="5">ชั้นปีอื่นๆ</option>--}}
+                            {{--<option value="5">ปีการศึกษาทั้งหมด</option>--}}
                            </select>
                            <input type="hidden" name="username" id="username" value="{{$username}}">
                            <button class="btn btn-outline-secondary btn-secondary" type="submit">
@@ -157,6 +161,7 @@ $dataPoints2 = array(
                        <select class="form-control" name="type">
                        <option value="1" {{ @$_GET['type'] == 1 ? "selected" : '' }}>กิจกรรมที่ต้องเข้าร่วม</option>
                        <option value="2" {{ @$_GET['type'] == 2 ? "selected" : '' }}>ประวัติกิจกรรมที่เข้าร่วม</option>
+                       <option value="3" {{ @$_GET['type'] == 3 ? "selected" : '' }}>กิจกรรมทั้งหมด</option>
                        </select>
                     </div>
                    
@@ -165,15 +170,17 @@ $dataPoints2 = array(
                     </button>
                  </div>
               </form>
+            </div>
+        </div>
               @if(@$_GET['type'] == 1)
-              <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
-                    <div class="mb-3 mx-auto">
-                       <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-small mb-4 pt-3">
+                        <div class="text-center">
+                        <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                        </div>
                     </div>
-                 </div>
-              </div>
-           </div>
+                </div>
            @if(empty($activity->count()))
            ไม่พบข้อมูล
            @endif
@@ -195,12 +202,14 @@ $dataPoints2 = array(
            </div>
            @endforeach   
            <div class="col-md-12 text-right">
-                       {{ $activity->appends($_GET)->links() }}
-                   </div>                                                                 
+                {{ $activity->appends($_GET)->links() }}
+            </div>   
+        </div>                                                               
            @elseif(@$_GET['type'] == 2)
+           <div class="row">
            <div class="col-md-12">
-              <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
+                <div class="card card-small mb-4 pt-3">
+                   <div class="text-center">
                     <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
                  </div>
               </div>
@@ -227,16 +236,17 @@ $dataPoints2 = array(
             @endforeach  
                 <div class="col-md-12 text-right">
                     {{ $history->appends($_GET)->links() }}
-                </div>              
+                </div>
+                      
            @else
            <div class="row">
               <!-- /.col-lg-4 -->
               <div class="col-md-12">
-                 <div class="card card-small mb-4 pt-3">
+                <div class="card card-small mb-4 pt-3">
                     <div class="text-center">
                        <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
                     </div>
-                 </div>
+                </div>
               </div>
             @if(empty($activity->count()))
               ไม่พบข้อมูล
@@ -260,6 +270,8 @@ $dataPoints2 = array(
                 <div class="col-md-12 text-right">
                      {{ $activity->appends($_GET)->links() }}
                 </div>
+            </div>
+            <div class="row">
               <div class="col-md-12">
                  <div class="card card-small mb-4 pt-3">
                     <div class="text-center">
@@ -286,11 +298,11 @@ $dataPoints2 = array(
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
                     </div>
                  </div>
-              </div>
+                </div>
               @endforeach
               <div class="col-md-12 text-right">
                 {{ $history->appends($_GET)->links() }}
-            </div>
+              </div>
            </div>
            @endif
            @else
@@ -338,8 +350,13 @@ $dataPoints2 = array(
                         var arrActivity = ['กิจกรรมทั้งหมด','กิจกรรมที่เข้าร่วมแล้ว','กิจกรรมที่ไม่ได้ร่วมเข้า'];
                     
                         if(term >= 0 && datasetIndex >= 0){
-                            $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษา "+yearSelect);
-                            getActivityDataForGraph(yearSelect, term, datasetIndex);
+                        if(yearSelect==0){
+                            $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษาทั้งหมด ");
+                            getActivityDataForGraph(yearSelect, term, datasetIndex); 
+                        }else{
+                                 $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษา "+yearSelect);
+                                 getActivityDataForGraph(yearSelect, term, datasetIndex);
+                        }
                         }
                     };
 

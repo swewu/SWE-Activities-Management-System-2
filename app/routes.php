@@ -54,7 +54,8 @@ Route::group(array('before' => array('auth', 'teacher')) , function () {
   Route::get('/manage/activity/{activity_id}/term/{id}/delete', 'ManageActivityController@actionActivityTermDelete');
   
   Route::get('/manage/activity/detail/{activity_detail_id}/participation', 'ManageActivityController@showParticipation');
-  Route::post('/manage/activity/detail/{activity_detail_id}/participation/all', 'ManageActivityController@actionParticipationAll');
+  Route::get('/manage/activity/detail/{activity_detail_id}/participation/confirm', 'ManageActivityController@actionParticipationConfirm');
+	Route::post('/manage/activity/detail/{activity_detail_id}/participation/all', 'ManageActivityController@actionParticipationAll');
   Route::post('/manage/activity/detail/{activity_detail_id}/participation/id/{id}', 'ManageActivityController@actionParticipation');
 
 

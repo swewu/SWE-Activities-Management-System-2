@@ -96,7 +96,7 @@ class ManageUserController extends BaseController {
 	{
 		$q = '';
 		$year = '';
-		$students = Student::orderBy('id','desc');
+		$students = Student::orderBy('year','DESC')->orderBy('id');
 		$isQ = Input::get('q') != NULL && Input::get('q') != "";
 		$isYear = Input::get('year') != NULL && Input::get('year') != "";
 		if($isYear){

@@ -1,6 +1,9 @@
 @extends('manage.layout')
 @section('title')
-    โปรไฟล์นักศึกษา
+ โปรไฟล์นักศึกษา
+@stop
+@section('subtitle')
+จัดการโปรไฟล์
 @stop
 @section('cdn')
 
@@ -81,8 +84,9 @@ $dataPoints2 = array(
                        @else
                        <div>ห้อง : {{ $user->{$user->type}->room_num }}</div>
                        @endif
-                       <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
-                       <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
+                       <div>เบอร์โทร : {{ $user->{$user->type}->tel }}</div>
+                       <div>อีเมล : {{ $user->{$user->type}->email }}</div>
+                       <div>ชั้นปีที่ : {{ $user->{$user->type}->getNowYear()  }}</div>
                     </div>
                  </div>
               </div>
@@ -94,11 +98,15 @@ $dataPoints2 = array(
                         <div class="input-group">   
                         <span class="input-group-append">
                            <select class="form-control" name="year" id="year">
-                              {{--  <option value="">ชั้นปีทั้งหมด</option>  --}}
-                              @for ($i = 0; $i < 4; $i++)
+                                <option value="{{$startYear+$j}}"selected>ชั้นปีที่ {{$y}}</option>
+                            {{--<option value= {{$startYear+3}} selected>ชั้นปีที่ 4</option> --}}
+                            @for ($i = 0; $i < $user->{$user->type}->getNowYear(); $i++)
                                 <option value="{{$startYear+$i}}">ชั้นปีที่ {{$i+1}}</option>
-                              @endfor                  
-                              <option value="5" >ชั้นปีที่อื่นๆ</option>
+                            @endfor                  
+                            {{--<option value="5">ชั้นปีอื่นๆ</option>--}}
+                                <option value="0">ทุกชั้นปี</option>
+                            {{--<option value="5">ชั้นปีอื่นๆ</option>--}}
+                            {{--<option value="5">ปีการศึกษาทั้งหมด</option>--}}
                            </select>
                            <input type="hidden" name="username" id="username" value="{{$username}}">
                            <button class="btn btn-outline-secondary btn-secondary" type="submit">
@@ -148,11 +156,12 @@ $dataPoints2 = array(
               <form>
                  <div class="input-group">
                         <input type="hidden" name="id" id="id" value="{{$id}}">
-                    <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="{{@$_GET['activity']}}">
+                    <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหาจากชื่อกิจกรรม" value="{{@$_GET['activity']}}">
                     <div class="input-group-append">
                        <select class="form-control" name="type">
                        <option value="1" {{ @$_GET['type'] == 1 ? "selected" : '' }}>กิจกรรมที่ต้องเข้าร่วม</option>
                        <option value="2" {{ @$_GET['type'] == 2 ? "selected" : '' }}>ประวัติกิจกรรมที่เข้าร่วม</option>
+                       <option value="3" {{ @$_GET['type'] == 3 ? "selected" : '' }}>กิจกรรมทั้งหมด</option>
                        </select>
                     </div>
                    
@@ -161,15 +170,17 @@ $dataPoints2 = array(
                     </button>
                  </div>
               </form>
+            </div>
+        </div>
               @if(@$_GET['type'] == 1)
-              <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
-                    <div class="mb-3 mx-auto">
-                       <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-small mb-4 pt-3">
+                        <div class="text-center">
+                        <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                        </div>
                     </div>
-                 </div>
-              </div>
-           </div>
+                </div>
            @if(empty($activity->count()))
            ไม่พบข้อมูล
            @endif
@@ -178,7 +189,7 @@ $dataPoints2 = array(
               <div class="img-activity">
                  <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
-                    {{ $value->name }}
+                    {{Activity::find($value->activity_id)->name}}
                     <br>
                     <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                     <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
@@ -191,12 +202,14 @@ $dataPoints2 = array(
            </div>
            @endforeach   
            <div class="col-md-12 text-right">
-                       {{ $activity->appends($_GET)->links() }}
-                   </div>                                                                 
+                {{ $activity->appends($_GET)->links() }}
+            </div>   
+        </div>                                                               
            @elseif(@$_GET['type'] == 2)
+           <div class="row">
            <div class="col-md-12">
-              <div class="card card-small mb-4 pt-3">
-                 <div class="text-center">
+                <div class="card card-small mb-4 pt-3">
+                   <div class="text-center">
                     <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
                  </div>
               </div>
@@ -209,29 +222,32 @@ $dataPoints2 = array(
               <div class="img-activity">
                  <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                  <div class="">
-                    {{ $value->name }}
+                    {{Activity::find($value->activity_id)->name}}
                     <br>
                     <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                     <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                  </div>
+                 
                  <div class="text-right">
-                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                    <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a></br>
+                    <button type="submit" class="btn btn-outline-success ml-auto mt-2 float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
                  </div>
               </div>
             </div>  
             @endforeach  
                 <div class="col-md-12 text-right">
                     {{ $history->appends($_GET)->links() }}
-                </div>              
+                </div>
+                      
            @else
            <div class="row">
               <!-- /.col-lg-4 -->
               <div class="col-md-12">
-                 <div class="card card-small mb-4 pt-3">
+                <div class="card card-small mb-4 pt-3">
                     <div class="text-center">
                        <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
                     </div>
-                 </div>
+                </div>
               </div>
             @if(empty($activity->count()))
               ไม่พบข้อมูล
@@ -241,7 +257,7 @@ $dataPoints2 = array(
                  <div class="img-activity">
                     <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
-                       {{ $value->name }}
+                       {{Activity::find($value->activity_id)->name}}
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                        <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
@@ -255,6 +271,8 @@ $dataPoints2 = array(
                 <div class="col-md-12 text-right">
                      {{ $activity->appends($_GET)->links() }}
                 </div>
+            </div>
+            <div class="row">
               <div class="col-md-12">
                  <div class="card card-small mb-4 pt-3">
                     <div class="text-center">
@@ -270,22 +288,24 @@ $dataPoints2 = array(
                  <div class="img-activity">
                     <a href="{{url('manage/activity/detail/'.$value->id. '/decription')}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i.ibb.co/hCrpzR6/p-image.jpg'" alt=""></a>
                     <div class="">
-                       {{ $value->name }}
+                       {{Activity::find($value->activity_id)->name}}
                        <br>
                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small></br>
                        <small>วันที่สิ้นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                     </div>
                     
-                 <button type="submit" class="btn btn-outline-success ml-auto float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
+
                     <div class="text-right">
                        <a style="font-size: 12px;" href="{{url('manage/activity/detail/'.$value->id. '/decription')}}">อ่านเพิ่มเติม</a>
+                    </br>
+                    <button type="submit" class="btn btn-outline-success ml-auto mt-2 float-right" data-toggle="modal" data-target="#Modal"><i class="material-icons">save</i> เกียรติบัตร</button>
                     </div>
                  </div>
-              </div>
+                </div>
               @endforeach
               <div class="col-md-12 text-right">
                 {{ $history->appends($_GET)->links() }}
-            </div>
+              </div>
            </div>
            @endif
            @else
@@ -333,8 +353,13 @@ $dataPoints2 = array(
                         var arrActivity = ['กิจกรรมทั้งหมด','กิจกรรมที่เข้าร่วมแล้ว','กิจกรรมที่ไม่ได้ร่วมเข้า'];
                     
                         if(term >= 0 && datasetIndex >= 0){
-                            $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษา "+yearSelect);
-                            getActivityDataForGraph(yearSelect, term, datasetIndex);
+                        if(yearSelect==0){
+                            $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษาทั้งหมด ");
+                            getActivityDataForGraph(yearSelect, term, datasetIndex); 
+                        }else{
+                                 $("#modal-title").html(arrActivity[datasetIndex]+" "+arrTerm[term]+" ปีการศึกษา "+yearSelect);
+                                 getActivityDataForGraph(yearSelect, term, datasetIndex);
+                        }
                         }
                     };
 

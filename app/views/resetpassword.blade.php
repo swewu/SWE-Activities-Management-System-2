@@ -77,7 +77,7 @@
 
             <br>
             
-            <button type="submit" class="btn btn-outline-success ml-auto float-right">บันทึก</button>
+            <button type="submit" class="btn btn-outline-success ml-auto float-right"><i class="material-icons">save</i>บันทึก</button>
             <h6></h6>
 
             <label for="name"></label>

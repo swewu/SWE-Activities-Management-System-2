@@ -1,7 +1,7 @@
 @extends('manage.layout')
 @section('title')
   @if(isset($onlyTrashed))
-   <small class="text-danger">อาจารย์ที่ลาออก</small>
+    อาจารย์ที่ลาออก
   @else
     ข้อมูลอาจารย์
   @endif

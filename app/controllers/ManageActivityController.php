@@ -366,7 +366,7 @@ class ManageActivityController extends BaseController {
 
     $countActivityDetail =  ActivityDetail::where('activity_id',$id)->count();
     if($countActivityDetail >= 1){
-      return Redirect::to('manage/activity')->with('error','ไม่สามารถลบกิจกรรมได้เนื่องจากมีรายละเอียดกิจกรรม');
+      return Redirect::to('manage/activity')->with('error','ไม่สามารถลบกิจกรรมได้เนื่องจากข้อมูลกิจกรรมถูกนำไปใช้แล้ว');
     }
 
 		try {
@@ -383,6 +383,7 @@ class ManageActivityController extends BaseController {
     $q = Input::get('q');
     $term_year = '';
     $term_years = Term::groupBy('year')->orderBy('year','desc')->lists('year');
+    // dd($term_years);
 
     $activityDetails = ActivityDetail::responsibilitySearch($q);
 
@@ -473,6 +474,14 @@ class ManageActivityController extends BaseController {
         'perpage'=>$perpage
       ]
     );
+  }
+
+  public function actionParticipationConfirm($activity_detail_id)
+  {
+    RankCheck::where('activity_details_id',$activity_detail_id)
+              ->where('date_check',Input::get('date'))
+              ->update(['confirm'=>1]);
+    return Redirect::back()->with('message','ยืนยันบันทึกการเข้าร่วมกิจกรรมสำเร็จ');
   }
 
   public function actionParticipation($activity_detail_id,$id)

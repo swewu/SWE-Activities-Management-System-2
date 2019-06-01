@@ -83,10 +83,12 @@ class ActivityDetail extends Eloquent {
     $count = 0 ;
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if($join){
+      if($join && $confirm){
         $count++;
       }
     }
@@ -97,10 +99,12 @@ class ActivityDetail extends Eloquent {
     $students = [];
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if($join){
+      if($join && $confirm){
         $students[] = [
           "id" => $participation->student->id,
           "fullName" => $participation->student->getFullName()
@@ -115,10 +119,12 @@ class ActivityDetail extends Eloquent {
     $count = 0 ;
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if(!$join){
+      if(!$join && $confirm){
         $count++;
       }
     }
@@ -129,10 +135,13 @@ class ActivityDetail extends Eloquent {
     $students = [];
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
-        $join = $join && $rankCheck->status;
+        $join = $join && $rankCheck->confirm !=0 && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
+
       }
-      if(!$join){
+      if(!$join && $confirm){
         $students[] = [
           "id" => $participation->student->id,
           "fullName" => $participation->student->getFullName()
@@ -148,22 +157,33 @@ class ActivityDetail extends Eloquent {
           ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
           ->where('participations.student_id', '=', $userId);
 
+          $activityDetailyear = DB::table('activity_details')
+          ->select('activity_details.term_sector', DB::raw('count(*) as total'))
+          ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+          ->where('participations.student_id', '=', $userId);
+
           if($year == "5"){
-            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getfourYear());
+            $activityDetail = $activityDetailyear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId));
+          }elseif($year == "0"){
+            $activityDetail = $activityDetail->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId));
           }else{
             $activityDetail = $activityDetail->where('activity_details.term_year', $year);
           }
 
     $activityDetail = $activityDetail->groupBy('activity_details.term_sector')
           ->get();
-      
+
     return $activityDetail;
   }
 
-  function getfourYear(){
-    $username = Auth::user()->username;
-    $startYear = (int)("25".substr($username,0,2));
+  function getfourYear($userId){
+    $startYear = (int)("25".substr($userId,0,2));
     return $startYear+4;
+  }
+
+  function getAllYear($userId){
+    $startYear = (int)("25".substr($userId,0,2));
+    return $startYear;
   }
 
   function getAllPaticipationByUserId($year, $userId){
@@ -172,8 +192,15 @@ class ActivityDetail extends Eloquent {
     ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
     ->where('participations.student_id', '=', $userId);
 
+    $participationYear = DB::table('activity_details')
+    ->select('participations.id', 'participations.activity_detail_id', 'participations.student_id', 'activity_details.term_sector')    
+    ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+    ->where('participations.student_id', '=', $userId);
+
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear())->get();
+      $participation = $participationYear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
+    }elseif($year == "0"){
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }
@@ -213,9 +240,18 @@ class ActivityDetail extends Eloquent {
     ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
     ->where('participations.student_id', $userId)
     ->where('activity_details.term_sector', $term);
+
+    $participationYear = DB::table('activity')
+    ->select('activity.name', 'activity.id', 'activity.description', 'activity_details.id as activity_detail_id', 'participations.id as participations_id')    
+    ->join('activity_details', 'activity.id', '=', 'activity_details.activity_id')
+    ->join('participations', 'activity_details.id', '=', 'participations.activity_detail_id')
+    ->where('participations.student_id', $userId)
+    ->where('activity_details.term_sector', $term);
     
     if($year == "5"){
-      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getfourYear())->get();
+      $participation = $participationYear->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
+    }elseif($year == "0"){
+      $participation = $participation->where('activity_details.term_year','>=', ActivityDetail::getAllYear($userId))->get();
     }else{
       $participation = $participation->where('activity_details.term_year', $year)->get();
     }

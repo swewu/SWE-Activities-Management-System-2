@@ -66,7 +66,8 @@
                      เลยเวลาจัดกิจกรรม
                     </small>
                   @else
-                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-success btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
+                    <?php $isConfirm = RankCheck::where('activity_details_id',$activityDetail->id)->where('confirm','0')->count() == 0 ?>
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn <?=($isConfirm)?'btn-success':'btn-danger'?> btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
                   @endif
                 </td>
                 <td>

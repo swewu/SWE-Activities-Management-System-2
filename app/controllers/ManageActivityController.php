@@ -443,7 +443,7 @@ class ManageActivityController extends BaseController {
   {
     $perpage = 20;
     $q = '';
-    $participations = Participation::where('activity_detail_id',$activity_detail_id)->orderBy('student_id','DESC');
+    $participations = Participation::where('activity_detail_id',$activity_detail_id)->orderBy('student_id');
     if(Input::get('q') != NULL && Input::get('q') != ""){
       $q = Input::get('q');
       $student_list = Student::withTrashed()->where('firstname','like','%'.$q.'%')->orWhere('lastname','like','%'.$q.'%')->lists('id');

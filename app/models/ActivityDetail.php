@@ -83,10 +83,12 @@ class ActivityDetail extends Eloquent {
     $count = 0 ;
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if($join){
+      if($join && $confirm){
         $count++;
       }
     }
@@ -97,10 +99,12 @@ class ActivityDetail extends Eloquent {
     $students = [];
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if($join){
+      if($join && $confirm){
         $students[] = [
           "id" => $participation->student->id,
           "fullName" => $participation->student->getFullName()
@@ -115,10 +119,12 @@ class ActivityDetail extends Eloquent {
     $count = 0 ;
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
         $join = $join && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
       }
-      if(!$join){
+      if(!$join && $confirm){
         $count++;
       }
     }
@@ -129,10 +135,13 @@ class ActivityDetail extends Eloquent {
     $students = [];
     foreach($this->participations as $participation){
       $join = true;
+      $confirm = true;
       foreach($participation->rankChecks as $rankCheck){
-        $join = $join && $rankCheck->status;
+        $join = $join && $rankCheck->confirm !=0 && $rankCheck->status;
+        $confirm = $confirm && $rankCheck->confirm;
+
       }
-      if(!$join){
+      if(!$join && $confirm){
         $students[] = [
           "id" => $participation->student->id,
           "fullName" => $participation->student->getFullName()

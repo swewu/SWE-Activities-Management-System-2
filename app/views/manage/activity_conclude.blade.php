@@ -78,14 +78,26 @@
                   </button>
                 </td>
                 <td>
+                  @if( RankCheck::where('activity_details_id',$detail->id)->where('confirm',0)->count() == 0)
                   <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentJoin()}}'>
                     {{$detail->studentJoinCount()}} คน
                   </button>
+                  @else
+                  <small class="text-danger">
+                      ยังไม่บันทึกการเข้าร่วมกิจกรรม
+                    </small>
+                  @endif
                 </td>
                 <td>
+                  @if( RankCheck::where('activity_details_id',$detail->id)->where('confirm',0)->count() == 0)
                   <button type="button" class="btn btn-link" data-toggle="modal" data-target="#showStudent" data-students='{{$detail->studentNotJoin()}}'>
                     {{$detail->studentNotJoinCount()}} คน
                   </button>
+                  @else
+                  <small class="text-danger">
+                      ยังไม่บันทึกการเข้าร่วมกิจกรรม
+                    </small>
+                  @endif
                 </td>
               </tr>
             @endforeach
